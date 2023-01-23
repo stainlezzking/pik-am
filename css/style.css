@@ -5568,18 +5568,31 @@ h6 {
   border-radius: 12px;
   height: 100% !important;
 }
+  /**
+ * ==============================================
+ * Dot Carousel
+ * ==============================================
+ */
+ .dot-carousel {
+  position: relative;
+  left: -9999px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #cfb579;
+  color: #cfb579;
+  box-shadow: 9984px 0 0 0 #cfb579, 9999px 0 0 0 #cfb579, 10014px 0 0 0 #cfb579;
+  animation: dot-carousel 1.5s infinite linear;
+}
 
-/*=================== contact form end ====================*/
-/* Contact Success and error Area css
-============================================================================================ */
-/* line 89, E:/161 Real estate/161_Real_state_html/sass/_contact.scss */
-
-/* line 98, E:/161 Real estate/161_Real_state_html/sass/_contact.scss */
-
-/* line 104, E:/161 Real estate/161_Real_state_html/sass/_contact.scss */
-
-/* line 113, E:/161 Real estate/161_Real_state_html/sass/_contact.scss */
-
-/* line 118, E:/161 Real estate/161_Real_state_html/sass/_contact.scss */
-
-/*# sourceMappingURL=style.css.map */
+@keyframes dot-carousel {
+  0% {
+    box-shadow: 9984px 0 0 -1px #cfb579, 9999px 0 0 1px #cfb579, 10014px 0 0 -1px #cfb579;
+  }
+  50% {
+    box-shadow: 10014px 0 0 -1px #cfb579, 9984px 0 0 -1px #cfb579, 9999px 0 0 1px #cfb579;
+  }
+  100% {
+    box-shadow: 9999px 0 0 1px #cfb579, 10014px 0 0 -1px #cfb579, 9984px 0 0 -1px #cfb579;
+  }
+}

@@ -364,9 +364,13 @@ News From Our Blog</h1>
 </div>
 </div>
 </div>
-<div class="row preloader text-center" id="blog_loader" style="height : 40vh;" >
-  <p class="col-12"> Loading blogs...</p>
-</div>
+
+
+<div id="blog_loader" class="text-center py-5 row">
+          <div class="stage col-12">
+            <div class="dot-carousel mx-auto"></div>
+          </div>
+  </div>
 <div class="row">
 <div class="col-md-6 col-lg-7">
 <div class="single_blog" id="single_blog">
@@ -485,15 +489,14 @@ Copyright &copy;<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728
   const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   let single = "";
   let sideContent = ""
+  const imgDefault = "http://0.news.cdn.pik-service.ru/attachment/46000/46747/1_artboard-3_46a6cce4a660344cfe32e71318791d71_6779105e26920fa7e4fd726e26442223.jpg"
   const getBlogs = function(e){
-    console.log(e)
-    let hasImage = false
-    e.forEach(blog=>{
-    if(!hasImage && blog.preview){
+    e.forEach((blog, index)=>{
+    if(index == 0){
     let date = new Date(blog.publishedAt*1000)
     single = `
       <div class="appartment_img">
-      <img src="${blog.preview}" alt="${blog.title}">
+      <img src="${blog.preview || blog.previewWater || imgDefault}" alt="${blog.title}">
       </div>
       <div class="single_appartment_content">
       <p>${date.getDay() + " " + month[date.getMonth()] + " "+ date.getFullYear()}</p>
@@ -503,24 +506,23 @@ Copyright &copy;<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728
       </div>
       </div>
     `
-    hasImage = true
     }else{
       let date = new Date(blog.publishedAt*1000)
       sideContent +=  `
 
-  <div class="single_blog">
-<div class="media">
-<img src="${blog.preview || blog.previewWater}" class="mr-3"  alt="${blog.title}">
-<div class="media-body align-self-center">
-<a target="_blank" href="https://pik-group.com/about/news-and-reports/news/${blog.id}">
-<h5 class="mt-0">${blog.title}</h5>
-</a>
-<ul class="list-unstyled">
-<li><span class="ti-time"></span> ${month[date.getMonth()] + " " +date.getDay()}</li>
-</ul>
-</div>
-</div>
-</div>
+      <div class="single_blog">
+        <div class="media gap-2 d-flex">
+        <img src="${blog.preview || blog.previewWater}" class="mr-3"  alt="${blog.title}">
+        <div class="media-body align-self-center">
+        <a target="_blank" href="https://pik-group.com/about/news-and-reports/news/${blog.id}">
+        <h5 class="mt-0">${blog.title}</h5>
+        </a>
+        <ul class="list-unstyled">
+        <li><span class="ti-time"></span> ${month[date.getMonth()] + " " +date.getDay()}</li>
+        </ul>
+        </div>
+        </div>
+    </div>
       `
     }
     })
