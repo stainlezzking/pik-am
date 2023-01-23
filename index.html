@@ -8,7 +8,7 @@
 <title>Real_state || Home</title>
 <link rel="icon" href="img/favicon.png">
 
-<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="css/animate.css">
 
@@ -23,6 +23,28 @@
 <link rel="stylesheet" href="fontawesome/css/all.min.css">
 
 <link rel="stylesheet" href="css/style.css">
+
+<style>
+  .more{
+    display: none;
+  }
+  .more_show {
+    display: inline;
+  }
+  .dots{
+    cursor: pointer;
+    color: green;
+  }
+  .dot_hide{
+    display: none;
+  }
+  .primaryColor {
+    color: #cfb579;
+  }
+  .team_img{
+    text-align: center;
+  }
+</style>
 <script nonce="d21349ee-bd85-40a7-be05-bf2431d521bc">(function(w,d){!function(f,g,h,i){f[h]=f[h]||{};f[h].executed=[];f.zaraz={deferred:[],listeners:[]};f.zaraz.q=[];f.zaraz._f=function(j){return function(){var k=Array.prototype.slice.call(arguments);f.zaraz.q.push({m:j,a:k})}};for(const l of["track","set","debug"])f.zaraz[l]=f.zaraz._f(l);f.zaraz.init=()=>{var m=g.getElementsByTagName(i)[0],n=g.createElement(i),o=g.getElementsByTagName("title")[0];o&&(f[h].t=g.getElementsByTagName("title")[0].text);f[h].x=Math.random();f[h].w=f.screen.width;f[h].h=f.screen.height;f[h].j=f.innerHeight;f[h].e=f.innerWidth;f[h].l=f.location.href;f[h].r=g.referrer;f[h].k=f.screen.colorDepth;f[h].n=g.characterSet;f[h].o=(new Date).getTimezoneOffset();if(f.dataLayer)for(const s of Object.entries(Object.entries(dataLayer).reduce(((t,u)=>({...t[1],...u[1]})))))zaraz.set(s[0],s[1],{scope:"page"});f[h].q=[];for(;f.zaraz.q.length;){const v=f.zaraz.q.shift();f[h].q.push(v)}n.defer=!0;for(const w of[localStorage,sessionStorage])Object.keys(w||{}).filter((y=>y.startsWith("_zaraz_"))).forEach((x=>{try{f[h]["z_"+x.slice(7)]=JSON.parse(w.getItem(x))}catch{f[h]["z_"+x.slice(7)]=w.getItem(x)}}));n.referrerPolicy="origin";n.src="../../cdn-cgi/zaraz/sd0d9.js?z="+btoa(encodeURIComponent(JSON.stringify(f[h])));m.parentNode.insertBefore(n,m)};["complete","interactive"].includes(g.readyState)?zaraz.init():f.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);</script></head>
 <body>
 
@@ -31,7 +53,11 @@
 <div class="row">
 <div class="col-lg-12">
 <nav class="navbar navbar-expand-lg navbar-light">
-<a class="navbar-brand" href="index.html"> <img src="img/logo.png" alt="logo"> </a>
+<a class="navbar-brand" href="index.html"> 
+  <div class="sizex100">
+    <svg viewBox="0 0 52 21"><path d="M0 0H9.18478C11.1442 0 12.8163 0.359333 14.2011 1.078C15.5859 1.79667 16.6409 2.786 17.3663 4.046C18.0917 5.306 18.4543 6.75733 18.4543 8.4C18.4543 10.08 18.0822 11.5593 17.338 12.838C16.5938 14.1167 15.5341 15.1153 14.1587 15.834C12.7833 16.5527 11.1442 16.912 9.2413 16.912H6.07609V21H0V0ZM6.07609 5.18V11.732H8.73261C9.91957 11.732 10.8051 11.4053 11.3891 10.752C11.9732 10.0987 12.2652 9.31467 12.2652 8.4C12.2652 7.448 11.9685 6.67333 11.375 6.076C10.7815 5.47867 9.90072 5.18 8.73261 5.18H6.07609ZM20.5174 0H26.5935V21H20.5174V0ZM35.4957 12.544V21H29.4196V0H35.4957V8.708L42.7587 0H49.8522L41.2043 10.192L52 21H43.8326L35.4957 12.544Z" fill="#FC4C02"></path></svg>
+  </div>
+ </a>
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 <span class="navbar-toggler-icon"></span>
 </button>
@@ -79,14 +105,14 @@ Pages
 <div class="col-lg-6">
 <div class="banner_text aling-items-center">
 <div class="banner_text_iner">
-<h5>Beautiful investments</h5>
+<h5>PIK Assets Management</h5>
 <h2>Everyone Deserves
-the Opportunity of
-the Home</h2>
-<p>Enim a, scelerisque aliquet vivamus neque diam sed at pede do laos orci. Potenti vel
-in sagittis nulla augue vitae et tempus torquent dicid Lacinia neque mus maleware
-poside</p>
-<a href="#" class="btn_1 banner_btn ">View Property</a>
+the Opportunity of owning
+a Property or investing in one</h2>
+<p> With our parent company Ranked <a href="#">#30 in forbes list World largest Public Real Estate Companies in 2021</a>, with a market value of over $9 Billion. 
+You can trust us to manage your assets.
+</p>
+<a href="#" class="btn_1 banner_btn ">Sign up</a>
 <div class="d-none d-xl-block banner_social_icon">
 <ul class="list-inline">
 <li class="list-inline-item"><a href="#"><span class="ti-facebook"></span>facebook</a><span class="dot"><i class="fas fa-circle"></i></span></li>
@@ -111,19 +137,25 @@ poside</p>
 </div>
 <div class="offset-lg-1 col-lg-5">
 <div class="team_member_text">
-<h2>Living From <br>
+<h2>What we do <br>
 The Team That Cares</h2>
-<p>Unto all set life creeping own set. Saw make multiply female watge deb all set life
-creeping own set. Saw make multiply female watge abund winged subdue dominion
-own night days second</p>
+<p>We sell low cost houses to passive investors from the Moscow and all over the World. 
+All of our properties are located in Europe, North America and Africa. 
+After your purchase, we effectively become your long-term tenants and agree to pay you
+guaranteed rent and maintain the properties at our cost. 
+You fully own the property, benefit from long term guaranteed rental income and future property capital growth,
+but do not need to do anything – we do it all.<a href="/about"> Read more...</a> </p>
 <ul>
-<li><span class="ti-paint-bucket"></span>Set dry signs spirit a kind First shall them windged
-creping</li>
-<li><span class="ti-check-box"></span>He two face one moved dominion man you're likeness</li>
-<li><span class="ti-ruler-pencil"></span>Sea forth fill have divide be dominion from life for feven
-</li>
+<li><span class="ti-check-box"></span> We offer loans  </li> <br/>
+<li><span class="ti-check-box"></span> Joint Property Ownership </li> <br/>
+<li><span class="ti-check-box"></span> We flip houses  </li> <br/>
+<li><span class="ti-check-box"></span> We Can help you acquire properties around the world</li> <br/>
+<li><span class="ti-check-box"></span> We accept investors from all over the world</li> <br>
+<li><span class="ti-check-box"></span> Our Payment plan is borderless</li> <br>
+<li><span class="ti-check-box"></span>Free financial advice for new investors (contact our support)</li>
+
 </ul>
-<a href="#" class="btn_1">Read More</a>
+<a href="/about" class="btn_1">Read More</a>
 </div>
 </div>
 </div>
@@ -137,53 +169,84 @@ creping</li>
 <div class="row">
 <div class="col-lg-5">
 <div class="section_tittle">
-<h1>Our Passion is <br>
-People What’s Yours?</h1>
+<h1>Investment Plans
+  <p style="color : #cfb579"> You (investors) can speak with our staff for advise in choosing the plan suitable for you.</p>
+ </h1>
 </div>
 </div>
 </div>
-<div class="row">
-<div class="col-md-6 col-lg-3">
+<div class="row justify-content-center g-4">
+<div class="col-md-6 col-lg-5">
 <div class="single_passion">
 <div class="single_passion_item">
-<a href="#" class="passion_icon"> <i class="flaticon-compass"></i> </a>
-<h4>Creative Design</h4>
-<p>Hac facilisi ac vitae consec tetu commod vel magna suspen disse on senectus
-pharetra magnfauc bed</p>
-<a href="#" class="btn_2">Read More <span class="ti-arrow-right"></span></a>
+<a href="#" class="passion_icon"> 
+<img src="./img/partnership-4.png" alt="">
+ </a>
+<h4>Shared cluster</h4>
+<h4> $100 - $999</h4>
+<div style="text-align: left; font-weight: bold;">
+<p><span class="ti-check-box primaryColor"></span> Roi - 7%  </p>
+<p><span class="ti-check-box primaryColor"></span> duration - 7 days</p>
+</div>
+<br>
+<p style="text-align: left;">Here investors money are combined and used to purchase a property, refurnish/renovate it and flip the property <span class="dots">back...</span> <span class="more">back for cash to pay back investors. this process is automated and does not necessarily depend on the sale of a particular property.</span></p>
+<a href="#" class="btn_2">Get Started <span class="ti-arrow-right"></span></a>
 </div>
 </div>
 </div>
-<div class="col-md-6 col-lg-3">
+<div class="col-md-6 col-lg-5">
 <div class="single_passion">
 <div class="single_passion_item">
-<a href="#" class="passion_icon"> <i class="flaticon-desk"></i> </a>
-<h4>Experience Style</h4>
-<p>Hac facilisi ac vitae consec tetu commod vel magna suspen disse on senectus
-pharetra magnfauc bed</p>
-<a href="#" class="btn_2">Read More <span class="ti-arrow-right"></span></a>
+<a href="#" class="passion_icon"><img src="./img/partnership-4.png" alt="">
+</a>
+<h4>Shared cluster 2</h4>
+<h4> $1000 - $15,000</h4>
+<div style="text-align: left; font-weight: bold;">
+<p><span class="ti-check-box primaryColor"></span> Roi - 16.5% </p>
+<p><span class="ti-check-box primaryColor"></span> duration - 5 days</p>
+</div>
+<br>
+<p style="text-align: left;">Here investors money are combined and used to purchase a property, refurnish/renovate it and flip the property <span class="dots">back...</span> <span class="more">back for cash to pay back investors. this process is automated and does not necessarily depend on the sale of a particular property.</span></p>
+<a href="#" class="btn_2"> Get Started<span class="ti-arrow-right"></span></a>
 </div>
 </div>
 </div>
-<div class="col-md-6 col-lg-3">
+<div class="col-md-6 col-lg-5">
 <div class="single_passion">
 <div class="single_passion_item">
-<a href="#" class="passion_icon"> <i class="flaticon-bathroom"></i> </a>
-<h4>Product Research</h4>
-<p>Hac facilisi ac vitae consec tetu commod vel magna suspen disse on senectus
-pharetra magnfauc bed</p>
-<a href="#" class="btn_2">Read More <span class="ti-arrow-right"></span></a>
+<a href="#" class="passion_icon"> <img src="./img/partnership.png" alt="">
+ </a>
+<h4>Partnership cluster</h4>
+<h4> $10,000 - $50,000</h4>
+<div style="text-align: left; font-weight: bold;">
+<p><span class="ti-check-box primaryColor"></span>  intial payment - 25% </p>
+<p><span class="ti-check-box primaryColor"></span> Lifetime Payment of 5% per month </p> 
+</div>
+<br>
+<p style="text-align: left;">
+Here investors own <span style="color : green;">50%</span> of the property been bought, after purchase of the property
+we effectively become your long-term <span class="dots">tenants...</span> <span class="more">tenants and agree to pay you guaranteed rent and maintain the properties at our cost.You fully own the property</span> 
+
+</p>
+<a href="#" class="btn_2">Get Started <span class="ti-arrow-right"></span></a>
 </div>
 </div>
 </div>
-<div class="col-md-6 col-lg-3">
+<div class="col-md-6 col-lg-5">
 <div class="single_passion">
 <div class="single_passion_item">
-<a href="#" class="passion_icon"> <i class="flaticon-beach"></i> </a>
-<h4>Affordable Price</h4>
-<p>Hac facilisi ac vitae consec tetu commod vel magna suspen disse on senectus
-pharetra magnfauc bed</p>
-<a href="#" class="btn_2">Read More <span class="ti-arrow-right"></span></a>
+<a href="#" class="passion_icon"> <img src="./img/keys.png" alt="">
+ </a>
+<h4>Landlord Cluster</h4>
+<h4> $50,000 - $1,000,000</h4>
+<div style="text-align: left; font-weight: bold;">
+<p><span class="ti-check-box primaryColor"></span>  intial payment - 30% </p>
+<p><span class="ti-check-box primaryColor"></span> Lifetime Payment of 12% per month</p> 
+</div>
+<br>
+<p style="text-align: left;">Here you own <span style="color : green;">100%</span> of the property been bought, after purchase of the property
+we effectively become your long-term <span class="dots">tenants...</span> <span class="more">tenants and agree to pay you guaranteed rent and maintain the properties at our cost.You fully own the property</span> </p>
+<a href="#" class="btn_2">Get Started <span class="ti-arrow-right"></span></a>
 </div>
 </div>
 </div>
@@ -191,14 +254,24 @@ pharetra magnfauc bed</p>
 </div>
 </div>
 
+<script>
+    const showMore = function(e){
+      e.classList.toggle("dot_hide")
+      e.nextElementSibling.classList.toggle("more_show")
+    }
+    const dots = document.querySelectorAll(".single_passion_item .dots")
+    dots.forEach(dot=>{
+      dot.addEventListener("click", ()=>showMore(dot))
+    })
+
+</script>
 
 <div class="apartment_part">
 <div class="container">
 <div class="row justify-content-between align-content-center">
-<div class="col-md-8 col-lg-7">
+<div class="col-md-8 col-lg-7 ">
 <div class="section_tittle">
-<h1>Provide The <br>
-Beautiful Apartment</h1>
+<h1>Why Choose us </h1>
 </div>
 </div>
 <div class="col-md-4 col-lg-5">
@@ -207,80 +280,38 @@ Beautiful Apartment</h1>
 </div>
 </div>
 </div>
-<div class="row">
-<div class="col-md-4 col-lg-4">
-<div class="single_appartment_part">
-<div class="appartment_img">
-<img src="img/appertment_1.png" alt="">
-<div class="single_appartment_text">
-<h3>$1,235632</h3>
-<p><span class="ti-location-pin"></span> 384 Treeline Park, San Antonio, TX</p>
-</div>
-</div>
-<div class="single_appartment_content">
-<a href="#" class="love_us"> <span class="ti-heart"></span> </a>
-<p>Home, Apartment</p>
-<a href="#">
-<h4>Detached House For Sale</h4>
-</a>
-<ul class="list-unstyled">
-<li><a href="#"><span class="flaticon-bath"></span></a> 04</li>
-<li><a href="#"><span class="flaticon-bed"></span></a> 03</li>
-<li><a href="#"><span class="flaticon-frame"></span></a> 2400 sqft</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="col-md-4 col-lg-4">
-<div class="single_appartment_part">
-<div class="appartment_img">
-<img src="img/appertment_2.png" alt="">
-<div class="single_appartment_text">
-<h3>$1,235632</h3>
-<p><span class="ti-location-pin"></span> 384 Treeline Park, San Antonio, TX</p>
-</div>
-</div>
-<div class="single_appartment_content">
-<a href="#" class="love_us"> <span class="ti-heart"></span> </a>
-<p>Home, Apartment</p>
-<a href="#">
-<h4>Detached House For Sale</h4>
-</a>
-<ul class="list-unstyled">
-<li><a href="#"><span class="flaticon-bath"></span></a> 04</li>
-<li><a href="#"><span class="flaticon-bed"></span></a> 03</li>
-<li><a href="#"><span class="flaticon-frame"></span></a> 2400 sqft</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="col-md-4 col-lg-4">
-<div class="single_appartment_part">
-<div class="appartment_img">
-<img src="img/appertment_3.png" alt="">
-<div class="single_appartment_text">
-<h3>$1,235632</h3>
-<p><span class="ti-location-pin"></span> 384 Treeline Park, San Antonio, TX</p>
-</div>
-</div>
-<div class="single_appartment_content">
-<a href="#" class="love_us"> <span class="ti-heart"></span> </a>
-<p>Home, Apartment</p>
-<a href="#">
-<h4>Detached House For Sale</h4>
-</a>
-<ul class="list-unstyled">
-<li><a href="#"><span class="flaticon-bath"></span></a> 04</li>
-<li><a href="#"><span class="flaticon-bed"></span></a> 03</li>
-<li><a href="#"><span class="flaticon-frame"></span></a> 2400 sqft</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
 </div>
 </div>
 
+<section class="">
+<div class="container">
+<div class="row">
+
+  <div class=" mb-3 col-lg-6">
+<div class="team_img">
+<img src="img/pik.png" alt="">
+</div>
+</div>
+
+<div class=" offset-lg-1 col-lg-5">
+<div class="team_member_text">
+
+<ul>
+<li><span class="ti-check-box"></span> we ranked #30 in forbes list World largest Public Real Estate Companies in 2021  </li> <br/>
+<li><span class="ti-check-box"></span> We have a market value of $9 billion </li> <br/>
+<li><span class="ti-check-box"></span> Through our website anyone around the world can start earning</li> <br/>
+<li><span class="ti-check-box"></span> 24/hrs customer support </li> <br/>
+<li><span class="ti-check-box"></span> No need for in depth knowledge about real estate before starting</li> <br/>
+<li><span class="ti-check-box"></span> Our investment plans are available to all persons around the world</li> <br/>
+<li><span class="ti-check-box"></span> We have a friendly interface </li> <br/>
+
+</ul>
+</div>
+</div>
+
+</div>
+</div>
+</section>
 
 <div class="room_part">
 <div class="container-fluid">
@@ -289,8 +320,8 @@ Beautiful Apartment</h1>
 <div class="room_1">
 <img src="img/room_1.png" alt="">
 <div class="room_text_1">
-<h1>Beginning own <br> light divided male <br> is light</h1>
-<a href="#" class="btn_2">Read More <span class="ti-arrow-right"></span></a>
+<h1>Real Estate  <br> For Everyone <br> <small style="color: #cfb579;"> The new Gold</small></h1>
+<a href="#" class="btn_2">Get started <span class="ti-arrow-right"></span></a>
 </div>
 </div>
 </div>
@@ -298,76 +329,8 @@ Beautiful Apartment</h1>
 <div class="room_2">
 <img src="img/room_2.png" alt="">
 <div class="room_text_2">
-<h1>Beginning own <br> light divided male <br> is light</h1>
-<a href="#" class="btn_2">Read More <span class="ti-arrow-right"></span></a>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-
-<div class="review_part" id="testimonial">
-<div class="container">
-<div class="row">
-<div class="col-sm-8 col-lg-7">
-<div class="section_tittle">
-<h1>Our Happy Customer
-Says About us</h1>
-</div>
-</div>
-</div>
-<div class="row">
-<div class="col-lg-12">
-<div class="review_part_text owl-carousel">
-<div class="singler_eview_part">
-<div class="client_info">
-<img src="img/client_1.png" alt="">
-<h4>Mouunt Alezaber</h4>
-<p>Project manager</p>
-</div>
-<p><i>Enim a, scelerisque aliquet. Vivamus neque diam sed at, pede laoreet orci.
-Potenti vel In sagittis nulla augue vitae et tempus torquent. Lacinia neque
-mus taciti ante prsent at facilisis. Enim a, scelerisque aliquet. Vivamus
-neque diam sed at, pede laoreet orci Potti, vel. In sagittis nulla augue
-vitae et tempus torquent.</i></p>
-</div>
-<div class="singler_eview_part">
-<div class="client_info">
-<img src="img/client_2.png" alt="">
-<h4>Mouunt Alezaber</h4>
-<p>Project manager</p>
-</div>
-<p><i>Enim a, scelerisque aliquet. Vivamus neque diam sed at, pede laoreet orci.
-Potenti vel In sagittis nulla augue vitae et tempus torquent. Lacinia neque
-mus taciti ante prsent at facilisis. Enim a, scelerisque aliquet. Vivamus
-neque diam sed at, pede laoreet orci Potti, vel. In sagittis nulla augue
-vitae et tempus torquent.</i></p>
-</div>
-<div class="singler_eview_part">
-<div class="client_info">
-<img src="img/client_1.png" alt="">
-<h4>Mouunt Alezaber</h4>
-<p>Project manager</p>
-</div>
-<p><i>Enim a, scelerisque aliquet. Vivamus neque diam sed at, pede laoreet orci.
-Potenti vel In sagittis nulla augue vitae et tempus torquent. Lacinia neque
-mus taciti ante prsent at facilisis. Enim a, scelerisque aliquet. Vivamus
-neque diam sed at, pede laoreet orci Potti, vel. In sagittis nulla augue
-vitae et tempus torquent.</i></p>
-</div>
-<div class="singler_eview_part">
-<div class="client_info">
-<img src="img/client_2.png" alt="">
-<h4>Mouunt Alezaber</h4>
-<p>Project manager</p>
-</div>
-<p><i>Enim a, scelerisque aliquet. Vivamus neque diam sed at, pede laoreet orci.
-Potenti vel In sagittis nulla augue vitae et tempus torquent. Lacinia neque
-mus taciti ante prsent at facilisis. Enim a, scelerisque aliquet. Vivamus
-neque diam sed at, pede laoreet orci Potti, vel. In sagittis nulla augue
-vitae et tempus torquent.</i></p>
+<h1>Own a property <br>today with <br> few clicks </h1>
+<a href="#" class="btn_2">Get started <span class="ti-arrow-right"></span></a>
 </div>
 </div>
 </div>
@@ -381,8 +344,8 @@ vitae et tempus torquent.</i></p>
 <div class="row justify-content-center">
 <div class="col-lg-6">
 <div class="cta_iner">
-<h1>Are You Ready For Move? </h1>
-<p>Lights had saw moving saw female blessed</p>
+<h1> Our Goal </h1>
+<p>Our main pursuit is to give people of different status all around the world equal Opportunity to get started in Real Estate </p>
 <a href="#" class="cta_btn">Sing Up</a>
 </div>
 </div>
@@ -401,74 +364,22 @@ News From Our Blog</h1>
 </div>
 </div>
 </div>
+<div class="row preloader text-center" id="blog_loader" style="height : 40vh;" >
+  <p class="col-12"> Loading blogs...</p>
+</div>
 <div class="row">
 <div class="col-md-6 col-lg-7">
-<div class="single_blog">
-<div class="appartment_img">
-<img src="img/blog_1.png" alt="">
-</div>
-<div class="single_appartment_content">
-<p><a href="#">Apartment</a> / March 20, 2019</p>
-<a href="blog.html">
-<h4>Doee lights without darkness that said
-good deep years very.</h4>
-</a>
-<ul class="list-unstyled">
-<li><a href="#"> <span class="ti-comment"></span> </a> 2 comment</li>
-<li><a href="#"> <span class="ti-heart"></span> </a> 0 like</li>
-</ul>
+<div class="single_blog" id="single_blog">
+
 </div>
 </div>
-</div>
+
 <div class="col-md-6 col-lg-5">
-<div class="right_single_blog">
-<div class="single_blog">
-<div class="media">
-<img src="img/blog_2.png" class=" mr-3" alt="...">
-<div class="media-body align-self-center">
-<p><a href="#">home</a></p>
-<a href="blog.html">
-<h5 class="mt-0">Green very from for rule stars seasons</h5>
-</a>
-<ul class="list-unstyled">
-<li><a href="#"> <span class="ti-time"></span> </a> Mar 12</li>
-<li><a href="#"> <span class="ti-heart"></span> </a> 0 like</li>
-</ul>
+<div class="right_single_blog" id="right_blogs">
+
 </div>
 </div>
-</div>
-<div class="single_blog">
-<div class="media">
-<img src="img/blog_3.png" class="mr-3" alt="...">
-<div class="media-body align-self-center">
-<p><a href="#">Apartment</a></p>
-<a href="blog.html">
-<h5 class="mt-0">Moveth wherein subdue of brought</h5>
-</a>
-<ul class="list-unstyled">
-<li><a href="#"> <span class="ti-time"></span> </a> Mar 12</li>
-<li><a href="#"> <span class="ti-heart"></span> </a> 0 like</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="single_blog">
-<div class="media">
-<img src="img/blog_4.png" class="mr-3" alt="...">
-<div class="media-body align-self-center">
-<p><a href="blog.html">Apartment</a></p>
-<a href="#">
-<h5 class="mt-0">Firmament heaven cant him night rule</h5>
-</a>
-<ul class="list-unstyled">
-<li><a href="#"> <span class="ti-time"></span> </a> Mar 12</li>
-<li><a href="#"> <span class="ti-heart"></span> </a> 0 like</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
+
 </div>
 </div>
 </div>
@@ -480,15 +391,19 @@ good deep years very.</h4>
 <div class="col-sm-6 col-lg-3">
 <div class="single_footer_part">
 <h4>About Us</h4>
-<p>Heaven fruitful doesn't over lesser days appear creeping seasons so behold bearing days open</p>
+<p>
+  PIK Assets Management specialize in low cost investment properties in the Europe, North America and Africa. 
+  Our clients include Overseas Nationals,  We work differently to normal 
+  Estate Agents and Letting Agents and provide a much more comprehensive service
+   looking after all aspects of the property purchase and the subsequent long term management.
+</p>
 <a href="index.html" class="footer_logo"> <img src="img/footer_logo.png" alt="#"> </a>
 </div>
 </div>
 <div class="col-sm-6 col-lg-3">
 <div class="single_footer_part">
 <h4>Contact Info</h4>
-<p>Address :Your address goes
-here, your demo address.</p>
+<p>Headquaters :19 bld. 1, Barrikadnaya street, Moscow, 123242, Russia.</p>
 <p>Phone : +8880 44338899</p>
 <p>Email : <a href="https://preview.colorlib.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1d74737b725d7e7271726f71747f337e7270">[email&#160;protected]</a></p>
 </div>
@@ -497,18 +412,19 @@ here, your demo address.</p>
 <div class="single_footer_part">
 <h4>Important Link</h4>
 <ul class="list-unstyled">
-<li><a href="#"> WHMCS-bridge</a></li>
+<li><a href="/about"> About</a></li>
 <li><a href="#">Search Domain</a></li>
 <li><a href="#">My Account</a></li>
 <li><a href="#">Shopping Cart</a></li>
 <li><a href="#">Our Shop</a> Our Shop</li>
+<li><a href="#">Contact us</a></li>
 </ul>
 </div>
 </div>
 <div class="col-sm-6 col-lg-3">
 <div class="single_footer_part">
 <h4>Newsletter</h4>
-<p>Heaven fruitful doesn't over lesser in days. Appear creeping seasons deve behold bearing days open
+<p>Register for our news letter to keep receiving updates and our latest deals
 </p>
 <div class="mail_part">
 <input type="text" placeholder="Email Address" class="placeholder hide-on-focus">
@@ -522,7 +438,7 @@ here, your demo address.</p>
 <div class="col-sm-6 col-lg-6">
 <div class="copyright_text">
 <P>
-Copyright &copy;<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com/" target="_blank">Colorlib</a>
+Copyright &copy;<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved PIK-GROUP</a>
 </P>
 </div>
 </div>
@@ -532,7 +448,6 @@ Copyright &copy;<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728
 <li><a href="#" class="single_social_icon"><i class="fab fa-facebook-f"></i></a></li>
 <li><a href="#" class="single_social_icon"><i class="fab fa-twitter"></i></a></li>
 <li><a href="#" class="single_social_icon"><i class="fas fa-globe"></i></a></li>
-<li><a href="#" class="single_social_icon"><i class="fab fa-behance"></i></a></li>
 </ul>
 </div>
 </div>
@@ -563,9 +478,67 @@ Copyright &copy;<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728
   gtag('js', new Date());
 
   gtag('config', 'UA-23581568-13');
+  
+
+
+  // my codes
+  const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  let single = "";
+  let sideContent = ""
+  const getBlogs = function(e){
+    console.log(e)
+    let hasImage = false
+    e.forEach(blog=>{
+    if(!hasImage && blog.preview){
+    let date = new Date(blog.publishedAt*1000)
+    single = `
+      <div class="appartment_img">
+      <img src="${blog.preview}" alt="${blog.title}">
+      </div>
+      <div class="single_appartment_content">
+      <p>${date.getDay() + " " + month[date.getMonth()] + " "+ date.getFullYear()}</p>
+      <a target="_blank" href="https://pik-group.com/about/news-and-reports/news/${blog.id}">
+      <h4>${blog.title}</h4>
+      </a>
+      </div>
+      </div>
+    `
+    hasImage = true
+    }else{
+      let date = new Date(blog.publishedAt*1000)
+      sideContent +=  `
+
+  <div class="single_blog">
+<div class="media">
+<img src="${blog.preview || blog.previewWater}" class="mr-3"  alt="${blog.title}">
+<div class="media-body align-self-center">
+<a target="_blank" href="https://pik-group.com/about/news-and-reports/news/${blog.id}">
+<h5 class="mt-0">${blog.title}</h5>
+</a>
+<ul class="list-unstyled">
+<li><span class="ti-time"></span> ${month[date.getMonth()] + " " +date.getDay()}</li>
+</ul>
+</div>
+</div>
+</div>
+      `
+    }
+    })
+      return {single, sideContent}
+  }
+  // fetching blogs
+  fetch("https://api.pik.pikweb.net/v2/news/articles?orTags=mainpage-news-pik-group.com&limit=4&page=1")
+    .then(res => res.json())
+    .then(d=> d.items)
+    .then(getBlogs)
+    .then(template=>{
+      document.getElementById("blog_loader").style.display = "none"
+      document.getElementById("single_blog").innerHTML = template.single
+      document.getElementById("right_blogs").innerHTML = template.sideContent
+      
+    })
 </script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vaafb692b2aea4879b33c060e79fe94621666317369993" integrity="sha512-0ahDYl866UMhKuYcW078ScMalXqtFJggm7TmlUtp0UlD4eQk0Ixfnm5ykXKvGJNFjLMoortdseTfsRT8oCfgGA==" data-cf-beacon='{"rayId":"789d8332596b0bcc","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2022.11.3","si":100}' crossorigin="anonymous"></script>
 </body>
 
-<!-- Mirrored from preview.colorlib.com/theme/rental/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Jan 2023 09:16:45 GMT -->
 </html>

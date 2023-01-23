@@ -1331,7 +1331,7 @@ ul {
 }
 
 /* line 128, E:/161 Real estate/161_Real_state_html/sass/_passion.scss */
-.passion_part .single_passion:hover .single_passion_item h4 {
+.passion_part .single_passion:hover .single_passion_item h4, .passion_part .single_passion:hover .single_passion_item div p {
   color: #14303a;
 }
 
@@ -1950,7 +1950,7 @@ ul {
 
 /*****************Review part start******************/
 /* line 2, E:/161 Real estate/161_Real_state_html/sass/_review.scss */
-.review_part {
+.cta_part {
   padding: 90px 0px 130px;
   position: relative;
   z-index: 1;
@@ -1958,7 +1958,7 @@ ul {
 
 @media (max-width: 576px) {
   /* line 2, E:/161 Real estate/161_Real_state_html/sass/_review.scss */
-  .review_part {
+  .cta_part {
     margin-top: 145px;
     padding: 70px 0px;
   }
@@ -1966,7 +1966,7 @@ ul {
 
 @media only screen and (min-width: 576px) and (max-width: 767px) {
   /* line 2, E:/161 Real estate/161_Real_state_html/sass/_review.scss */
-  .review_part {
+  .cta_part {
     margin-top: 0px;
     padding: 70px 0px;
   }
@@ -1974,7 +1974,7 @@ ul {
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   /* line 2, E:/161 Real estate/161_Real_state_html/sass/_review.scss */
-  .review_part {
+  .cta_part {
     margin-top: 0px;
     padding: 70px 0px;
   }
@@ -2570,14 +2570,14 @@ ul {
   }
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1200px) {
+@media only screen and (min-width: 992px) {
   /* line 158, E:/161 Real estate/161_Real_state_html/sass/_blog_part.scss */
   .blog_part .right_single_blog .single_blog {
     margin-bottom: 20px;
   }
   /* line 182, E:/161 Real estate/161_Real_state_html/sass/_blog_part.scss */
   .blog_part .right_single_blog .single_blog img {
-    max-width: 173px;
+    width: 200px;
   }
 }
 
@@ -2892,8 +2892,14 @@ ul {
 
 /* line 80, E:/161 Real estate/161_Real_state_html/sass/_elements.scss */
 .text-heading {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   font-size: 24px;
+}
+.mb-5 {
+  margin-bottom: 50px;
+}
+.mb-3{
+  margin-bottom: 30px;
 }
 
 /* line 85, E:/161 Real estate/161_Real_state_html/sass/_elements.scss */
