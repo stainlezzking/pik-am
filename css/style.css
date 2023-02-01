@@ -1085,7 +1085,7 @@ ul {
   margin-right: 17px;
   color: #cfb579;
   font-size: 20px;
-  position: absolute;
+  position: static;
   left: 14px;
 }
 
@@ -1123,8 +1123,8 @@ ul {
   /* line 161, E:/161 Real estate/161_Real_state_html/sass/_team.scss */
   .team_part .team_member_text ul li span {
     padding-bottom: 15px;
-    position: absolute;
-    left: 15px;
+    position: static;
+    left: 0px;
     padding-top: 6px;
   }
 }
@@ -5567,6 +5567,9 @@ h6 {
 .form-contact textarea {
   border-radius: 12px;
   height: 100% !important;
+}
+.primary_colorr {
+  color: #cfb579;
 }
   /**
  * ==============================================

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/favicon.png">
+
+ <link rel="icon" href="img/favicon.png">
+
+<link rel="stylesheet" href="css/bootstrap.min.css">
+
+<link rel="stylesheet" href="css/animate.css">
+
+<link rel="stylesheet" href="css/owl.carousel.min.css">
+
+<link rel="stylesheet" href="css/themify-icons.css">
+
+<link rel="stylesheet" href="css/flaticon.css">
+
+<link rel="stylesheet" href="css/magnific-popup.css">
+
+<link rel="stylesheet" href="fontawesome/css/all.min.css">
+
+<link rel="stylesheet" href="css/style.css">
+<style>
+    body {
+        position: relative;
+    }
+    .background_pik{
+    position : absolute ;
+    height : 100% ;
+    width: 100%;
+    display : flex;
+    align-items : center;
+    justify-content : center;
+}
+.card {
+    background-color: #f0f8ffbf;
+}
+</style>
+
+</head>
+<body>
+    <div class="background_pik">
+        <svg viewBox="0 0 52 21"><path d="M0 0H9.18478C11.1442 0 12.8163 0.359333 14.2011 1.078C15.5859 1.79667 16.6409 2.786 17.3663 4.046C18.0917 5.306 18.4543 6.75733 18.4543 8.4C18.4543 10.08 18.0822 11.5593 17.338 12.838C16.5938 14.1167 15.5341 15.1153 14.1587 15.834C12.7833 16.5527 11.1442 16.912 9.2413 16.912H6.07609V21H0V0ZM6.07609 5.18V11.732H8.73261C9.91957 11.732 10.8051 11.4053 11.3891 10.752C11.9732 10.0987 12.2652 9.31467 12.2652 8.4C12.2652 7.448 11.9685 6.67333 11.375 6.076C10.7815 5.47867 9.90072 5.18 8.73261 5.18H6.07609ZM20.5174 0H26.5935V21H20.5174V0ZM35.4957 12.544V21H29.4196V0H35.4957V8.708L42.7587 0H49.8522L41.2043 10.192L52 21H43.8326L35.4957 12.544Z" fill="#FC4C02"></path></svg>
+    </div>
+    <div class="container">
+       <div class="row justify-content-center vh-100 align-items-center">
+           <div class="col-sm-10  col-lg-8">
+               <form class="card px-3 py-5 shadow">
+                <div class="text-center mb-3" style="width: 100px;">
+                     <svg viewBox="0 0 52 21"><path d="M0 0H9.18478C11.1442 0 12.8163 0.359333 14.2011 1.078C15.5859 1.79667 16.6409 2.786 17.3663 4.046C18.0917 5.306 18.4543 6.75733 18.4543 8.4C18.4543 10.08 18.0822 11.5593 17.338 12.838C16.5938 14.1167 15.5341 15.1153 14.1587 15.834C12.7833 16.5527 11.1442 16.912 9.2413 16.912H6.07609V21H0V0ZM6.07609 5.18V11.732H8.73261C9.91957 11.732 10.8051 11.4053 11.3891 10.752C11.9732 10.0987 12.2652 9.31467 12.2652 8.4C12.2652 7.448 11.9685 6.67333 11.375 6.076C10.7815 5.47867 9.90072 5.18 8.73261 5.18H6.07609ZM20.5174 0H26.5935V21H20.5174V0ZM35.4957 12.544V21H29.4196V0H35.4957V8.708L42.7587 0H49.8522L41.2043 10.192L52 21H43.8326L35.4957 12.544Z" fill="#FC4C02"></path></svg>
+                </div>
+                <h3 class="mb-30">Complete Your Profile</h3>
+                <div class="d-md-flex gap-2">
+                    <input type="text" name="first_name" placeholder="First Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'First Name'" required="" class="single-input mb-2 ">
+                    <input type="text" name="first_name" placeholder="Last Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'" required="" class="mb-2 single-input ">
+                </div>
+                <input type="text" name="first_name" placeholder="Occupation" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Occupation'" required="" class="single-input mb-2 ">
+                <input type="text" name="first_name" placeholder="Country" onfocus="this.placeholder = ''" onblur="this.placeholder = 'country'" required="" class="single-input mb-2 ">
+                <div class="d-flex  gap-2 mb-3 py-2">
+                    <div class="switch-wrap mx-md-3">
+                            <p class="d-inline-block text-dark">Male</p>
+                            <div class="confirm-radio d-inline-block ">
+                            <input type="radio" name="gender" id="confirm-radio" >
+                            <label for="confirm-radio"></label>
+                            </div>
+                    </div>
+                    <div class="switch-wrap d-inline-block mx-md-3">
+                        <p class="d-inline-block text-dark"> Female</p>
+                        <div class="primary-radio d-inline-block ">
+                        <input type="radio" name="gender" id="primary-radio" >
+                        <label for="primary-radio"></label>
+                        </div>
+                    </div>
+                </div>
+                <select name="means"  class="form-select mb-3">
+                    <option style="color : #797979;" value="">How did you hear about us </option>
+                    <option value="facebook">  facebook</option>
+                    <option value="Youtube"> Youtube</option>
+                    <option value="referral"> Referral</option>
+                    <option value="referral"> other</option>
+                </select>
+                <input type="text" name="first_name" placeholder="how did you hear about us" onfocus="this.placeholder = ''" onblur="this.placeholder = 'how did you hear about us'" required="" class="single-input mb-2">
+                <input type="text" name="first_name" placeholder="referral code" onfocus="this.placeholder = ''" onblur="this.placeholder = 'referral code'" required="" class="single-input mb-2">
+                <div class="mb-3">
+                    <label for="ID-card" class="d-block"> Upload a valid ID</label>
+                    <input type="file" name="file" id="ID-card">
+                </div>
+                
+                <button type="submit" class="btn_1 genric-btn success"> submit </button>
+            </form>
+           </div>
+       </div>
+    </div>
+</body>
+</html>

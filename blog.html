@@ -100,8 +100,8 @@ Pages
 
 <section class="blog_area area-padding">
 <div class="container">
-<div class="row ">
-<div class="col-lg-6">
+<div class="row justify-content-between">
+<div class="col-lg-7">
 <div class="blog_right_sidebar">
 <aside class="single_sidebar_widget popular_post_widget" >
 <h3 class="widget_title">Recent Post</h3>
@@ -118,16 +118,20 @@ Pages
 
 <button onclick="getMoreBlogs()" class="button rounded-0 primary-bg text-white w-50 mx-auto d-block my-3" type="submit">Load more</button>
 </aside>
-<aside class="single_sidebar_widget newsletter_widget">
-<h4 class="widget_title">Newsletter</h4>
-<form action="#">
-<div class="form-group">
-<input type="email" class="form-control placeholder hide-on-focus" placeholder="Enter email" required>
+
 </div>
-<button class="button rounded-0 primary-bg text-white w-100" type="submit">Subscribe</button>
-</form>
-</aside>
 </div>
+
+<div class="col-lg-4">
+  <aside class="single_sidebar_widget newsletter_widget">
+    <h4 class="widget_title">Newsletter</h4>
+    <form action="#">
+    <div class="form-group">
+    <input type="email" class="form-control placeholder hide-on-focus my-2" placeholder="Enter email" required>
+    </div>
+    <button class="button rounded-0 primary-bg text-white w-100" type="submit">Subscribe</button>
+    </form>
+</aside>  
 </div>
 </div>
 </div>
@@ -255,7 +259,8 @@ Copyright &copy;<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728
     .then(d=> d.items)
     .then(getBlogs)
     .catch(err=>{
-      console.log(err.message + " error messsage caught")
+      document.getElementById("loading").style.display = "none"
+      document.getElementById("addBlog").innerHTML += "Failed to load more posts"
     })
 
     const getMoreBlogs = function(e){
@@ -265,7 +270,8 @@ Copyright &copy;<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728
       .then(d=> d.items)
       .then(getBlogs)
       .catch(err=>{
-        console.log(err.message + " error messsage caught")
+        document.getElementById("loading").style.display = "none"
+          document.getElementById("addBlog").innerHTML += "Failed to load more posts"
       })
     }
 
