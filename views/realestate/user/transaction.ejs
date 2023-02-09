@@ -61,102 +61,105 @@
 
                     <!-- Main Content Wrapper -->
                     <main class="main-content w-full px-[var(--margin-x)] pb-8">
-                        <div class="mt-4 grid grid-cols-12 gap-4 sm:mt-5 sm:gap-5 lg:mt-6 lg:gap-6">
-                            <div class="col-span-12 lg:col-span-8">
+                        <!-- BreadCrumbs lies here -->
+                        <%- include("../partials/dashboard/components/breadcrumbs.ejs", {breadcrumbs_active : Transaction}) -%>
+                            <!-- BreadCrumbs : ends -->
+                            <div class="mt-4 grid grid-cols-12 gap-4 sm:mt-5 sm:gap-5 lg:mt-6 lg:gap-6">
+                                <div class="col-span-12 lg:col-span-8">
 
-                                <!-- hear lies balance -->
-                                <%-include("../partials/dashboard/components/balance.ejs") -%>
-                                    <!-- ### -->
+                                    <!-- hear lies balance -->
+                                    <%-include("../partials/dashboard/components/balance.ejs") -%>
+                                        <!-- ### -->
 
-                                    <div class="card col-span-2 px-4 pb-5 sm:px-5 my-5">
-                                        <div class="my-3 flex h-8 items-center justify-between">
-                                            <h2 class="font-medium tracking-wide text-slate-700 dark:text-navy-100">
-                                                Transactions
-                                            </h2>
-                                            <p class="text-xs text-slate-400 dark:text-navy-200">
-                                                All transactions in and out of your account
-                                            </p>
-                                        </div>
-                                        <% if("transactions.length"){%>
-                                            <div class="space-y-4">
-                                                <div class="flex cursor-pointer items-center justify-between">
-                                                    <div class="flex items-center space-x-3">
-                                                        <div class="avatar">
-                                                            <img class="rounded-full" src="/img/debit-card-shade.png" alt="avatar" />
-                                                        </div>
-                                                        <div>
-                                                            <p class="text-slate-700 dark:text-navy-100">
-                                                                Credit
-                                                            </p>
-                                                            <p class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200">
-                                                                Dec 21, 2021 - 08:05
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <p class="font-medium text-success">$660.22</p>
-                                                </div>
-                                                <div class="flex cursor-pointer items-center justify-between">
-                                                    <div class="flex items-center space-x-3">
-                                                        <div class="avatar">
-                                                            <img class="rounded-full" src="/img/debit-card-shade.png" alt="avatar" />
-                                                        </div>
-                                                        <div>
-                                                            <p class="text-slate-700 dark:text-navy-100">
-                                                                Credit
-                                                            </p>
-                                                            <p class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200">
-                                                                Dec 21, 2022 - 08:05
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <p class="font-medium text-success">$660.22</p>
-                                                </div>
-                                                <div class="flex cursor-pointer items-center justify-between">
-                                                    <div class="flex items-center space-x-3">
-                                                        <div class="avatar">
-                                                            <img class="rounded-full" src="/img/debit-card-outline.png" alt="avatar" />
-                                                        </div>
-                                                        <div>
-                                                            <p class="text-slate-700 dark:text-navy-100">
-                                                                Debit
-                                                            </p>
-                                                            <p class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200">
-                                                                Dec 21, 2021 - 08:05
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <p class="font-medium text-error">$660.22</p>
-                                                </div>
-                                                <div class="flex cursor-pointer items-center justify-between">
-                                                    <div class="flex items-center space-x-3">
-                                                        <div class="avatar">
-                                                            <img class="rounded-full" src="/img/debit-card-shade.png" alt="avatar" />
-                                                        </div>
-                                                        <div>
-                                                            <p class="text-slate-700 dark:text-navy-100">
-                                                                Credit
-                                                            </p>
-                                                            <p class="text-xs text-slate-400  line-clamp-1 dark:text-navy-200 text">
-                                                                Dec 21, 2021 - 08:05
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <p class="font-medium text-success">$660.22</p>
-                                                </div>
-
+                                        <div class="card col-span-2 px-4 pb-5 sm:px-5 my-5">
+                                            <div class="my-3 flex h-8 items-center justify-between">
+                                                <h2 class="font-medium tracking-wide text-slate-700 dark:text-navy-100">
+                                                    Transactions
+                                                </h2>
+                                                <p class="text-xs text-slate-400 dark:text-navy-200">
+                                                    All transactions in and out of your account
+                                                </p>
                                             </div>
-                                            <%}else{%>
-                                                <h2> show an image similar to activities but with a man </h2>
-                                                <%}%>
-                                    </div>
-                            </div>
-                            <div class="col-span-12 grid grid-cols-1 gap-4 sm:gap-5 lg:col-span-4 lg:gap-6">
+                                            <% if("transactions.length"){%>
+                                                <div class="space-y-4">
+                                                    <div class="flex cursor-pointer items-center justify-between">
+                                                        <div class="flex items-center space-x-3">
+                                                            <div class="avatar">
+                                                                <img class="rounded-full" src="/img/debit-card-shade.png" alt="avatar" />
+                                                            </div>
+                                                            <div>
+                                                                <p class="text-slate-700 dark:text-navy-100">
+                                                                    Credit
+                                                                </p>
+                                                                <p class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200">
+                                                                    Dec 21, 2021 - 08:05
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <p class="font-medium text-success">$660.22</p>
+                                                    </div>
+                                                    <div class="flex cursor-pointer items-center justify-between">
+                                                        <div class="flex items-center space-x-3">
+                                                            <div class="avatar">
+                                                                <img class="rounded-full" src="/img/debit-card-shade.png" alt="avatar" />
+                                                            </div>
+                                                            <div>
+                                                                <p class="text-slate-700 dark:text-navy-100">
+                                                                    Credit
+                                                                </p>
+                                                                <p class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200">
+                                                                    Dec 21, 2022 - 08:05
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <p class="font-medium text-success">$660.22</p>
+                                                    </div>
+                                                    <div class="flex cursor-pointer items-center justify-between">
+                                                        <div class="flex items-center space-x-3">
+                                                            <div class="avatar">
+                                                                <img class="rounded-full" src="/img/debit-card-outline.png" alt="avatar" />
+                                                            </div>
+                                                            <div>
+                                                                <p class="text-slate-700 dark:text-navy-100">
+                                                                    Debit
+                                                                </p>
+                                                                <p class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200">
+                                                                    Dec 21, 2021 - 08:05
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <p class="font-medium text-error">$660.22</p>
+                                                    </div>
+                                                    <div class="flex cursor-pointer items-center justify-between">
+                                                        <div class="flex items-center space-x-3">
+                                                            <div class="avatar">
+                                                                <img class="rounded-full" src="/img/debit-card-shade.png" alt="avatar" />
+                                                            </div>
+                                                            <div>
+                                                                <p class="text-slate-700 dark:text-navy-100">
+                                                                    Credit
+                                                                </p>
+                                                                <p class="text-xs text-slate-400  line-clamp-1 dark:text-navy-200 text">
+                                                                    Dec 21, 2021 - 08:05
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <p class="font-medium text-success">$660.22</p>
+                                                    </div>
+
+                                                </div>
+                                                <%}else{%>
+                                                    <h2> show an image similar to activities but with a man </h2>
+                                                    <%}%>
+                                        </div>
+                                </div>
+                                <div class="col-span-12 grid grid-cols-1 gap-4 sm:gap-5 lg:col-span-4 lg:gap-6">
+
+
+                                </div>
 
 
                             </div>
-
-
-                        </div>
                     </main>
         </div>
         <!-- 
