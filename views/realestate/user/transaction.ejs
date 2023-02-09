@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from lineone.piniastudio.com/dashboards-crypto-1.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 01 Feb 2023 08:31:31 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<!-- /Added by HTTrack -->
+
+<head>
+
+    <title>Transaction History | PIK ASSETS MANAGEMENT </title>
+
+    <!-- headLinks -->
+    <%- include("../partials/dashboard/headLinks.ejs") -%>
+        <!-- ######### -->
+
+
+        <style>
+            .btn:not(.btn-shadow):not(.shadow):not(.shadow-sm):not(.shadow-lg):not(.shadow-xs) {
+                box-shadow: none;
+            }
+            
+            .btn.btn-outline.btn-outline-dashed {
+                border-width: 1px;
+                border-style: dashed;
+            }
+            
+            .bg-disabled {
+                background-color: #e1e0ff !important;
+            }
+        </style>
+</head>
+
+<body x-data class="is-header-blur" x-bind="$store.global.documentBody">
+    <!-- App preloader-->
+    <div class="app-preloader fixed z-50 grid h-full w-full place-content-center bg-slate-50 dark:bg-navy-900">
+        <div class="app-preloader-inner relative inline-block h-48 w-48"></div>
+    </div>
+
+    <!-- importing copy to clipboard function -->
+    <%- include("../partials/dashboard/components/clipboard.ejs") -%>
+        <!-- #### -->
+
+        <!-- Page Wrapper -->
+        <div id="root" class="min-h-100vh flex grow bg-slate-50 dark:bg-navy-900" x-cloak>
+            <!-- Sidebar -->
+            <div class="sidebar print:hidden">
+
+                <!-- main sidebar and sidebar panel -->
+                <%- include("../partials/dashboard/components/nav/navbar.ejs") -%>
+                    <!-- ### -->
+            </div>
+
+            <!-- Here lies the  App heder -->
+            <%- include("../partials/dashboard/components/nav/header.ejs") -%>
+                <!-- ######  App header:end ###-->
+
+                <!-- Right side bar lies here -->
+                <%- include("../partials/dashboard/components/rightside.ejs") -%>
+                    <!-- Right side bar : ends -->
+
+                    <!-- Main Content Wrapper -->
+                    <main class="main-content w-full px-[var(--margin-x)] pb-8">
+                        <div class="mt-4 grid grid-cols-12 gap-4 sm:mt-5 sm:gap-5 lg:mt-6 lg:gap-6">
+                            <div class="col-span-12 lg:col-span-8">
+
+                                <!-- hear lies balance -->
+                                <%-include("../partials/dashboard/components/balance.ejs") -%>
+                                    <!-- ### -->
+
+                                    <div class="card col-span-2 px-4 pb-5 sm:px-5 my-5">
+                                        <div class="my-3 flex h-8 items-center justify-between">
+                                            <h2 class="font-medium tracking-wide text-slate-700 dark:text-navy-100">
+                                                Transactions
+                                            </h2>
+                                            <p class="text-xs text-slate-400 dark:text-navy-200">
+                                                All transactions in and out of your account
+                                            </p>
+                                        </div>
+                                        <% if("transactions.length"){%>
+                                            <div class="space-y-4">
+                                                <div class="flex cursor-pointer items-center justify-between">
+                                                    <div class="flex items-center space-x-3">
+                                                        <div class="avatar">
+                                                            <img class="rounded-full" src="/img/debit-card-shade.png" alt="avatar" />
+                                                        </div>
+                                                        <div>
+                                                            <p class="text-slate-700 dark:text-navy-100">
+                                                                Credit
+                                                            </p>
+                                                            <p class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200">
+                                                                Dec 21, 2021 - 08:05
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <p class="font-medium text-success">$660.22</p>
+                                                </div>
+                                                <div class="flex cursor-pointer items-center justify-between">
+                                                    <div class="flex items-center space-x-3">
+                                                        <div class="avatar">
+                                                            <img class="rounded-full" src="/img/debit-card-shade.png" alt="avatar" />
+                                                        </div>
+                                                        <div>
+                                                            <p class="text-slate-700 dark:text-navy-100">
+                                                                Credit
+                                                            </p>
+                                                            <p class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200">
+                                                                Dec 21, 2022 - 08:05
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <p class="font-medium text-success">$660.22</p>
+                                                </div>
+                                                <div class="flex cursor-pointer items-center justify-between">
+                                                    <div class="flex items-center space-x-3">
+                                                        <div class="avatar">
+                                                            <img class="rounded-full" src="/img/debit-card-outline.png" alt="avatar" />
+                                                        </div>
+                                                        <div>
+                                                            <p class="text-slate-700 dark:text-navy-100">
+                                                                Debit
+                                                            </p>
+                                                            <p class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200">
+                                                                Dec 21, 2021 - 08:05
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <p class="font-medium text-error">$660.22</p>
+                                                </div>
+                                                <div class="flex cursor-pointer items-center justify-between">
+                                                    <div class="flex items-center space-x-3">
+                                                        <div class="avatar">
+                                                            <img class="rounded-full" src="/img/debit-card-shade.png" alt="avatar" />
+                                                        </div>
+                                                        <div>
+                                                            <p class="text-slate-700 dark:text-navy-100">
+                                                                Credit
+                                                            </p>
+                                                            <p class="text-xs text-slate-400  line-clamp-1 dark:text-navy-200 text">
+                                                                Dec 21, 2021 - 08:05
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <p class="font-medium text-success">$660.22</p>
+                                                </div>
+
+                                            </div>
+                                            <%}else{%>
+                                                <h2> show an image similar to activities but with a man </h2>
+                                                <%}%>
+                                    </div>
+                            </div>
+                            <div class="col-span-12 grid grid-cols-1 gap-4 sm:gap-5 lg:col-span-4 lg:gap-6">
+
+
+                            </div>
+
+
+                        </div>
+                    </main>
+        </div>
+        <!-- 
+        This is a place for Alpine.js Teleport feature 
+        @see https://alpinejs.dev/directives/teleport
+      -->
+        <div id="x-teleport-target"></div>
+        <script>
+            window.addEventListener("DOMContentLoaded", () => Alpine.start());
+        </script>
+</body>
+
+</html>
