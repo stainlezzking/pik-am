@@ -54,7 +54,6 @@
         <script>
 
         </script>
-
         <div class="grid grid-cols-2 gap-4 sm:gap-5 lg:gap-6">
             <div>
                 <p class="text-indigo-100">Credits</p>
@@ -66,10 +65,11 @@
                     </div>
                     <p class="text-base font-medium text-white">$2,225.22</p>
                 </div>
-                
-                <a href="/deposit" class="btn mt-3 w-full border border-white/10 bg-white/20 text-white hover:bg-white/30 focus:bg-white/30">
-                    Deposit
-                </a>
+                <% if(!(typeof Deposit_withdraw_button_show)){ %>
+                    <a href="/deposit" class="btn mt-3 w-full border border-white/10 bg-white/20 text-white hover:bg-white/30 focus:bg-white/30">
+                        Deposit
+                    </a>
+                <% } %>
             </div>
             <div>
                 <p class="text-indigo-100">Debits</p>
@@ -81,9 +81,11 @@
                     </div>
                     <p class="text-base font-medium text-white">$225.22</p>
                 </div>
-                <a href="/withdraw" class="btn mt-3 w-full border border-white/10 bg-white/20 text-white hover:bg-white/30 focus:bg-white/30">
-                    Withdraw
-                </a>
+                <% if(!(typeof Deposit_withdraw_button_show)){ %>
+                    <a href="/withdraw" class="btn mt-3 w-full border border-white/10 bg-white/20 text-white hover:bg-white/30 focus:bg-white/30">
+                        Withdraw
+                    </a>
+                <% } %>
             </div>
         </div>
     </div>

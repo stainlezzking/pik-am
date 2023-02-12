@@ -1,0 +1,53 @@
+ <!-- first tab section -->
+ 
+ <div x-show="activeTab === 'tabAccount'" x-transition:enter="transition-all duration-500 easy-in-out" x-transition:enter-start="opacity-0 [transform:translate3d(1rem,0,0)]" x-transition:enter-end="opacity-100 [transform:translate3d(0,0,0)]" >
+    
+       <!-- hear lies balance -->
+       <%-include("../../partials/dashboard/components/balance.ejs", {Deposit_withdraw_button_show : false}) -%>
+           <!-- ### -->
+        
+      <div class="card py-3 px-4 sm:px-5 my-4">
+        <div class="space-y-4">
+            <div class="space-y-3 text-xs+">
+                <div class="flex justify-between">
+                    <p class="font-medium text-slate-700 dark:text-navy-100">
+                      Name
+                    </p>
+                    <p class="text-right">Chukwuebuka Azuka</p>
+                  </div>
+                <div class="flex justify-between">
+                <p class="font-medium text-slate-700 dark:text-navy-100">
+                  D.O.B.
+                </p>
+                <p class="text-right">25 Jan 1998</p>
+              </div>
+              <div class="flex justify-between">
+                <p class="font-medium text-slate-700 dark:text-navy-100">
+                  Weight
+                </p>
+                <p class="text-right">56 kg</p>
+              </div>
+              <div class="flex justify-between">
+                <p class="font-medium text-slate-700 dark:text-navy-100">
+                  Height
+                </p>
+                <p class="text-right">164 cm</p>
+              </div>
+              <div class="flex justify-between">
+                <p class="font-medium text-slate-700 dark:text-navy-100">
+                  Last Appointment
+                </p>
+                <p class="text-right">25 May 2021</p>
+              </div>
+              <div class="flex justify-between">
+                <p class="font-medium text-slate-700 dark:text-navy-100">
+                  Register Date
+                </p>
+                <p class="text-right">16 Jun 2020</p>
+              </div>
+            </div>
+          </div>
+      </div>
+ 
+</div>
+<!-- firstTab:end -->

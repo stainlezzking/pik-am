@@ -1,0 +1,59 @@
+<div class="card" x-show="activeTab === 'tabSecurity'" x-transition:enter="transition-all duration-500 easy-in-out" x-transition:enter-start="opacity-0 [transform:translate3d(1rem,0,0)]" x-transition:enter-end="opacity-100 [transform:translate3d(0,0,0)]" >
+    <div class="flex flex-col items-center space-y-4 border-b border-slate-200 p-4 dark:border-navy-500 sm:flex-row sm:justify-between sm:space-y-0 sm:px-5">
+        <h2 class="text-lg font-medium tracking-wide text-slate-700 dark:text-navy-100">
+            Account Security
+        </h2>
+        <div class="flex justify-center space-x-2">
+            <button class="btn min-w-[7rem] rounded-full border border-slate-300 font-medium text-slate-700 hover:bg-slate-150 focus:bg-slate-150 active:bg-slate-150/80 dark:border-navy-450 dark:text-navy-100 dark:hover:bg-navy-500 dark:focus:bg-navy-500 dark:active:bg-navy-500/90">
+                Cancel
+            </button>
+            <button class="btn min-w-[7rem] rounded-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
+                Save
+            </button>
+        </div>
+    </div>
+    <div class="p-4 sm:p-5">
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <label class="block">
+                <span>Email Address </span>
+                <span class="relative mt-1.5 flex">
+                    <input class="form-input peer w-full rounded-full border border-slate-300 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="Enter email address" type="text" />
+                    <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+                        <i class="fa-regular fa-envelope text-base"></i>
+                    </span>
+                </span>
+            </label>
+            <label class="block">
+                <span>Password </span>
+                <span class="relative mt-1.5 flex">
+                    <input class="form-input peer w-full rounded-full border border-slate-300 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="Enter phone number" type="text" />
+                    <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+                        <i class="fa fa-phone"></i>
+                    </span>
+                </span>
+            </label>
+        </div>
+        <div class="my-7 h-px bg-slate-200 dark:bg-navy-500"></div>
+        <div>
+            <h3 class="text-base font-medium text-slate-600 dark:text-navy-100">
+                Linked Accounts
+            </h3>
+            <p class="text-xs+ text-slate-400 dark:text-navy-300">
+                Lorem ipsum dolor sit amet consectetur.
+            </p>
+            <div class="flex items-center justify-between pt-4">
+                <div class="flex items-center space-x-4">
+                    <div class="h-12 w-12">
+                        <img src="/limestone/images/logos/google.svg" alt="logo" />
+                    </div>
+                    <p class="font-medium line-clamp-1">
+                        Sign In with Google
+                    </p>
+                </div>
+                <button class="btn h-8 rounded-full border border-slate-200 px-3 text-xs+ font-medium text-primary hover:bg-slate-150 focus:bg-slate-150 active:bg-slate-150/80 dark:border-navy-500 dark:text-accent-light dark:hover:bg-navy-500 dark:focus:bg-navy-500 dark:active:bg-navy-500/90">
+                    Connect
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

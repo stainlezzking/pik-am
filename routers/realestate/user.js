@@ -22,4 +22,8 @@ Router.get("/withdraw", function(req, res) {
 Router.get("/invest", function(req, res) {
     res.render("realestate/user/invest.ejs")
 })
+
+Router.get("/account", function(req, res) {
+    res.render("realestate/user/account.ejs")
+})
 module.exports = Router

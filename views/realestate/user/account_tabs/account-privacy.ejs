@@ -1,0 +1,21 @@
+    
+<div class="card py-5 px-4 sm:px-5"
+x-show="activeTab === 'tabPrivacy'" x-transition:enter="transition-all duration-500 easy-in-out" x-transition:enter-start="opacity-0 [transform:translate3d(1rem,0,0)]" x-transition:enter-end="opacity-100 [transform:translate3d(0,0,0)]"
+>
+<h2 class="text-lg font-medium tracking-wide text-slate-700 dark:text-navy-100">
+    Account Administration
+</h2>
+    <div class="flex items-center justify-between pt-4">
+        <div class="flex items-center space-x-4">
+            <p class="font-medium line-clamp-1">
+                <span class="avatar border inline-block p-2 text-center" style="border-radius: 50%;">
+                    <i class="fa-solid fa-user-minus"></i>
+                </span>
+                Deactivate account
+            </p>
+        </div>
+        <button class="btn h-8 rounded-full border border-slate-200 px-3 text-xs+ font-medium text-error hover:bg-error/20 focus:bg-slate-150 active:bg-slate-150/80 dark:border-navy-500 dark:text-accent-light dark:hover:bg-navy-500 dark:focus:bg-navy-500 dark:active:bg-navy-500/90">
+            Delete
+        </button>
+    </div>
+</div>

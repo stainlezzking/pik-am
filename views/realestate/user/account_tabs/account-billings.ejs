@@ -1,0 +1,198 @@
+
+<div
+x-show="activeTab === 'tabBilling'" x-transition:enter="transition-all duration-500 easy-in-out" x-transition:enter-start="opacity-0 [transform:translate3d(1rem,0,0)]" x-transition:enter-end="opacity-100 [transform:translate3d(0,0,0)]">
+
+<!-- Basic Table -->
+<div class="card px-4 pb-4 sm:px-5 my-3">
+    <div class=" flex h-8 items-center justify-between">
+        <h2 class="pt-2 font-medium tracking-wide text-slate-700 line-clamp-1 dark:text-navy-100 lg:text-base">
+            Available Cards
+        </h2>
+    </div>
+    <div>
+        <div>
+            <div class="is-scrollbar-hidden min-w-full overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="border border-transparent border-b-slate-200 dark:border-b-navy-500">
+                            <th class="whitespace-nowrap px-3 py-3 font-semibold uppercase text-slate-800 dark:text-navy-100 lg:px-5">
+                                #
+                            </th>
+                            <th class="whitespace-nowrap px-3 py-3 font-semibold uppercase text-slate-800 dark:text-navy-100 lg:px-5">
+                                Email
+                            </th>
+                            <th class="whitespace-nowrap px-3 py-3 font-semibold uppercase text-slate-800 dark:text-navy-100 lg:px-5">
+                                Payment method
+                            </th>
+                            <th class="whitespace-nowrap px-3 py-3 font-semibold uppercase text-slate-800 dark:text-navy-100 lg:px-5">
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-y border-transparent border-b-slate-200 dark:border-b-navy-500">
+                            <td class="whitespace-nowrap px-4 py-3 sm:px-5">1</td>
+                            <td class="whitespace-nowrap px-4 py-3 sm:px-5">
+                                Cy Ganderton
+                            </td>
+                            <td class="whitespace-nowrap px-4 py-3 sm:px-5" data-filter="mastercard"><img src="/img/cards/mastercard.svg" class="w-7 me-3" alt="mastercard">**** 2707</td>
+                            <td class="whitespace-nowrap px-4 py-3 sm:px-5">
+                                <i class="fa-solid fa-trash text-danger" style="color : red"></i>
+                            </td>
+                        </tr>
+                        <tr class="border-y border-transparent border-b-slate-200 dark:border-b-navy-500">
+                            <td class="whitespace-nowrap px-4 py-3 sm:px-5">2</td>
+                            <td class="whitespace-nowrap px-4 py-3 sm:px-5">
+                                Hart Hagerty
+                            </td>
+                            <td class="whitespace-nowrap px-4 py-3 sm:px-5" data-filter="mastercard"><img src="/img/cards/visa.svg" class="w-7 me-3" alt="mastercard">**** 2707</td>
+                            <td class="whitespace-nowrap px-4 py-3 sm:px-5">
+                                <i class="fa-solid fa-trash text-danger" style="color : red"></i>
+                            </td>
+                        </tr>
+                        <tr class="border-y border-transparent border-b-slate-200 dark:border-b-navy-500">
+                            <td class="whitespace-nowrap px-4 py-3 sm:px-5">3</td>
+                            <td class="whitespace-nowrap px-4 py-3 sm:px-5">
+                                Brice Swyre
+                            </td>
+                            <td class="whitespace-nowrap px-4 py-3 sm:px-5" data-filter="mastercard"><img src="/img/cards/american-express.svg" class="w-7 me-3" alt="mastercard">**** 2707</td>
+                            <td class="whitespace-nowrap px-4 py-3 sm:px-5">
+                                <i class="fa-solid fa-trash text-danger" style="color : red"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="my-4 flex items-center space-x-3">
+    <div class="h-px flex-1 bg-slate-200 dark:bg-navy-500"></div>
+    <p>Add Card</p>
+    <div class="h-px flex-1 bg-slate-200 dark:bg-navy-500"></div>
+  </div>
+
+<div class="card flex flex-col items-center space-y-4 border-b border-slate-200 p-4 dark:border-navy-500 sm:flex-row sm:justify-between sm:space-y-0 sm:px-5">
+    <div class="flex items-center justify-center space-x-2 text-center w-full">
+        <button class="btn min-w-[7rem] rounded-full border border-slate-300 font-medium text-slate-700 hover:bg-slate-150 focus:bg-slate-150 active:bg-slate-150/80 dark:border-navy-450 dark:text-navy-100 dark:hover:bg-navy-500 dark:focus:bg-navy-500 dark:active:bg-navy-500/90">
+            Cancel
+        </button>
+        <button class="btn min-w-[7rem] rounded-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
+            Save
+        </button>
+    </div>
+</div>
+
+<div class="card mt-20 w-full  p-4 sm:p-5" x-data="pages.initCreditCard">
+    <div class="relative mx-auto -mt-20 h-40 w-72 rounded-lg text-white shadow-xl transition-transform hover:scale-110 lg:h-48 lg:w-80">
+        <div class="h-full w-full rounded-lg" :class="creditCardUI"></div>
+        <div class="absolute top-0 flex h-full w-full flex-col justify-between p-4 sm:p-5">
+            <div class="flex justify-between">
+                <div>
+                    <p class="text-xs+ font-light">Name</p>
+                    <p class="font-medium uppercase tracking-wide" x-text="nameOnCard"></p>
+                </div>
+                <template x-if="cardLogoSrc">
+                        <img src="404-2.html" :src="cardLogoSrc" class="w-12 rounded-lg" alt="creditcard" />
+                </template>
+            </div>
+            <div class="pt-4">
+                <p class="text-xs+ font-light">Card Number</p>
+                <p class="font-medium tracking-wide" x-text="cardNumber"></p>
+            </div>
+        </div>
+    </div>
+    <p class="text-base font-medium text-slate-700 dark:text-navy-100 my-4">
+        Add Card
+    </p>
+    <div class="space-y-4">
+        <label class="block">
+                <span>Card number</span>
+                <input class="form-input mt-1.5 w-full rounded-lg bg-slate-150 px-3 py-2 ring-primary/50 placeholder:text-slate-400 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:placeholder:text-navy-300 dark:hover:bg-navy-900 dark:focus:bg-navy-900" placeholder="**** **** **** ****" type="text" x-model.debounce="cardNumber" x-input-mask="creditCardInput" />
+            </label>
+        <label class="block">
+                <span>Name on card</span>
+                <input class="form-input mt-1.5 w-full rounded-lg bg-slate-150 px-3 py-2 ring-primary/50 placeholder:text-slate-400 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:placeholder:text-navy-300 dark:hover:bg-navy-900 dark:focus:bg-navy-900" placeholder="John Doe" type="text" x-model.debounce="nameOnCard" />
+            </label>
+        <div class="grid grid-cols-2 gap-4">
+            <label class="block">
+                    <span>Expiration date</span>
+                    <input class="form-input mt-1.5 w-full rounded-lg bg-slate-150 px-3 py-2 ring-primary/50 placeholder:text-slate-400 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:placeholder:text-navy-300 dark:hover:bg-navy-900 dark:focus:bg-navy-900" placeholder="mm/yy" type="text" x-input-mask="{ date: true, datePattern: ['m', 'y'] }" />
+                </label>
+            <label class="block">
+                    <span>CVV</span>
+                    <input class="form-input mt-1.5 w-full rounded-lg bg-slate-150 px-3 py-2 ring-primary/50 placeholder:text-slate-400 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:placeholder:text-navy-300 dark:hover:bg-navy-900 dark:focus:bg-navy-900" placeholder="***" type="password" x-input-mask="{ numeral: true }" maxlength="3" />
+                </label>
+        </div>
+    </div>
+
+    <div class="my-5">
+        <p class="text-base font-medium text-slate-700 dark:text-navy-100">
+            Shipping Address
+        </p>
+        <div class="mt-4 space-y-4">
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <label class="block">
+                    <span>Your name</span>
+                    <span class="relative mt-1.5 flex">
+                        <input class="form-input peer w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="Your Name" type="text" />
+                        <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+                            <i class="far fa-user text-base"></i>
+                        </span>
+                    </span>
+                </label>
+                <label class="block">
+                    <span>Phone number</span>
+                    <span class="relative mt-1.5 flex">
+                        <input class="form-input peer w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="(999) 999-9999" type="text" x-input-mask="{numericOnly: true, blocks: [0, 3, 3, 4], delimiters: ['(', ') ', '-']}" />
+                        <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+                            <i class="fa fa-phone"></i>
+                        </span>
+                    </span>
+                </label>
+            </div>
+                <label class="block">
+                    <span>Email Address</span>
+                    <div class="relative mt-1.5 flex">
+                        <input class="form-input peer w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="Email address" type="text" />
+                        <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+                            <i class="fa-regular fa-envelope text-base"></i>
+                        </span>
+                    </div>
+                </label>
+                    <label class="block">
+                        <span>Pincode</span>
+                        <div class="relative mt-1.5 flex">
+                            <input class="form-input peer w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="Pincode" type="text" />
+                            <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+                                <i class="fa-solid fa-map-pin text-base"></i>
+                            </span>
+                        </div>
+                    </label>
+            <label class="block">
+                <span>Address</span>
+                <textarea rows="4" placeholder="Your Address (Area and Street)" class="form-textarea mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent p-2.5 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"></textarea>
+            </label>
+            <label class="block">
+                <span>City</span>
+                <span class="relative mt-1.5 flex">
+                    <input class="form-input peer w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="Your City/Town" type="text" />
+                    <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+                        <i class="fa-solid fa-city text-base"></i>
+                    </span>
+                </span>
+            </label>
+            <label class="block">
+                <span>State</span>
+                <span class="relative mt-1.5 flex">
+                    <input class="form-input peer w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="Your State" type="text" />
+                    <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+                        <i class="fa-solid fa-flag"></i>
+                    </span>
+                </span>
+            </label>
+        </div>
+    </div>
+</div>
+
+</div>
