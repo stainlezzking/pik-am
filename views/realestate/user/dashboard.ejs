@@ -1,438 +1,418 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+	<head>
 
-    <title>Dashboard | PIK ASSETS MANAGEMENT </title>
+		<title>Dashboard | PIK ASSETS MANAGEMENT </title>
 
-    <!-- headLinks -->
-    <%- include("../partials/dashboard/headLinks.ejs") -%>
-        <!-- ######### -->
+		<!-- headLinks -->
+		<%- include("../partials/dashboard/headLinks.ejs") -%>
+		<!-- ######### -->
 
 
-        <style>
-            .btn:not(.btn-shadow):not(.shadow):not(.shadow-sm):not(.shadow-lg):not(.shadow-xs) {
-                box-shadow: none;
-            }
-            
-            .btn.btn-outline.btn-outline-dashed {
-                border-width: 1px;
-                border-style: dashed;
-            }
-            
-            .bg-disabled {
-                background-color: #e1e0ff !important;
-            }
-        </style>
-</head>
+		<style>
+			.btn:not(.btn-shadow):not(.shadow):not(.shadow-sm):not(.shadow-lg):not(.shadow-xs) {
+				box-shadow: none;
+			}
 
-<body x-data class="is-header-blur" x-bind="$store.global.documentBody">
-    <!-- App preloader-->
-    <div class="app-preloader fixed z-50 grid h-full w-full place-content-center bg-slate-50 dark:bg-navy-900">
-        <div class="app-preloader-inner relative inline-block h-48 w-48"></div>
-    </div>
+			.btn.btn-outline.btn-outline-dashed {
+				border-width: 1px;
+				border-style: dashed;
+			}
 
-    <!-- importing copy to clipboard function -->
-    <%- include("../partials/dashboard/components/clipboard.ejs") -%>
-        <!-- #### -->
+			.bg-disabled {
+				background-color: #e1e0ff !important;
+			}
+		</style>
+	</head>
 
-        <!-- Page Wrapper -->
-        <div id="root" class="min-h-100vh flex grow bg-slate-50 dark:bg-navy-900" x-cloak>
-            <!-- Sidebar -->
-            <div class="sidebar print:hidden">
+	<body x-data class="is-header-blur" x-bind="$store.global.documentBody">
+		<!-- App preloader-->
+		<div class="app-preloader fixed z-50 grid h-full w-full place-content-center bg-slate-50 dark:bg-navy-900">
+			<div class="app-preloader-inner relative inline-block h-48 w-48"></div>
+		</div>
 
-                <!-- main sidebar and sidebar panel -->
-                <%- include("../partials/dashboard/components/nav/navbar.ejs") -%>
-                    <!-- ### -->
-            </div>
+		<!-- importing copy to clipboard function -->
+		<%- include("../partials/dashboard/components/clipboard.ejs") -%>
+		<!-- #### -->
 
-            <!-- Here lies the  App heder -->
-            <%- include("../partials/dashboard/components/nav/header.ejs") -%>
-                <!-- ######  App header:end ###-->
+		<!-- Page Wrapper -->
+		<div id="root" class="min-h-100vh flex grow bg-slate-50 dark:bg-navy-900" x-cloak>
+			<!-- Sidebar -->
+			<div class="sidebar print:hidden">
 
-                <!-- Right side bar lies here -->
-                <%- include("../partials/dashboard/components/rightside.ejs") -%>
-                    <!-- Right side bar : ends -->
+				<!-- main sidebar and sidebar panel -->
+				<%- include("../partials/dashboard/components/nav/navbar.ejs", {active_page : "dashboard"}) -%>
+				<!-- ### -->
+			</div>
 
-                    <!-- Main Content Wrapper -->
-                    <main class="main-content w-full px-[var(--margin-x)] pb-8">
-                        <!-- BreadCrumbs lies here -->
-                        <%- include("../partials/dashboard/components/breadcrumbs.ejs", {breadcrumbs_active : "dashboard"}) -%>
-                            <!-- BreadCrumbs : ends -->
-                            <div class="mt-4 grid grid-cols-12 gap-4 sm:mt-5 sm:gap-5 lg:mt-6 lg:gap-6">
-                                <div class="col-span-12 lg:col-span-8">
+			<!-- Here lies the  App heder -->
+			<%- include("../partials/dashboard/components/nav/header.ejs") -%>
+			<!-- ######  App header:end ###-->
 
-                                    <!-- hear lies balance -->
-                                    <%-include("../partials/dashboard/components/balance.ejs") -%>
-                                        <!-- ### -->
+			<!-- Right side bar lies here -->
+			<%- include("../partials/dashboard/components/rightside.ejs") -%>
+			<!-- Right side bar : ends -->
 
-                                        <div class="card mt-4 pb-1 sm:mt-5 lg:mt-6">
-                                            <div class="my-3 flex items-center justify-between px-4 sm:px-5">
-                                                <h2 class="font-medium tracking-wide text-slate-700 dark:text-navy-100">
-                                                    Assets
-                                                </h2>
-                                                <a href="/invest" class="btn h-7 w-7 rounded-full bg-slate-150 p-0 font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"></path>
-                                    </svg>
-                                                </a>
-                                            </div>
-                                            <div class="scrollbar-sm flex space-x-4 overflow-x-auto overflow-y-hidden px-4 pb-2 sm:px-5">
-                                                <div class="flex w-72 shrink-0 flex-col">
-                                                    <div class="flex items-center space-x-2">
-                                                        <img class="h-6 w-6" src="/limestone/images/logos/bitcoin.svg" alt="flag" />
-                                                        <div>
-                                                            <span>Shared cluster</span>
-                                                        </div>
-                                                    </div>
+			<!-- Main Content Wrapper -->
+			<main class="main-content w-full px-[var(--margin-x)] pb-8">
+				<!-- BreadCrumbs lies here -->
+				<%- include("../partials/dashboard/components/breadcrumbs.ejs", {breadcrumbs_active : "dashboard"}) -%>
+				<!-- BreadCrumbs : ends -->
+				<div class="mt-4 grid grid-cols-12 gap-4 sm:mt-5 sm:gap-5 lg:mt-6 lg:gap-6">
+					<div class="col-span-12 lg:col-span-8">
 
-                                                    <div class="mt-2.5 flex justify-between rounded-lg bg-slate-50 py-3 pr-3 dark:bg-navy-600">
-                                                        <div class="ax-transparent-gridline">
-                                                            <div x-init="$nextTick(() => { $el._x_chart = new ApexCharts($el,pages.charts.cryptoWatchlist1); $el._x_chart.render() });"></div>
-                                                        </div>
-                                                        <div class="flex w-36 flex-col items-center rounded-lg bg-slate-100 py-2 font-inter dark:bg-navy-500">
-                                                            <p class="text-xl font-medium text-slate-700 line-clamp-1 dark:text-navy-100">
-                                                                $31,566.11
-                                                            </p>
-                                                            <p class="mt-1 flex items-center space-x-0.5 text-xs text-success">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<!-- hear lies balance -->
+						<%-include("../partials/dashboard/components/balance.ejs") -%>
+						<!-- ### -->
+
+						<div class="card mt-4 pb-1 sm:mt-5 lg:mt-6">
+							<div class="my-3 flex items-center justify-between px-4 sm:px-5">
+								<h2 class="font-medium tracking-wide text-slate-700 dark:text-navy-100">
+									Assets
+								</h2>
+								<a href="/invest" class="btn h-7 w-7 rounded-full bg-slate-150 p-0 font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90">
+									<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"></path>
+									</svg>
+								</a>
+							</div>
+							<div class="scrollbar-sm flex space-x-4 overflow-x-auto overflow-y-hidden px-4 pb-2 sm:px-5">
+								<div class="flex w-72 shrink-0 flex-col">
+									<div class="flex items-center space-x-2">
+										<img class="h-6 w-6" src="/limestone/images/logos/bitcoin.svg" alt="flag" />
+										<div>
+											<span>Shared cluster</span>
+										</div>
+									</div>
+
+									<div class="mt-2.5 flex justify-between rounded-lg bg-slate-50 py-3 pr-3 dark:bg-navy-600">
+										<div class="ax-transparent-gridline">
+											<div x-init="$nextTick(() => { $el._x_chart = new ApexCharts($el,pages.charts.cryptoWatchlist1); $el._x_chart.render() });"></div>
+										</div>
+										<div class="flex w-36 flex-col items-center rounded-lg bg-slate-100 py-2 font-inter dark:bg-navy-500">
+											<p class="text-xl font-medium text-slate-700 line-clamp-1 dark:text-navy-100">
+												$31,566.11
+											</p>
+											<p class="mt-1 flex items-center space-x-0.5 text-xs text-success">
+												<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 													<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12" />
 												</svg>
-                                                                <span>4.3%</span>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="flex w-72 shrink-0 flex-col">
-                                                    <div class="flex items-center space-x-2">
-                                                        <img class="h-6 w-6" src="/limestone/images/logos/ethereum.svg" alt="flag" />
-                                                        <div>
-                                                            <span>Properties</span>
-                                                        </div>
-                                                    </div>
+												<span>4.3%</span>
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="flex w-72 shrink-0 flex-col">
+									<div class="flex items-center space-x-2">
+										<img class="h-6 w-6" src="/limestone/images/logos/ethereum.svg" alt="flag" />
+										<div>
+											<span>Properties</span>
+										</div>
+									</div>
 
-                                                    <div class="mt-2.5 flex justify-between rounded-lg bg-slate-50 py-3 pr-3 dark:bg-navy-600">
-                                                        <div class="ax-transparent-gridline">
-                                                            <div x-init="$nextTick(() => { $el._x_chart = new ApexCharts($el,pages.charts.cryptoWatchlist2); $el._x_chart.render() });"></div>
-                                                        </div>
-                                                        <div class="flex w-36 flex-col items-center rounded-lg bg-slate-100 py-2 font-inter dark:bg-navy-500">
-                                                            <p class="text-xl font-medium text-slate-700 line-clamp-1 dark:text-navy-100">
-                                                                $7,668.56
-                                                            </p>
-                                                            <p class="mt-1 flex items-center space-x-0.5 text-xs text-error">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+									<div class="mt-2.5 flex justify-between rounded-lg bg-slate-50 py-3 pr-3 dark:bg-navy-600">
+										<div class="ax-transparent-gridline">
+											<div x-init="$nextTick(() => { $el._x_chart = new ApexCharts($el,pages.charts.cryptoWatchlist2); $el._x_chart.render() });"></div>
+										</div>
+										<div class="flex w-36 flex-col items-center rounded-lg bg-slate-100 py-2 font-inter dark:bg-navy-500">
+											<p class="text-xl font-medium text-slate-700 line-clamp-1 dark:text-navy-100">
+												$7,668.56
+											</p>
+											<p class="mt-1 flex items-center space-x-0.5 text-xs text-error">
+												<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 													<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 13l-5 5m0 0l-5-5m5 5V6" />
 												</svg>
-                                                                <span>6.53%</span>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="flex w-72 shrink-0 flex-col">
-                                                    <div class="flex items-center space-x-2">
-                                                        <img class="h-6 w-6" src="/limestone/images/logos/solana.svg" alt="flag" />
-                                                        <div>
-                                                            <span>Solana</span>
-                                                            <span class="text-xs uppercase text-slate-400 dark:text-navy-300">
+												<span>6.53%</span>
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="flex w-72 shrink-0 flex-col">
+									<div class="flex items-center space-x-2">
+										<img class="h-6 w-6" src="/limestone/images/logos/solana.svg" alt="flag" />
+										<div>
+											<span>Solana</span>
+											<span class="text-xs uppercase text-slate-400 dark:text-navy-300">
 												SOl
 											</span>
-                                                        </div>
-                                                    </div>
+										</div>
+									</div>
 
-                                                    <div class="mt-2.5 flex justify-between rounded-lg bg-slate-50 py-3 pr-3 dark:bg-navy-600">
-                                                        <div class="ax-transparent-gridline">
-                                                            <div x-init="$nextTick(() => { $el._x_chart = new ApexCharts($el,pages.charts.cryptoWatchlist3); $el._x_chart.render() });"></div>
-                                                        </div>
-                                                        <div class="flex w-36 flex-col items-center rounded-lg bg-slate-100 py-2 font-inter dark:bg-navy-500">
-                                                            <p class="text-xl font-medium text-slate-700 line-clamp-1 dark:text-navy-100">
-                                                                $1,956.11
-                                                            </p>
-                                                            <p class="mt-1 flex items-center space-x-0.5 text-xs text-success">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+									<div class="mt-2.5 flex justify-between rounded-lg bg-slate-50 py-3 pr-3 dark:bg-navy-600">
+										<div class="ax-transparent-gridline">
+											<div x-init="$nextTick(() => { $el._x_chart = new ApexCharts($el,pages.charts.cryptoWatchlist3); $el._x_chart.render() });"></div>
+										</div>
+										<div class="flex w-36 flex-col items-center rounded-lg bg-slate-100 py-2 font-inter dark:bg-navy-500">
+											<p class="text-xl font-medium text-slate-700 line-clamp-1 dark:text-navy-100">
+												$1,956.11
+											</p>
+											<p class="mt-1 flex items-center space-x-0.5 text-xs text-success">
+												<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 													<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12" />
 												</svg>
-                                                                <span>3.6%</span>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="flex w-72 shrink-0 flex-col">
-                                                    <div class="flex items-center space-x-2">
-                                                        <img class="h-6 w-6" src="/limestone/images/logos/litecoin.svg" alt="flag" />
-                                                        <div>
-                                                            <span>Litecoin</span>
-                                                            <span class="text-xs uppercase text-slate-400 dark:text-navy-300">
+												<span>3.6%</span>
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="flex w-72 shrink-0 flex-col">
+									<div class="flex items-center space-x-2">
+										<img class="h-6 w-6" src="/limestone/images/logos/litecoin.svg" alt="flag" />
+										<div>
+											<span>Litecoin</span>
+											<span class="text-xs uppercase text-slate-400 dark:text-navy-300">
 												LTC
 											</span>
-                                                        </div>
-                                                    </div>
+										</div>
+									</div>
 
-                                                    <div class="mt-2.5 flex justify-between rounded-lg bg-slate-50 py-3 pr-3 dark:bg-navy-600">
-                                                        <div class="ax-transparent-gridline">
-                                                            <div x-init="$nextTick(() => { $el._x_chart = new ApexCharts($el,pages.charts.cryptoWatchlist4); $el._x_chart.render() });"></div>
-                                                        </div>
-                                                        <div class="flex w-36 flex-col items-center rounded-lg bg-slate-100 py-2 font-inter dark:bg-navy-500">
-                                                            <p class="text-xl font-medium text-slate-700 line-clamp-1 dark:text-navy-100">
-                                                                $487.76
-                                                            </p>
-                                                            <p class="mt-1 flex items-center space-x-0.5 text-xs text-success">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+									<div class="mt-2.5 flex justify-between rounded-lg bg-slate-50 py-3 pr-3 dark:bg-navy-600">
+										<div class="ax-transparent-gridline">
+											<div x-init="$nextTick(() => { $el._x_chart = new ApexCharts($el,pages.charts.cryptoWatchlist4); $el._x_chart.render() });"></div>
+										</div>
+										<div class="flex w-36 flex-col items-center rounded-lg bg-slate-100 py-2 font-inter dark:bg-navy-500">
+											<p class="text-xl font-medium text-slate-700 line-clamp-1 dark:text-navy-100">
+												$487.76
+											</p>
+											<p class="mt-1 flex items-center space-x-0.5 text-xs text-success">
+												<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 													<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12" />
 												</svg>
-                                                                <span>7.98%</span>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+												<span>7.98%</span>
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 
-                                        <!-- here lies the activities column -->
-                                        <%- include("../partials/dashboard/components/activities.ejs", {activities_exists : true}) -%>
-                                            <!-- activities: end -->
-                                </div>
-                                <div class="col-span-12 grid grid-cols-1 gap-4 sm:gap-5 lg:col-span-4 lg:gap-6">
-                                    <div class="card pb-4">
-                                        <div class="flex items-center justify-between px-4 py-3 sm:px-5">
-                                            <h2 class="font-medium tracking-wide text-slate-700 dark:text-navy-100">
-                                                Make Deposit
-                                            </h2>
-                                            <div x-data="usePopper({placement:'bottom-end',offset:4})" @click.outside="isShowPopper && (isShowPopper = false)" class="inline-flex">
-                                                <a href="/deposit" class="btn h-7 w-7 rounded-full bg-slate-150 p-0 font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"></path>
-                                        </svg>
-                                                </a>
-                                            </div>
-                                        </div>
+						<!-- here lies the activities column -->
+						<%- include("../partials/dashboard/components/activities.ejs", {activities_exists : true}) -%>
+						<!-- activities: end -->
+					</div>
+					<div class="col-span-12 grid grid-cols-1 gap-4 sm:gap-5 lg:col-span-4 lg:gap-6">
+						<div class="card pb-4">
+							<div class="flex items-center justify-between px-4 py-3 sm:px-5">
+								<h2 class="font-medium tracking-wide text-slate-700 dark:text-navy-100">
+									Make Deposit
+								</h2>
+								<div x-data="usePopper({placement:'bottom-end',offset:4})" @click.outside="isShowPopper && (isShowPopper = false)" class="inline-flex">
+									<a href="/deposit" class="btn h-7 w-7 rounded-full bg-slate-150 p-0 font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90">
+										<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"></path>
+										</svg>
+									</a>
+								</div>
+							</div>
 
-                                        <div class="mx-4 my-3 h-px bg-slate-200 dark:bg-navy-500 sm:mx-5"></div>
+							<div class="mx-4 my-3 h-px bg-slate-200 dark:bg-navy-500 sm:mx-5"></div>
 
-                                        <div class="px-4 sm:px-5">
-                                            <div x-data="{activeTab:'tabHome'}" class="tabs flex flex-col">
-                                                <div class="is-scrollbar-hidden overflow-x-auto rounded-lg bg-slate-200 text-slate-600 dark:bg-navy-800 dark:text-navy-200">
-                                                    <div class="tabs-list flex px-1.5 py-1">
-                                                        <button @click="activeTab = 'tabProfile'" :class="activeTab === 'tabProfile' ? 'bg-white shadow dark:bg-navy-500 dark:text-navy-100' : 'hover:text-slate-800 focus:text-slate-800 dark:hover:text-navy-100 dark:focus:text-navy-100'" class="btn flex-1 space-x-2 px-3 py-2 font-medium">
-                                                <span> Card </span>
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                                </svg>
-                                            </button>
-                                                        <button @click="activeTab = 'tabHome'" :class="activeTab === 'tabHome' ? 'bg-white shadow dark:bg-navy-500 dark:text-navy-100' : 'hover:text-slate-800 focus:text-slate-800 dark:hover:text-navy-100 dark:focus:text-navy-100'" class="btn flex-1 space-x-2 px-3 py-2 font-medium">
-                                                <img class="h-6 w-6" src="/limestone/images/logos/bitcoin.svg" alt="flag">
-                                                <span>Crypto</span>
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                                </svg>
-                                            </button>
-                                                    </div>
-                                                </div>
-                                                <div class="tab-content pt-4">
-                                                    <div x-show="activeTab === 'tabHome'" x-transition:enter="transition-all duration-500 easy-in-out" x-transition:enter-start="opacity-0 [transform:translate3d(1rem,0,0)]" x-transition:enter-end="opacity-100 [transform:translate3d(0,0,0)]">
-                                                        <div class="relative">
-                                                            <div class="pt-4">
-                                                                <p class="text-xs+">Select payment</p>
-                                                                <select class="w-full form-select h-8 rounded-2xl border border-transparent bg-slate-150 px-4 py-0 pr-9 text-xs+ hover:border-slate-400 focus:border-primary dark:bg-navy-700 dark:hover:border-navy-400 dark:focus:border-accent">
-                                                        <option>Bitcoin</option>
-                                                        <option>Ethereum</option>
-                                                        <option>Solana</option>
-                                                        <option>Litecoin</option>
-                                                    </select>
-                                                            </div>
-                                                            <div class="pt-4">
-                                                                <p class="text-xs+">Amount</p>
-                                                                <div class="mt-1 flex justify-between space-x-2 rounded-2xl bg-slate-150 p-1.5 dark:bg-navy-800">
-                                                                    <label class="px-3"> $ </label>
-                                                                    <input class="form-input w-full bg-transparent px-2 text-right placeholder:text-slate-400/70" placeholder="Amount" type="text" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div x-data="{showModal:false}">
-                                                            <button @click="showModal = true" class="btn mt-6 h-10 w-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
-												Make payment
+							<div class="px-4 sm:px-5">
+								<div x-data="{activeTab:'tabCard'}" class="tabs flex flex-col">
+									<div class="is-scrollbar-hidden overflow-x-auto rounded-lg bg-slate-200 text-slate-600 dark:bg-navy-800 dark:text-navy-200">
+										<div class="tabs-list flex px-1.5 py-1">
+											<button @click="activeTab = 'tabCard'" :class="activeTab === 'tabCard' ? 'bg-white shadow dark:bg-navy-500 dark:text-navy-100' : 'hover:text-slate-800 focus:text-slate-800 dark:hover:text-navy-100 dark:focus:text-navy-100'" class="btn flex-1 space-x-2 px-3 py-2 font-medium">
+												<span> Card </span>
+												<svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" viewBox="0 0 20 20" fill="currentColor">
+													<path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+												</svg>
 											</button>
-                                                            <template x-teleport="#x-teleport-target">
-												<div class="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden px-4 py-6 sm:px-5" x-show="showModal" role="dialog" @keydown.window.escape="showModal = false">
-													<div class="absolute inset-0 bg-slate-900/60 transition-opacity duration-300" @click="showModal = false" x-show="showModal" x-transition:enter="ease-out" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"></div>
-													<div
-													class="absolute inset-0 bg-slate-900/60 backdrop-blur transition-opacity duration-300"
-													@click="showModal = false"
-													x-show="showModal"
-													x-transition:enter="ease-out"
-													x-transition:enter-start="opacity-0"
-													x-transition:enter-end="opacity-100"
-													x-transition:leave="ease-in"
-													x-transition:leave-start="opacity-100"
-													x-transition:leave-end="opacity-0"
-													></div>
-													<div class="relative w-full max-w-2xl origin-bottom rounded-lg bg-white pb-4 transition-all duration-300 dark:bg-navy-700" x-show="showModal" x-transition:enter="easy-out" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="easy-in" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95">
-														<div class="flex justify-between rounded-t-lg bg-slate-200 px-4 py-3 dark:bg-navy-800 sm:px-5">
-															<h3 class="text-base font-medium text-slate-700 ">
-																Make deposit into your Wallet
-																<p class="py-2 text-xs+"> in two easy steps 🙂</p>
-															</h3>
-															<button @click="showModal = !showModal" class="btn -mr-1.5 h-7 w-7 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
-																<svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-																	<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
-																</svg>
-															</button>
-														</div>
-														<div x-data="{activeTab:'tabBalance'}" class="tabs flex flex-col px-4 sm:px-5">
-															<ol class="steps py-3">
-																<li class="cursor-pointer step before:bg-primary dark:before:bg-accent">
-																	<div class="step-header rounded-full bg-primary text-white dark:bg-accent"
-																	@click="activeTab = 'tabBalance'"
-																	>
-																	1
-																</div>
-																<h3 class="text-slate-600 dark:text-navy-100">Step 1</h3>
-															</li>
-															<li class="step before:bg-primary dark:before:bg-accent">
-																<div 
-																   :class="activeTab === 'tabNextConfirm' ? 'bg-primary' : 'bg-disabled'"
-																	class="cursor-pointer step-header rounded-full bg-primary text-white dark:bg-accent"
-																	@click="activeTab = 'tabNextConfirm'"
-																	>
-																		2
+											<button @click="activeTab = 'tabCrypto'" :class="activeTab === 'tabCrypto' ? 'bg-white shadow dark:bg-navy-500 dark:text-navy-100' : 'hover:text-slate-800 focus:text-slate-800 dark:hover:text-navy-100 dark:focus:text-navy-100'" class="btn flex-1 space-x-2 px-3 py-2 font-medium">
+												<img class="h-6 w-6" src="/limestone/images/logos/bitcoin.svg" alt="flag">
+												<span>Crypto</span>
+												<svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" viewBox="0 0 20 20" fill="currentColor">
+													<path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+												</svg>
+											</button>
+										</div>
+									</div>
+									<div class="tab-content pt-4">
+                                        <div x-show="activeTab === 'tabCard'" x-transition:enter="transition-all duration-500 easy-in-out" x-transition:enter-start="opacity-0 [transform:translate3d(1rem,0,0)]" x-transition:enter-end="opacity-100 [transform:translate3d(0,0,0)]">
+											<div class="">
+												<div class="w-full h-40 btn btn-outline btn-outline-dashed btn-active-light-primary p-7 d-flex align-items-center mb-10" for="kt_create_account_form_account_type_personal">
+													<!--begin::Svg Icon | path: icons/duotune/communication/com005.svg-->
+													<span class="svg-icon svg-icon-3x me-5">
+														<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+															<path d="M20 14H18V10H20C20.6 10 21 10.4 21 11V13C21 13.6 20.6 14 20 14ZM21 19V17C21 16.4 20.6 16 20 16H18V20H20C20.6 20 21 19.6 21 19ZM21 7V5C21 4.4 20.6 4 20 4H18V8H20C20.6 8 21 7.6 21 7Z" fill="currentColor"></path>
+															<path opacity="0.3" d="M17 22H3C2.4 22 2 21.6 2 21V3C2 2.4 2.4 2 3 2H17C17.6 2 18 2.4 18 3V21C18 21.6 17.6 22 17 22ZM10 7C8.9 7 8 7.9 8 9C8 10.1 8.9 11 10 11C11.1 11 12 10.1 12 9C12 7.9 11.1 7 10 7ZM13.3 16C14 16 14.5 15.3 14.3 14.7C13.7 13.2 12 12 10.1 12C8.10001 12 6.49999 13.1 5.89999 14.7C5.59999 15.3 6.19999 16 7.39999 16H13.3Z" fill="currentColor"></path>
+														</svg>
+													</span>
+													<!--end::Svg Icon-->
+													<!--begin::Info-->
+													<span class="d-block fw-semibold text-start">
+														<span class="text-dark fw-bold d-block fs-4 mb-2">
+															No card found in account
+														</span>
+													</span>
+													<!--end::Info-->
+												</div>
+												<button class="btn mt-6 h-10 w-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
+													Pay with card
+												</button>
+											</div>
+										</div>
+										<div x-show="activeTab === 'tabCrypto'" x-transition:enter="transition-all duration-500 easy-in-out" x-transition:enter-start="opacity-0 [transform:translate3d(1rem,0,0)]" x-transition:enter-end="opacity-100 [transform:translate3d(0,0,0)]">
+											<div class="relative">
+												<div class="pt-4">
+													<p class="text-xs+">Select payment</p>
+													<select class="w-full form-select h-8 rounded-2xl border border-transparent bg-slate-150 px-4 py-0 pr-9 text-xs+ hover:border-slate-400 focus:border-primary dark:bg-navy-700 dark:hover:border-navy-400 dark:focus:border-accent">
+														<option>Bitcoin</option>
+														<option>Ethereum</option>
+														<option>Solana</option>
+														<option>Litecoin</option>
+													</select>
+												</div>
+												<div class="pt-4">
+													<p class="text-xs+">Amount</p>
+													<div class="mt-1 flex justify-between space-x-2 rounded-2xl bg-slate-150 p-1.5 dark:bg-navy-800">
+														<label class="px-3"> $ </label>
+														<input class="form-input w-full bg-transparent px-2 text-right placeholder:text-slate-400/70" placeholder="Amount" type="text" />
+													</div>
+												</div>
+											</div>
+
+											<div x-data="{showModal:false}">
+												<button @click="showModal = true" class="btn mt-6 h-10 w-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
+													Make payment
+												</button>
+												<template x-teleport="#x-teleport-target">
+													<div class="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden px-4 py-6 sm:px-5" x-show="showModal" role="dialog" @keydown.window.escape="showModal = false">
+														<div class="absolute inset-0 bg-slate-900/60 transition-opacity duration-300" @click="showModal = false" x-show="showModal" x-transition:enter="ease-out" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"></div>
+														<div class="absolute inset-0 bg-slate-900/60 backdrop-blur transition-opacity duration-300" @click="showModal = false" x-show="showModal" x-transition:enter="ease-out" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"></div>
+														<div class="relative w-full max-w-2xl origin-bottom rounded-lg bg-white pb-4 transition-all duration-300 dark:bg-navy-700" x-show="showModal" x-transition:enter="easy-out" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="easy-in" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95">
+															<div class="flex justify-between rounded-t-lg bg-slate-200 px-4 py-3 dark:bg-navy-800 sm:px-5">
+																<h3 class="text-base font-medium text-slate-700 ">
+																	Make deposit into your Wallet
+																	<p class="py-2 text-xs+"> in two easy steps 🙂</p>
+																</h3>
+																<button @click="showModal = !showModal" class="btn -mr-1.5 h-7 w-7 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+																	<svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+																		<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+																	</svg>
+																</button>
+															</div>
+															<div x-data="{activeTab:'tabBalance'}" class="tabs flex flex-col px-4 sm:px-5">
+																<ol class="steps py-3">
+																	<li class="cursor-pointer step before:bg-primary dark:before:bg-accent">
+																		<div class="step-header rounded-full bg-primary text-white dark:bg-accent" @click="activeTab = 'tabBalance'">
+																			1
+																		</div>
+																		<h3 class="text-slate-600 dark:text-navy-100">Step 1</h3>
+																	</li>
+																	<li class="step before:bg-primary dark:before:bg-accent">
+																		<div :class="activeTab === 'tabNextConfirm' ? 'bg-primary' : 'bg-disabled'" class="cursor-pointer step-header rounded-full bg-primary text-white dark:bg-accent" @click="activeTab = 'tabNextConfirm'">
+																			2
+																		</div>
+																		<h3 class="text-slate-600 dark:text-navy-100">Step 2</h3>
+																	</li>
+																</ol>
+																<img src="/img/makedeposit.png" alt="deposit illustration" class="sm:w-72 w-40 d-block mx-auto">
+																<div class="tab-content pt-4 text-center">
+																	<div x-show="activeTab === 'tabBalance'" x-transition:enter="transition-all duration-500 easy-in-out" x-transition:enter-start="opacity-0 [transform:translate3d(1rem,0,0)]" x-transition:enter-end="opacity-100 [transform:translate3d(0,0,0)]">
+																		<h4 class="py-4"> Send $400 <span class="text-slate-700 fa">BTC</span> to this address</h4>
+																		<div class="flex p-1.5 justify-between bg-slate-200 rounded-lg">
+																			<input id="clipboardCont" disabled value="Lorem ipsum dolor sit amet consectetur" class="text-slate-400 form-input rounded-l-lg text-slate-800 border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-700 " style="color:black;" />
+																			<button class=" d-block rounded bg-white/20 px-2 text-xs text-white active:bg-white/25" id="copy_button">
+																				<i class="fa-solid fa-copy text-slate-600 text-2xl"></i>
+																			</button>
+																			<script>
+																				document.getElementById("copy_button").onclick = () => copy("clipboardCont")
+																			</script>
+																		</div>
+																		<button @click="activeTab = 'tabNextConfirm'" class="py-2 my-3 d-block btn border border-primary font-medium  hover:text-white ">
+																			<img class="w-7" src="/img/fast-forward.gif" alt="" srcset="">
+																		</button>
 																	</div>
-																	<h3 
-																	class="text-slate-600 dark:text-navy-100">Step 2</h3>
-																</li>
-															</ol>
-															<img src="/img/makedeposit.png" alt="deposit illustration" class="sm:w-72 w-40 d-block mx-auto" >
-															<div class="tab-content pt-4 text-center">
-																<div x-show="activeTab === 'tabBalance'" x-transition:enter="transition-all duration-500 easy-in-out" x-transition:enter-start="opacity-0 [transform:translate3d(1rem,0,0)]" x-transition:enter-end="opacity-100 [transform:translate3d(0,0,0)]">
-																	<h4 class="py-4"> Send $400 <span class="text-slate-700 fa">BTC</span> to this address</h4>
-																	<div class="flex p-1.5 justify-between bg-slate-200 rounded-lg">
-																	<input id="clipboardCont" disabled value="Lorem ipsum dolor sit amet consectetur" 
-																	class="text-slate-400 form-input rounded-l-lg text-slate-800 border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-700 " style="color:black;"/>
-																	<button class=" d-block rounded bg-white/20 px-2 text-xs text-white active:bg-white/25" id="copy_button" >
-																		<i class="fa-solid fa-copy text-slate-600 text-2xl"></i>
-																	</button>
-																	<script>
-																		document.getElementById("copy_button").onclick = ()=> copy("clipboardCont") 
-																	</script>
-																	</div>
-																  <button
-																		@click="activeTab = 'tabNextConfirm'"
-																		class="py-2 my-3 d-block btn border border-primary font-medium  hover:text-white ">
-																		<img class="w-7" src="/img/fast-forward.gif" alt="" srcset="">
-																	</button>
-																  </div>
-														
-																
-																<div x-show="activeTab === 'tabNextConfirm'" x-transition:enter="transition-all duration-500 easy-in-out" x-transition:enter-start="opacity-0 [transform:translate3d(1rem,0,0)]" x-transition:enter-end="opacity-100 [transform:translate3d(0,0,0)]">
-																	<div>
-																		<p>
-																			Take a screenshot of your receipt transaction and upload here 
-																			<a href="/invest#receiipt" class="btn h-7 w-7 rounded-full bg-info/15 p-0 font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90">
-																				<svg class="h-5 w-5 rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-																					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"></path>
-																				</svg>
-																			</a>
-																		</p>
-															
-																		<p class="pt-3 text-xs text-slate-400 dark:text-navy-300">
-																			Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
-																			dolore non atque?
-																		</p>
+
+
+																	<div x-show="activeTab === 'tabNextConfirm'" x-transition:enter="transition-all duration-500 easy-in-out" x-transition:enter-start="opacity-0 [transform:translate3d(1rem,0,0)]" x-transition:enter-end="opacity-100 [transform:translate3d(0,0,0)]">
+																		<div>
+																			<p>
+																				Take a screenshot of your receipt transaction and upload here
+																				<a href="/invest#receiipt" class="btn h-7 w-7 rounded-full bg-info/15 p-0 font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90">
+																					<svg class="h-5 w-5 rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+																						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"></path>
+																					</svg>
+																				</a>
+																			</p>
+
+																			<p class="pt-3 text-xs text-slate-400 dark:text-navy-300">
+																				Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
+																				dolore non atque?
+																			</p>
+																		</div>
 																	</div>
 																</div>
 															</div>
 														</div>
-												</div>
-											</template>
-                                                        </div>
-                                                    </div>
-                                                    <div x-show="activeTab === 'tabProfile'" x-transition:enter="transition-all duration-500 easy-in-out" x-transition:enter-start="opacity-0 [transform:translate3d(1rem,0,0)]" x-transition:enter-end="opacity-100 [transform:translate3d(0,0,0)]">
-                                                        <div class="">
-                                                            <div class="w-full h-40 btn btn-outline btn-outline-dashed btn-active-light-primary p-7 d-flex align-items-center mb-10" for="kt_create_account_form_account_type_personal">
-                                                                <!--begin::Svg Icon | path: icons/duotune/communication/com005.svg-->
-                                                                <span class="svg-icon svg-icon-3x me-5">
-                                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M20 14H18V10H20C20.6 10 21 10.4 21 11V13C21 13.6 20.6 14 20 14ZM21 19V17C21 16.4 20.6 16 20 16H18V20H20C20.6 20 21 19.6 21 19ZM21 7V5C21 4.4 20.6 4 20 4H18V8H20C20.6 8 21 7.6 21 7Z" fill="currentColor"></path>
-                                                        <path opacity="0.3" d="M17 22H3C2.4 22 2 21.6 2 21V3C2 2.4 2.4 2 3 2H17C17.6 2 18 2.4 18 3V21C18 21.6 17.6 22 17 22ZM10 7C8.9 7 8 7.9 8 9C8 10.1 8.9 11 10 11C11.1 11 12 10.1 12 9C12 7.9 11.1 7 10 7ZM13.3 16C14 16 14.5 15.3 14.3 14.7C13.7 13.2 12 12 10.1 12C8.10001 12 6.49999 13.1 5.89999 14.7C5.59999 15.3 6.19999 16 7.39999 16H13.3Z" fill="currentColor"></path>
-                                                        </svg>
-                                                    </span>
-                                                                <!--end::Svg Icon-->
-                                                                <!--begin::Info-->
-                                                                <span class="d-block fw-semibold text-start">                            
-                                                        <span class="text-dark fw-bold d-block fs-4 mb-2">
-                                                            No card found in account
-                                                        </span>
-                                                                </span>
-                                                                <!--end::Info-->
-                                                            </div>
-                                                            <button class="btn mt-6 h-10 w-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
-                                                   Pay Now
-                                                </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+												</template>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 
-                                    <div class="card pb-4">
-                                        <div class="mt-3 flex items-top justify-between px-4 sm:px-5 py-5">
-                                            <div>
-                                                <h2 class="font-medium tracking-wide text-slate-700 dark:text-navy-100">
-                                                    Buy PIK Gift card
-                                                </h2>
-                                                <p> gift investment properties to friends and family </p>
-                                            </div>
-                                            <div x-data="usePopper({placement:'bottom-end',offset:4})" @click.outside="isShowPopper && (isShowPopper = false)" class="inline-flex">
-                                                <button x-ref="popperRef" @click="isShowPopper = !isShowPopper" class="btn -mr-1.5 h-8 w-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+						<div class="card pb-4">
+							<div class="mt-3 flex items-top justify-between px-4 sm:px-5 py-5">
+								<div>
+									<h2 class="font-medium tracking-wide text-slate-700 dark:text-navy-100">
+										Buy PIK Gift card
+									</h2>
+									<p> gift investment properties to friends and family </p>
+								</div>
+								<div x-data="usePopper({placement:'bottom-end',offset:4})" @click.outside="isShowPopper && (isShowPopper = false)" class="inline-flex">
+									<button x-ref="popperRef" @click="isShowPopper = !isShowPopper" class="btn -mr-1.5 h-8 w-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
 										<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
 											<path stroke-linecap="round" stroke-linejoin="round" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
 										</svg>
 									</button>
 
-                                                <div x-ref="popperRoot" class="popper-root" :class="isShowPopper && 'show'">
-                                                    <div class="popper-box rounded-md border border-slate-150 bg-white py-1.5 font-inter dark:border-navy-500 dark:bg-navy-700">
-                                                        <ul>
-                                                            <li>
-                                                                <a href="#" class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Action</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Another Action</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Something else</a>
-                                                            </li>
-                                                        </ul>
-                                                        <div class="my-1 h-px bg-slate-150 dark:bg-navy-500"></div>
-                                                        <ul>
-                                                            <li>
-                                                                <a href="#" class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Separated Link</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mx-5 my-3">
-                                            <!-- hear lies balance -->
-                                            <%-include("../partials/dashboard/components/giftcard.ejs") -%>
-                                                <!-- ### -->
-                                        </div>
-                                    </div>
+									<div x-ref="popperRoot" class="popper-root" :class="isShowPopper && 'show'">
+										<div class="popper-box rounded-md border border-slate-150 bg-white py-1.5 font-inter dark:border-navy-500 dark:bg-navy-700">
+											<ul>
+												<li>
+													<a href="#" class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Action</a>
+												</li>
+												<li>
+													<a href="#" class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Another Action</a>
+												</li>
+												<li>
+													<a href="#" class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Something else</a>
+												</li>
+											</ul>
+											<div class="my-1 h-px bg-slate-150 dark:bg-navy-500"></div>
+											<ul>
+												<li>
+													<a href="#" class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Separated Link</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="mx-5 my-3">
+								<!-- hear lies balance -->
+								<%-include("../partials/dashboard/components/giftcard.ejs") -%>
+								<!-- ### -->
+							</div>
+						</div>
 
-                                </div>
+					</div>
 
 
-                            </div>
-                    </main>
-        </div>
-        <!-- 
+				</div>
+			</main>
+		</div>
+		<!-- 
         This is a place for Alpine.js Teleport feature 
         @see https://alpinejs.dev/directives/teleport
       -->
-        <div id="x-teleport-target"></div>
-        <script>
-            window.addEventListener("DOMContentLoaded", () => Alpine.start());
-        </script>
-</body>
+		<div id="x-teleport-target"></div>
+		<script>
+			window.addEventListener("DOMContentLoaded", () => Alpine.start());
+		</script>
+	</body>
 
 </html>

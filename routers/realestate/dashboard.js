@@ -1,48 +1,84 @@
 const express = require("express")
 const Router = express.Router()
-const path = require("path")
+const showError = require("../../modules/errormodule")
+
+const passport = require("passport")
 
 
-
-Router.use(function(req,res,next){
-    console.log(req.get("host"))
-    next()
+Router.get("/", function(req, res) {
+    res.render("realestate/user/dashboard.ejs")
 })
 
-Router.get("/", function(req,res){
-    res.render("realestate/home/index.ejs")
+Router.get("/deposit", function(req, res) {
+    res.render("realestate/user/deposit.ejs")
 })
 
-Router.get("/about", function(req,res){
-    res.render("realestate/home/about.ejs")
+Router.get("/transaction", function(req, res) {
+    res.render("realestate/user/transaction.ejs")
 })
 
-Router.get("/blogs", function(req,res){
-    res.render("realestate/home/blogs.ejs")
+Router.get("/withdraw", function(req, res) {
+    res.render("realestate/user/withdraw.ejs")
 })
 
-Router.get("/contact", function(req,res){
-    res.render("realestate/home/contact.ejs")
+Router.get("/invest", function(req, res) {
+    res.render("realestate/user/invest.ejs")
+})
+
+Router.get("/account", function(req, res) {
+    res.render("realestate/user/account.ejs")
 })
 
 Router.get("/registration", function(req,res){
+    console.log(req.user)
     res.render("realestate/user/completeinfo.ejs")
 })
 
-Router.get("/auth", function(req,res){
-    res.render("realestate/home/auth.ejs")
-})
-
-Router.post("/OTP-email", express.json({ extended: false }), function(req,res){
-    // do your check making sure its valid emails and input
-    // check if user exists on db
-    // send OTP to the email
-    // send OTP back to the browser
-    // end request
+Router.post("/auth/login", express.urlencoded({ extended: false }),
+function(req,res,next){
     console.log(req.body)
-    res.json({error : "error sending OTP"})
-    res.end()
+    next()
+},
+passport.authenticate("user", {
+  successRedirect: "/dashboard/registration",
+  failureRedirect: "/pik-home/login",
+  failureFlash: true,
 })
+);
 
+Router.post("/auth/register", express.urlencoded({extended : false}), function(req,res, next){
+      USER.findOne({email : req.body.email.toLowerCase()})
+    .then(user=>{
+        if(user)  return showError(req,"/pik-home/register", "This email has been used ", res)
+        return USER.create(req.body, function(err){
+            if(err)  return showError(req,"/pik-home/register" , "A 500 code error occured, please try again", res)
+            // send signup email confirmation
+            return next()
+        })
+    })
+    .catch(e=> showError(req,"pik/home/register", "A 500 code error, please try again", e))
+},passport.authenticate("user", {
+    successRedirect: "/dashboard/registration",
+    failureRedirect: "/pik-home/register",
+    failureFlash: true,
+}))
+
+
+// json response
+Router.post("/auth/OTP", express.json({ extended: false }), async function(req,res){
+    console.log(req.body)
+    let OTP = Math.round(Math.random()*1000000)
+    
+    // check if user exists on db
+    try{
+        const user = await USER.findOne({email : req.body.email})
+        if(user) return res.json({error : "This email has been used "}) 
+        return res.json({success : true, OTP})
+    }catch(err){
+        console.log(err)
+        return res.json({error : "An error occured, please try again"})
+    }
+    // end request
+})
 
 module.exports = Router

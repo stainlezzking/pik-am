@@ -34,7 +34,7 @@
     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:gap-6">
         <div>
             <div class="flex w-9/12 items-center space-x-1">
-                <input  class="text-slate-400 form-input w-full rounded-l-lg  border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:z-10 hover:border-slate-400 focus:z-10 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                <input  class="text-slate-400 form-input w-full rounded-l-lg  border-slate-300 bg-transparent py-2 placeholder:text-slate-400/70 hover:z-10 hover:border-slate-400 focus:z-10 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
                  value="0x9CDBC28F0A6C13BB42ACBD3A3B366BFCAB07B8B1" disabled id="copy_this__" />
                 <button class="btn h-5 w-5 shrink-0 rounded-full p-0 text-white hover:bg-white/20 focus:bg-white/20 active:bg-white/25">
                     <svg id="copy_this__icon" xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
@@ -65,7 +65,7 @@
                     </div>
                     <p class="text-base font-medium text-white">$2,225.22</p>
                 </div>
-                <% if(!(typeof Deposit_withdraw_button_show)){ %>
+                <% if((typeof Deposit_withdraw_button_show == "undefined")){ %>
                     <a href="/deposit" class="btn mt-3 w-full border border-white/10 bg-white/20 text-white hover:bg-white/30 focus:bg-white/30">
                         Deposit
                     </a>
@@ -81,7 +81,7 @@
                     </div>
                     <p class="text-base font-medium text-white">$225.22</p>
                 </div>
-                <% if(!(typeof Deposit_withdraw_button_show)){ %>
+                <% if((typeof Deposit_withdraw_button_show == "undefined")){ %>
                     <a href="/withdraw" class="btn mt-3 w-full border border-white/10 bg-white/20 text-white hover:bg-white/30 focus:bg-white/30">
                         Withdraw
                     </a>

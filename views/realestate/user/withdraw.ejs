@@ -42,7 +42,7 @@
             <div class="sidebar print:hidden">
 
                 <!-- main sidebar and sidebar panel -->
-                <%- include("../partials/dashboard/components/nav/navbar.ejs") -%>
+                <%- include("../partials/dashboard/components/nav/navbar.ejs", {active_page : "withdraw"}) -%>
                     <!-- ### -->
             </div>
 
@@ -85,7 +85,7 @@
                                         </button>
                                         </div>
 
-                                        <div class="card px-4 sm:px-5 pb-5 my-4">
+                                        <div class="card px-4 sm:px-5 pb-5 my-4" id="giftcard">
                                             <div class="flex items-center justify-between py-3 ">
                                                 <h2 class="text-base font-medium tracking-wide text-slate-700 line-clamp-1 dark:text-navy-100 ">
                                                     Purchase PIK Gift card
