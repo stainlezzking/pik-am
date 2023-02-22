@@ -5,13 +5,13 @@ const localStrategy = require("passport-local").Strategy;
 const session = require("express-session");
 const flash = require("express-flash");
 
-const realestateRouter = require("./routers/realestate/frontend")
-const user = require("./routers/realestate/dashboard")
-
 
 // local modules import
-const USER = require("./modules/db/db-user.js")
+const {USER} = require("./modules/db/db-user.js")
 const passportAuth = require("./modules/passport/config.js");
+const realestateRouter = require("./routers/realestate/frontend")
+const user = require("./routers/realestate/dashboard")
+const userPost = require("./routers/realestate/user-post")
 
 app.use(flash());
 
@@ -23,6 +23,7 @@ app.set("view engine", "ejs")
 
 app.use("/pik-home/", realestateRouter)
 app.use("/dashboard/", user)
+app.use("/dashboard/", userPost)
 
 app.use(express.static("public"))
 

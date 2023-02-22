@@ -38,7 +38,6 @@ var KTCreateAccount = function () {
 		stepperObj.on('kt.stepper.next', function (stepper) {
 			console.log('stepper.next', stepper);
 
-			return stepper.goLast()
 			// Validate form before change stepper step
 			var validator = validations[stepper.getCurrentStepIndex() - 1]; // get validator for currnt step
 

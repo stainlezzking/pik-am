@@ -80,76 +80,60 @@
                                                     All transactions in and out of your account
                                                 </p>
                                             </div>
-                                            <% if("transactions.length"){%>
-                                                    <div class="space-y-4">
-                                                        <div class="flex cursor-pointer items-center justify-between">
-                                                            <div class="flex items-center space-x-3">
-                                                                <div class="avatar">
-                                                                    <img class="rounded-full" src="/img/debit-card-shade.png" alt="avatar" />
-                                                                </div>
-                                                                <div>
-                                                                    <p class="text-slate-700 dark:text-navy-100">
-                                                                        Credit
-                                                                    </p>
-                                                                    <p class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200">
-                                                                        Dec 21, 2021 - 08:05
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                            <p class="font-medium text-success">$660.22</p>
-                                                        </div>
-                                                        <div class="flex cursor-pointer items-center justify-between">
-                                                            <div class="flex items-center space-x-3">
-                                                                <div class="avatar">
-                                                                    <img class="rounded-full" src="/img/debit-card-shade.png" alt="avatar" />
-                                                                </div>
-                                                                <div>
-                                                                    <p class="text-slate-700 dark:text-navy-100">
-                                                                        Credit
-                                                                    </p>
-                                                                    <p class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200">
-                                                                        Dec 21, 2022 - 08:05
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                            <p class="font-medium text-success">$660.22</p>
-                                                        </div>
-                                                        <div class="flex cursor-pointer items-center justify-between">
-                                                            <div class="flex items-center space-x-3">
-                                                                <div class="avatar">
-                                                                    <img class="rounded-full" src="/img/debit-card-outline.png" alt="avatar" />
-                                                                </div>
-                                                                <div>
-                                                                    <p class="text-slate-700 dark:text-navy-100">
-                                                                        Debit
-                                                                    </p>
-                                                                    <p class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200">
-                                                                        Dec 21, 2021 - 08:05
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                            <p class="font-medium text-error">$660.22</p>
-                                                        </div>
-                                                        <div class="flex cursor-pointer items-center justify-between">
-                                                            <div class="flex items-center space-x-3">
-                                                                <div class="avatar">
-                                                                    <img class="rounded-full" src="/img/debit-card-shade.png" alt="avatar" />
-                                                                </div>
-                                                                <div>
-                                                                    <p class="text-slate-700 dark:text-navy-100">
-                                                                        Credit
-                                                                    </p>
-                                                                    <p class="text-xs text-slate-400  line-clamp-1 dark:text-navy-200 text">
-                                                                        Dec 21, 2021 - 08:05
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                            <p class="font-medium text-success">$660.22</p>
-                                                        </div>
+                                            <div class="space-y-4">
+                                            <% if(user.transactions && user.transactions.length){%>
+                                                <% user.transactions.forEach(transaction=>{ %>
+                                                    <div class="flex cursor-pointer items-center justify-between">
+                                                        <div class="flex items-start space-x-3">
+                                                            <div class="avatar">
+                                                               <% if(transaction.type == 'pending'){ %>
+                                                                    <div class="btn h-7 w-7 rounded-full bg-info/10 p-0 text-secondary hover:bg-info/20 focus:bg-info/20 active:bg-info/25">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                                      </svg>
+                                                                    </div>
+                                                              <%  } %>
 
+                                                              <%if(transaction.type == 'decline'){ %>
+                                                                <div class="btn h-7 w-7 rounded-full bg-error/10 p-0 text-error hover:bg-error/20 focus:bg-error/20 active:bg-error/25">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                                                    </svg>
+                                                                  </div>
+                                                              <%}%>
+                                                              <%if(transaction.type == 'success'){ %>
+                                                                <div class="btn h-7 w-7 rounded-full bg-success/10 p-0 text-success hover:bg-success/20 focus:bg-success/20 active:bg-success/25">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                                                    </svg>
+                                                                  </div>
+                                                              <%}%>
+                                                            </div>
+                                                            <div>
+                                                                <p class="text-slate-700 dark:text-navy-100">
+                                                                    <%= transaction.title %>
+                                                                </p>
+                                                                <p class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200">
+                                                                    <!-- Dec 21, 2021 - 08:05 -->
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <p class="font-medium <%= transaction.type == 'success'? 'text-success' : (transaction.type == 'decline') ? 'text-error' : 'text-info'%> ">$<%= transaction.amount %></p>
+                                                    </div>
+
+                                                <% })%>
                                                     </div>
                                                 <%}else{%>
-                                                    <h2> show an image similar to activities but with a man </h2>
+                                                    <div class="max-w-md p-6 text-center mx-auto">
+                                                        <div class="w-full">
+                                                            <img class="w-full" x-show="!$store.global.isDarkModeEnabled" src="/limestone/images/illustrations/error-429.svg" alt="image">
+                                                            <img class="w-full" x-show="$store.global.isDarkModeEnabled" src="/limestone/images/illustrations/error-429-dark.svg" alt="image" style="display: none;">
+                                                        </div>
+                                                        <p class="pt-4 text-7xl font-bold text-primary dark:text-accent">
+                                                        <p class="pt-4 text-xl font-semibold text-slate-800 dark:text-navy-50">
+                                                            No transactions
+                                                        </p>
+                                                    </div>
                                                 <%}%>
                                         </div>
                                 </div>

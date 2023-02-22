@@ -1,9 +1,31 @@
 const express = require("express")
 const Router = express.Router()
 const showError = require("../../modules/errormodule")
-
+const {USER, ADMIN, CARD} = require("../../modules/db/db-user")
 const passport = require("passport")
 
+Router.use(async function(req,res,next){
+    try{
+        if(req.isAuthenticated()){
+            const admin = await ADMIN.findOne({}, "accounts giftcards").lean()
+            req.user.cards = await CARD.find({user : req.user._id, deleted : false})
+            res.locals.accounts = admin.accounts
+            res.locals.giftcards = admin.giftcards
+            res.locals.user = req.user
+            return next()
+        }
+        // res redirect to login page
+        console.log("not authenticated")
+        const user = await USER.findOne({email : "somtrcu@sidin.cniy"})
+        return req.login(user, function(err){
+            if(err) return console.log(err.message)
+            return next()
+        })
+    }catch(err){
+        console.log(err.message)
+        res.send("an error occured internally, please report")
+    }
+})
 
 Router.get("/", function(req, res) {
     res.render("realestate/user/dashboard.ejs")
@@ -29,9 +51,19 @@ Router.get("/account", function(req, res) {
     res.render("realestate/user/account.ejs")
 })
 
-Router.get("/registration", function(req,res){
-    console.log(req.user)
-    res.render("realestate/user/completeinfo.ejs")
+Router.route("/registration")
+.get(function(req,res){
+    // redirect to dashboard if user has completed full res
+    return res.render("realestate/user/completeinfo.ejs")
+})
+.post(express.urlencoded({ extended: false }), async function(req,res){
+    // update the account found
+   try{
+    const response = await USER.updateOne({email : req.user.email }, {...req.body,completeSignup : true, $push : req.body.skip ? {} : {cards : {...req.body} }})
+    return res.redirect("/dashboard")
+   }catch(err){
+        return showError(req, "/dashboard/registration",err.message, res)
+    }
 })
 
 Router.post("/auth/login", express.urlencoded({ extended: false }),
@@ -46,6 +78,11 @@ passport.authenticate("user", {
 })
 );
 
+/*
+signup route for new users 
+get[requrest]@ frontend.js
+emaul,password,fname,lname
+*/
 Router.post("/auth/register", express.urlencoded({extended : false}), function(req,res, next){
       USER.findOne({email : req.body.email.toLowerCase()})
     .then(user=>{
@@ -64,21 +101,8 @@ Router.post("/auth/register", express.urlencoded({extended : false}), function(r
 }))
 
 
-// json response
-Router.post("/auth/OTP", express.json({ extended: false }), async function(req,res){
-    console.log(req.body)
-    let OTP = Math.round(Math.random()*1000000)
-    
-    // check if user exists on db
-    try{
-        const user = await USER.findOne({email : req.body.email})
-        if(user) return res.json({error : "This email has been used "}) 
-        return res.json({success : true, OTP})
-    }catch(err){
-        console.log(err)
-        return res.json({error : "An error occured, please try again"})
-    }
-    // end request
-})
-
+/*
+#JSON Response
+OTP request for register page
+*/
 module.exports = Router

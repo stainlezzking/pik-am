@@ -35,7 +35,8 @@
         <div>
             <div class="flex w-9/12 items-center space-x-1">
                 <input  class="text-slate-400 form-input w-full rounded-l-lg  border-slate-300 bg-transparent py-2 placeholder:text-slate-400/70 hover:z-10 hover:border-slate-400 focus:z-10 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                 value="0x9CDBC28F0A6C13BB42ACBD3A3B366BFCAB07B8B1" disabled id="copy_this__" />
+                style="background: transparent !important;"
+                value="0x<%= user.id %>" disabled id="copy_this__" />
                 <button class="btn h-5 w-5 shrink-0 rounded-full p-0 text-white hover:bg-white/20 focus:bg-white/20 active:bg-white/25">
                     <svg id="copy_this__icon" xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
                         <path d="M7 9a2 2 0 012-2h6a2 2 0 012 2v6a2 2 0 01-2 2H9a2 2 0 01-2-2V9z" />
@@ -47,7 +48,7 @@
                 </script>
             </div>
             <div class="mt-3 text-3xl font-semibold text-white">
-                $5,566.00
+                $<%= user.balance ? user.balance.toLocaleString() : "0.00" %>
             </div>
             <p class="mt-3 text-xs+ text-indigo-100">11.159849849 BTC</p>
         </div>
@@ -63,7 +64,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 13l-5 5m0 0l-5-5m5 5V6" />
                         </svg>
                     </div>
-                    <p class="text-base font-medium text-white">$2,225.22</p>
+                    <p class="text-base font-medium text-white">$<%= user.credits ? user.credits.toLocaleString() : "0.00" %> </p>
                 </div>
                 <% if((typeof Deposit_withdraw_button_show == "undefined")){ %>
                     <a href="/deposit" class="btn mt-3 w-full border border-white/10 bg-white/20 text-white hover:bg-white/30 focus:bg-white/30">
@@ -79,7 +80,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12" />
                         </svg>
                     </div>
-                    <p class="text-base font-medium text-white">$225.22</p>
+                    <p class="text-base font-medium text-white">$<%= user.debits ? user.debits.toLocaleString() : "0.00" %></p>
                 </div>
                 <% if((typeof Deposit_withdraw_button_show == "undefined")){ %>
                     <a href="/withdraw" class="btn mt-3 w-full border border-white/10 bg-white/20 text-white hover:bg-white/30 focus:bg-white/30">

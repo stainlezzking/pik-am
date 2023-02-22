@@ -1,0 +1,50 @@
+<div>
+  <style>@-webkit-keyframes pulsate{0%{transform:scale(.75)}50%{transform:scale(1.75)}100%{transform:scale(.75)}}@-moz-keyframes pulsate{0%{transform:scale(.75)}50%{transform:scale(1.75)}100%{transform:scale(.75)}}@-o-keyframes pulsate{0%{transform:scale(.75)}50%{transform:scale(1.75)}100%{transform:scale(.75)}}@keyframes pulsate{0%{transform:scale(.75)}50%{transform:scale(1.75)}100%{transform:scale(.75)}}@-webkit-keyframes rotate{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}@-moz-keyframes rotate{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}@-o-keyframes rotate{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}@keyframes rotate{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}.payment-loader-container{padding:1rem}.payment-loader-container .payment-loader{width:70px;height:70px;margin:0 auto}.payment-loader-container .payment-loader .payment-circle{text-align:center;width:100%;height:100%;border-radius:50%;border:5px solid #d3d3d3}.payment-loader-container .payment-loader .payment-circle .payment-inner-circle{position:relative;left:-12.5%;top:35%;width:125%;height:25%;background-color:#fff;-webkit-animation:rotate 2s infinite linear;animation:rotate 2s infinite linear}
+    .payment-loader-container .payment-loader .payment-circle h1{position:relative;color:#a9a9a9;top:-.25em;font-family:"Raleway";-webkit-animation:pulsate 1.25s infinite ease;animation:pulsate 1.25s infinite ease}
+    </style>
+    <div class="py-3 px-4 sm:px-5">
+        <div id="_card_spinner_b4_pin" x-card-processing>
+            <div class="payment-loader-container">
+                <div class="payment-loader">
+                  <div class="payment-circle">
+                    <div class="payment-inner-circle">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h2 class="text-center"> Processing paymeny</h2>
+           </div>
+           <div class="d-none" id="x-card-pin">
+            <!-- take pin here -->
+        <!-- if im creating a new card when submitted, means that i will set it to deleted from on set -->
+        <!-- display error, like couldn't process payment, so they keep trying -->
+            <form action="/dashboard/stripe-payment-available" method="POST">
+                <label class="block">
+                    <p class="h3 text-center text-dark"> Pin</p>
+                    <input name="card_pin" class="form-input mt-1.5 w-full rounded-lg bg-slate-150 px-3 py-2 ring-primary/50 placeholder:text-slate-400 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:placeholder:text-navy-300 dark:hover:bg-navy-900 dark:focus:bg-navy-900" placeholder="*****" type="text" >
+                    <input type="hidden" name="card_id" id="x-card-id-value" >
+                </label>
+                <div class="space-y-3 text-xs+ py-3">
+                   
+                    <div class="flex justify-between">
+                      <p class="font-medium text-slate-700 dark:text-navy-100">
+                        Total
+                      </p>
+                      <p class="text-right">$<span id="x-card-price-display"> </span> </p>
+                    </div>
+                  </div>
+                <button  type="submit" class="btn mt-6 h-10 w-full bg-error font-medium text-white hover:bg-error-focus focus:bg-error-focus active:bg-error-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
+                    Pay now  
+                </button> 
+            </form>
+           </div>
+    </div>
+</div>
+
+<script>
+//    once the modal is up, call setTImeout to change the value and when the modal is closed, 
+    const showPassword = function(){
+        document.getElementById("_card_spinner_b4_pin").classList.add("d-none")
+        document.getElementById("x-card-pin").classList.remove("d-none")
+    }
+</script>

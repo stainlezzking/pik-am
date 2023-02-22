@@ -1,0 +1,33 @@
+<!-- error display -->
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 11000">
+    <div id="_liveToast" class="toast hide bg-white flex gx-1 items-center" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="text-info p-1 text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+      <div class="p-3" x-toast-error-selector>
+        <%= messages.error %>
+        <% console.log(messages.error) %>
+      </div>
+      <button type="button" class="btn-close ms-auto p-2" data-bs-dismiss="toast" aria-label="Close"> 
+        <svg  class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />  
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <% if(messages.error){%>
+  <script>
+    	const liveToast = document.getElementById('_liveToast')
+      const toast = new bootstrap.Toast(liveToast)
+      toast.show()
+  </script>
+  <%}else{%>
+    <script>
+    	const liveToast = document.getElementById('_liveToast')
+      const toast = new bootstrap.Toast(liveToast)
+  </script>
+  <% }%>
+<!-- ########## -->

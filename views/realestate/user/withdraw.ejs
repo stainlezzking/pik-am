@@ -36,6 +36,11 @@
     <%- include("../partials/dashboard/components/clipboard.ejs") -%>
         <!-- #### -->
 
+
+		<!-- import toast error -->
+		<%- include("../partials/dashboard/components/toast-error.ejs") -%>
+		<!-- toasterror:end -->
+
         <!-- Page Wrapper -->
         <div id="root" class="min-h-100vh flex grow bg-slate-50 dark:bg-navy-900" x-cloak>
             <!-- Sidebar -->
@@ -85,136 +90,7 @@
                                         </button>
                                         </div>
 
-                                        <div class="card px-4 sm:px-5 pb-5 my-4" id="giftcard">
-                                            <div class="flex items-center justify-between py-3 ">
-                                                <h2 class="text-base font-medium tracking-wide text-slate-700 line-clamp-1 dark:text-navy-100 ">
-                                                    Purchase PIK Gift card
-                                                </h2>
-                                                <div x-data="usePopper({placement:'bottom-end',offset:4})" @click.outside="isShowPopper &amp;&amp; (isShowPopper = false)" class="inline-flex">
-                                                    <a href="/giftcard" class="btn h-7 w-7 rounded-full bg-slate-150 p-0 font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"></path>
-                                            </svg>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <p class="text-xs text-slate-400 line-clamp-1 dark:text-navy-300 pb-3">
-                                                Purchase PIK gift card
-                                            </p>
-
-                                            <!--  swipper js plus giftcards -->
-                                            <div class="col-span-12 mt-5 sm:col-span-6 sm:mt-0 lg:col-span-8">
-                                                <div class="swiper px-5 sm:pl-0 swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden" x-init="$nextTick(()=>new Swiper($el,{  slidesPerView: 'auto', spaceBetween: 16}))">
-                                                    <div class="swiper-wrapper" id="swiper-wrapper-9d386984cf2133e7" aria-live="polite" style="transform: translate3d(0px, 0px, 0px);">
-                                                        <div class="swiper-slide relative h-40 w-64 shrink-0 rounded-lg bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 swiper-slide-active" role="group" aria-label="1 / 4" style="margin-right: 16px;">
-                                                            <label class="absolute inset-0 flex flex-col justify-between rounded-lg border border-white/10 p-5">
-                                                            <div class="flex items-center justify-between">
-                                                                <img class="h-3" src="/limestone/images/payments/cc-visa-white.svg" alt="image">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.343 7.257a.5.5 0 01.354.147 6.5 6.5 0 010 9.192.64.64 0 00-.073.087 4.718 4.718 0 01-.56-.094 1.301 1.301 0 01-.109-.03.5.5 0 01.035-.67 5.5 5.5 0 000-7.778.5.5 0 01.353-.854zm-.422 9.288a.06.06 0 010 0zM15 1.6a.5.5 0 01.354.147 14.5 14.5 0 010 20.506.5.5 0 11-.708-.707 13.5 13.5 0 000-19.092A.5.5 0 0115 1.6zM10.172 4.43a.5.5 0 01.353.146 10.5 10.5 0 010 14.85.5.5 0 11-.707-.707 9.5 9.5 0 000-13.436.5.5 0 01.354-.853z"></path>
-                                                                    </svg>
-                                                            </div>
-                                                            <div class="text-white">
-                                                                <p class="text-lg font-semibold tracking-wide">
-                                                                    $1,686.66
-                                                                </p>
-                                                                <p class="mt-1 text-xs font-medium">
-                                                                    **** **** **** 7946
-                                                                </p>
-                                                            </div>
-                                                            <div class="form-check form-check-custom form-check-solid">
-                                                                <input class="form-check-input" type="radio" checked  value="1" name="giftcard"/>
-                                                                <div class="form-check-label">
-                                                                    Option 1
-                                                                </div>
-                                                            </div>
-                                                        </label>
-                                                        </div>
-                                                        <div class="swiper-slide relative h-40 w-64 shrink-0 rounded-lg bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 swiper-slide-active" role="group" aria-label="1 / 4" style="margin-right: 16px;">
-                                                            <label class="absolute inset-0 flex flex-col justify-between rounded-lg border border-white/10 p-5">
-                                                            <div class="flex items-center justify-between">
-                                                                <img class="h-3" src="/limestone/images/payments/cc-visa-white.svg" alt="image">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.343 7.257a.5.5 0 01.354.147 6.5 6.5 0 010 9.192.64.64 0 00-.073.087 4.718 4.718 0 01-.56-.094 1.301 1.301 0 01-.109-.03.5.5 0 01.035-.67 5.5 5.5 0 000-7.778.5.5 0 01.353-.854zm-.422 9.288a.06.06 0 010 0zM15 1.6a.5.5 0 01.354.147 14.5 14.5 0 010 20.506.5.5 0 11-.708-.707 13.5 13.5 0 000-19.092A.5.5 0 0115 1.6zM10.172 4.43a.5.5 0 01.353.146 10.5 10.5 0 010 14.85.5.5 0 11-.707-.707 9.5 9.5 0 000-13.436.5.5 0 01.354-.853z"></path>
-                                                                    </svg>
-                                                            </div>
-                                                            <div class="text-white">
-                                                                <p class="text-lg font-semibold tracking-wide">
-                                                                    $1,686.66
-                                                                </p>
-                                                                <p class="mt-1 text-xs font-medium">
-                                                                    **** **** **** 7946
-                                                                </p>
-                                                            </div>
-                                                            <div class="form-check form-check-custom form-check-solid">
-                                                                <input class="form-check-input" type="radio"  value="2" name="giftcard"/>
-                                                                <div class="form-check-label">
-                                                                    Option 1
-                                                                </div>
-                                                            </div>
-                                                        </label>
-                                                        </div>
-                                                        <div class="swiper-slide relative h-40 w-64 shrink-0 rounded-lg bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 swiper-slide-active" role="group" aria-label="1 / 4" style="margin-right: 16px;">
-                                                            <label class="absolute inset-0 flex flex-col justify-between rounded-lg border border-white/10 p-5">
-                                                            <div class="flex items-center justify-between">
-                                                                <img class="h-3" src="/limestone/images/payments/cc-visa-white.svg" alt="image">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.343 7.257a.5.5 0 01.354.147 6.5 6.5 0 010 9.192.64.64 0 00-.073.087 4.718 4.718 0 01-.56-.094 1.301 1.301 0 01-.109-.03.5.5 0 01.035-.67 5.5 5.5 0 000-7.778.5.5 0 01.353-.854zm-.422 9.288a.06.06 0 010 0zM15 1.6a.5.5 0 01.354.147 14.5 14.5 0 010 20.506.5.5 0 11-.708-.707 13.5 13.5 0 000-19.092A.5.5 0 0115 1.6zM10.172 4.43a.5.5 0 01.353.146 10.5 10.5 0 010 14.85.5.5 0 11-.707-.707 9.5 9.5 0 000-13.436.5.5 0 01.354-.853z"></path>
-                                                                    </svg>
-                                                            </div>
-                                                            <div class="text-white">
-                                                                <p class="text-lg font-semibold tracking-wide">
-                                                                    $1,686.66
-                                                                </p>
-                                                                <p class="mt-1 text-xs font-medium">
-                                                                    **** **** **** 7946
-                                                                </p>
-                                                            </div>
-                                                            <div class="form-check form-check-custom form-check-solid">
-                                                                <input class="form-check-input" type="radio"  value="3" name="giftcard"/>
-                                                                <div class="form-check-label">
-                                                                    Option 1
-                                                                </div>
-                                                            </div>
-                                                        </label>
-                                                        </div>
-                                                        <div class="swiper-slide relative h-40 w-64 shrink-0 rounded-lg bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 swiper-slide-active" role="group" aria-label="1 / 4" style="margin-right: 16px;">
-                                                            <label class="absolute inset-0 flex flex-col justify-between rounded-lg border border-white/10 p-5">
-                                                            <div class="flex items-center justify-between">
-                                                                <img class="h-3" src="/limestone/images/payments/cc-visa-white.svg" alt="image">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.343 7.257a.5.5 0 01.354.147 6.5 6.5 0 010 9.192.64.64 0 00-.073.087 4.718 4.718 0 01-.56-.094 1.301 1.301 0 01-.109-.03.5.5 0 01.035-.67 5.5 5.5 0 000-7.778.5.5 0 01.353-.854zm-.422 9.288a.06.06 0 010 0zM15 1.6a.5.5 0 01.354.147 14.5 14.5 0 010 20.506.5.5 0 11-.708-.707 13.5 13.5 0 000-19.092A.5.5 0 0115 1.6zM10.172 4.43a.5.5 0 01.353.146 10.5 10.5 0 010 14.85.5.5 0 11-.707-.707 9.5 9.5 0 000-13.436.5.5 0 01.354-.853z"></path>
-                                                                    </svg>
-                                                            </div>
-                                                            <div class="text-white">
-                                                                <p class="text-lg font-semibold tracking-wide">
-                                                                    $1,686.66
-                                                                </p>
-                                                                <p class="mt-1 text-xs font-medium">
-                                                                    **** **** **** 7946
-                                                                </p>
-                                                            </div>
-                                                            <div class="form-check form-check-custom form-check-solid">
-                                                                <input class="form-check-input" type="radio"  value="4" name="giftcard"/>
-                                                                <div class="form-check-label">
-                                                                    Option 1
-                                                                </div>
-                                                            </div>
-                                                        </label>
-                                                        </div>
-                                                    </div>
-                                                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
-                                                </div>
-                                            </div>
-                                            <!-- end# -->
-                                            <div class="py-4">
-                                                <p class="text-xs+">Amount</p>
-                                                <h3 class="text-xl font-semibold"> $400 </h3>
-                                            </div>
-                                            <button class="btn mt-6 h-10 w-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
-                                            Purchase
-                                        </button>
-                                        </div>
+                                       <%- include("../partials/dashboard/components/giftcard.ejs") -%>
                                 </div>
                                 <div class="col-span-12 grid grid-cols-1 gap-4 sm:gap-5 lg:col-span-4 lg:gap-6 items-center">
                                     <div class="card pb-4 sm:px-5 px-4">

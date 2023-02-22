@@ -1,0 +1,85 @@
+<!-- No submission here -->
+
+<template x-teleport="#x-teleport-target">
+    <div class="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden px-4 py-6 sm:px-5" x-show="showModal" role="dialog" @keydown.window.escape="showModal = false">
+        <div class="absolute inset-0 bg-slate-900/60 transition-opacity duration-300" @click="showModal = false" x-show="showModal" x-transition:enter="ease-out" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"></div>
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur transition-opacity duration-300" @click="showModal = false" x-show="showModal" x-transition:enter="ease-out" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"></div>
+        <div class="relative w-full max-w-2xl origin-bottom rounded-lg bg-white pb-4 transition-all duration-300 dark:bg-navy-700" x-show="showModal" x-transition:enter="easy-out" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="easy-in" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95">
+            <div class="flex justify-between rounded-t-lg bg-slate-200 px-4 py-3 dark:bg-navy-800 sm:px-5">
+                <h3 class="text-base font-medium text-slate-700 ">
+                    Make deposit into your Wallet
+                    <p class="py-2 text-xs+"> in two easy steps 🙂</p>
+                </h3>
+                <button @click="showModal = !showModal" class="btn -mr-1.5 h-7 w-7 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div x-data="{activeTab:'tabBalance'}" class="tabs flex flex-col px-4 sm:px-5">
+                <ol class="steps py-3">
+                    <li class="cursor-pointer step before:bg-primary dark:before:bg-accent">
+                        <div class="step-header rounded-full bg-primary text-white dark:bg-accent" @click="activeTab = 'tabBalance'">
+                            1
+                        </div>
+                        <h3 class="text-slate-600 dark:text-navy-100">Step 1</h3>
+                    </li>
+                    <li class="step before:bg-primary dark:before:bg-accent">
+                        <div :class="activeTab === 'tabNextConfirm' ? 'bg-primary' : 'bg-disabled'" class="cursor-pointer step-header rounded-full bg-primary text-white dark:bg-accent" @click="activeTab = 'tabNextConfirm'">
+                            2
+                        </div>
+                        <h3 class="text-slate-600 dark:text-navy-100">Step 2</h3>
+                    </li>
+                </ol>
+                <img src="/img/makedeposit.png" alt="deposit illustration" class="sm:w-72 w-40 d-block mx-auto">
+                <div class="tab-content pt-4 text-center">
+                    <div x-show="activeTab === 'tabBalance'" x-transition:enter="transition-all duration-500 easy-in-out" x-transition:enter-start="opacity-0 [transform:translate3d(1rem,0,0)]" x-transition:enter-end="opacity-100 [transform:translate3d(0,0,0)]">
+                        <h4 class="py-4"> Send $<span id="_crypto_amount_output"> </span> <span class="text-slate-700 fa" id="crypto_output"><%= accounts[0].title %></span> to this address</h4>
+                        <div class="flex p-1.5 justify-between bg-slate-200 rounded-lg">
+                            <input id="_crypto_clipboard_address" disabled value="<%= accounts[0].address %>" class="flex-1 text-slate-400 form-input rounded-l-lg text-slate-800 border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-700 " style="color:black;" />
+                            <button class=" d-block rounded bg-white/20 px-2 text-xs text-white active:bg-white/25" id="copy_button">
+                                <i class="fa-solid fa-copy text-slate-600 text-2xl"></i>
+                            </button>
+                            <script>
+                                document.getElementById("copy_button").onclick = () => copy("_crypto_clipboard_address")
+                            </script>
+                        </div>
+                        <button @click="activeTab = 'tabNextConfirm'" class="py-2 my-3 d-block btn border border-primary font-medium  hover:text-white ">
+                            <img class="w-7" src="/img/fast-forward.gif" alt="" srcset="">
+                        </button>
+                    </div>
+
+
+                    <div x-show="activeTab === 'tabNextConfirm'" x-transition:enter="transition-all duration-500 easy-in-out" x-transition:enter-start="opacity-0 [transform:translate3d(1rem,0,0)]" x-transition:enter-end="opacity-100 [transform:translate3d(0,0,0)]">
+                        <div>
+                            <p>
+                                Take a screenshot of your receipt transaction and upload here
+                                <a href="/dashboard/deposit#receipt" class="btn h-7 w-7 rounded-full bg-info/15 p-0 font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90">
+                                    <svg class="h-5 w-5 rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"></path>
+                                    </svg>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</template>
+<script>
+    document.getElementById("_crypto_amount_input").onkeyup = (e)=>{
+        
+        if(!(e.target.value > 0)) {
+            document.getElementById("_crypto_amount_output").innerText = 0.00
+            return document.getElementById("_crypto_makepayment").disabled = true
+        }
+        document.getElementById("_crypto_amount_output").innerText = e.target.value
+        return document.getElementById("_crypto_makepayment").disabled = false
+    }
+
+    document.getElementById("pay_with_crypto").addEventListener("change", function(e){
+        document.getElementById("crypto_output").innerHTML = e.target.value.split("/")[1]
+        document.getElementById("_crypto_clipboard_address").value = e.target.value.split("/")[0]
+        
+    })
+</script>

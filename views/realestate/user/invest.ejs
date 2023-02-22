@@ -99,8 +99,12 @@
                                                     </h4>
                                                     <p> <% index == 0 ?  "the starter choise" : "Moderate" %> </p> 
                                                 </div>
-                                                <div class="mt-5">
-                                                    <span class="text-4xl tracking-tight text-primary dark:text-accent-light">$<%= plan.min.toLocaleString() %></span>
+                                                <div class="mt-5 mx-auto flex text-success">
+                                                    <span class="text-4xl tracking-tight text-primary dark:text-accent-light">$<%= plan.min.toLocaleString() %>
+                                                    </span>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"></path>
+                                                    </svg>
                                                 </div>
                                                 <div class="mt-8 space-y-4 text-left">
                                                     <%- include("../partials/dashboard/components/pricingList_details.ejs", {pricingListDetailValue : "Max of $"+plan.max.toLocaleString()}) -%>

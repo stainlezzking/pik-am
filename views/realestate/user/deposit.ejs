@@ -36,12 +36,17 @@
 			<div class="app-preloader-inner relative inline-block h-48 w-48"></div>
 		</div>
 
+		<!-- import toast error -->
+		<%- include("../partials/dashboard/components/toast-error.ejs") -%>
+		<!-- toasterror:end -->
+
 		<!-- importing copy to clipboard function -->
 		<%- include("../partials/dashboard/components/clipboard.ejs") -%>
 		<!-- #### -->
 
 		<!-- Page Wrapper -->
 		<div id="root" class="min-h-100vh flex grow bg-slate-50 dark:bg-navy-900" x-cloak>
+			  
 			<!-- Sidebar -->
 			<div class="sidebar print:hidden">
 
@@ -69,206 +74,24 @@
 						<!-- hear lies balance -->
 						<%-include("../partials/dashboard/components/balance.ejs") -%>
 						<!-- ### -->
-						<!-- begin of tab -->
-						<div x-data="{activeTab:'tabHome'}" class="tabs flex flex-col card py-6 px-4 sm:px-5 my-5">
-							<h2 class="text-base font-medium tracking-wide text-slate-700 line-clamp-1 dark:text-navy-100 py-2">
-								Make deposit
-							</h2>
+						<!-- here lies a card for deposit  -->
+							<%- include("./deposit-card.ejs") -%>
+							<!-- depositcard:end -->
 
-							<div class="is-scrollbar-hidden overflow-x-auto rounded-lg bg-white text-slate-600 dark:bg-navy-800 dark:text-navy-200">
-								<div class="tabs-list flex px-1.5 py-1 my-4 bg-slate-200 rounded-lg">
-									<button @click="activeTab = 'tabHome'" :class="activeTab === 'tabHome' ? 'bg-white shadow dark:bg-navy-500 dark:text-navy-100' : 'hover:text-slate-800 focus:text-slate-800 dark:hover:text-navy-100 dark:focus:text-navy-100'" class="btn shrink-0 space-x-2 px-3 py-1.5 font-medium">
-										<svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-											<path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-										</svg>
-										<span> Crypto </span>
-									</button>
-									<button @click="activeTab = 'tabProfile'" :class="activeTab === 'tabProfile' ? 'bg-white shadow dark:bg-navy-500 dark:text-navy-100' : 'hover:text-slate-800 focus:text-slate-800 dark:hover:text-navy-100 dark:focus:text-navy-100'" class="btn shrink-0 space-x-2 px-3 py-1.5 font-medium">
-										<svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-											<path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-										</svg>
-										<span> Card </span>
-									</button>
+						</div>
+								<div id="receipt" class="card my-5 sm:px-5 px-4">
+									<h2 class="text-base font-medium tracking-wide text-slate-700 line-clamp-1 dark:text-navy-100 py-5">
+										Confirm Deposit
+									</h2>
+									<form action="" class="text-center">
+										<div class="filepond fp-bordered">
+											<input type="file" x-init="$el._x_filepond = FilePond.create($el)" multiple />
+										</div>
+										<button class="w-40 mx-auto my-4 btn border border-primary font-medium text-primary hover:bg-primary hover:text-white focus:bg-primary focus:text-white active:bg-primary/90 dark:border-accent dark:text-accent-light dark:hover:bg-accent dark:hover:text-white dark:focus:bg-accent dark:focus:text-white dark:active:bg-accent/90" >
+											Upload
+											</button>
+									</form>
 								</div>
-							</div>
-							<div class="tab-content pt-4">
-								<div x-show="activeTab === 'tabHome'" x-transition:enter="transition-all duration-500 easy-in-out" x-transition:enter-start="opacity-0 [transform:translate3d(1rem,0,0)]" x-transition:enter-end="opacity-100 [transform:translate3d(0,0,0)]">
-									<div class="relative">
-										<div>
-											<p class="text-xs+">Select payment</p>
-											<select class="w-full form-select h-8 rounded-lg border border-transparent bg-slate-150 px-4 py-0 pr-9 text-xs+ hover:border-slate-400 focus:border-primary dark:bg-navy-700 dark:hover:border-navy-400 dark:focus:border-accent">
-												<option>Bitcoin</option>
-												<option>Ethereum</option>
-												<option>Solana</option>
-												<option>Litecoin</option>
-											</select>
-										</div>
-										<div class="pt-4">
-											<p class="text-xs+">Amount</p>
-											<div class="mt-1 flex justify-between space-x-2 rounded-lg bg-slate-150 p-1.5 dark:bg-navy-800">
-												<label class="px-3"> $ </label>
-												<input class="form-input w-full bg-transparent px-2 text-right placeholder:text-slate-400/70" placeholder="Amount" type="text" />
-											</div>
-										</div>
-									</div>
-
-									<div x-data="{showModal:false}">
-										<button @click="showModal = true" class="btn mt-6 h-10 w-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
-											Make payment
-										</button>
-										<template x-teleport="#x-teleport-target">
-											<div class="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden px-4 py-6 sm:px-5" x-show="showModal" role="dialog" @keydown.window.escape="showModal = false">
-												<div class="absolute inset-0 bg-slate-900/60 transition-opacity duration-300" @click="showModal = false" x-show="showModal" x-transition:enter="ease-out" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"></div>
-												<div class="absolute inset-0 bg-slate-900/60 backdrop-blur transition-opacity duration-300" @click="showModal = false" x-show="showModal" x-transition:enter="ease-out" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"></div>
-												<div class="relative w-full max-w-2xl origin-bottom rounded-lg bg-white pb-4 transition-all duration-300 dark:bg-navy-700" x-show="showModal" x-transition:enter="easy-out" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="easy-in" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95">
-													<div class="flex justify-between rounded-t-lg bg-slate-200 px-4 py-3 dark:bg-navy-800 sm:px-5">
-														<h3 class="text-base font-medium text-slate-700 ">
-															Make deposit into your Wallet
-															<p class="py-2 text-xs+"> in two easy steps 🙂</p>
-														</h3>
-														<button @click="showModal = !showModal" class="btn -mr-1.5 h-7 w-7 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
-															<svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-																<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
-															</svg>
-														</button>
-													</div>
-													<div x-data="{activeTab:'tabBalance'}" class="tabs flex flex-col px-4 sm:px-5">
-														<ol class="steps py-3">
-															<li class="cursor-pointer step before:bg-primary dark:before:bg-accent">
-																<div class="step-header rounded-full bg-primary text-white dark:bg-accent" @click="activeTab = 'tabBalance'">
-																	1
-																</div>
-																<h3 class="text-slate-600 dark:text-navy-100">Step 1</h3>
-															</li>
-															<li class="step before:bg-primary dark:before:bg-accent">
-																<div :class="activeTab === 'tabNextConfirm' ? 'bg-primary' : 'bg-disabled'" class="cursor-pointer step-header rounded-full bg-primary text-white dark:bg-accent" @click="activeTab = 'tabNextConfirm'">
-																	2
-																</div>
-																<h3 class="text-slate-600 dark:text-navy-100">Step 2</h3>
-															</li>
-														</ol>
-														<img src="/img/makedeposit.png" alt="deposit illustration" class="sm:w-72 w-40 d-block mx-auto">
-														<div class="tab-content pt-4 text-center">
-															<div x-show="activeTab === 'tabBalance'" x-transition:enter="transition-all duration-500 easy-in-out" x-transition:enter-start="opacity-0 [transform:translate3d(1rem,0,0)]" x-transition:enter-end="opacity-100 [transform:translate3d(0,0,0)]">
-																<h4 class="py-4"> Send $400 <span class="text-slate-700 fa">BTC</span> to this address</h4>
-																<div class="flex p-1.5 justify-between bg-slate-200 rounded-lg">
-																	<input id="clipboardCont" disabled value="Lorem ipsum dolor sit amet consectetur" class="text-slate-400 form-input rounded-l-lg text-slate-800 border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-700 " style="color:black;" />
-																	<button class=" d-block rounded bg-white/20 px-2 text-xs text-white active:bg-white/25" id="copy_button">
-																		<i class="fa-solid fa-copy text-slate-600 text-2xl"></i>
-																	</button>
-																	<script>
-																		document.getElementById("copy_button").onclick = () => copy("clipboardCont")
-																	</script>
-																</div>
-																<button @click="activeTab = 'tabNextConfirm'" class="py-2 my-3 d-block btn border border-primary font-medium  hover:text-white ">
-																	<img class="w-7" src="/img/fast-forward.gif" alt="" srcset="">
-																</button>
-															</div>
-
-
-															<div x-show="activeTab === 'tabNextConfirm'" x-transition:enter="transition-all duration-500 easy-in-out" x-transition:enter-start="opacity-0 [transform:translate3d(1rem,0,0)]" x-transition:enter-end="opacity-100 [transform:translate3d(0,0,0)]">
-																<div>
-																	<p>
-																		Take a screenshot of your receipt transaction and upload here
-																		<a href="/invest#receiipt" class="btn h-7 w-7 rounded-full bg-info/15 p-0 font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90">
-																			<svg class="h-5 w-5 rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-																				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"></path>
-																			</svg>
-																		</a>
-																	</p>
-
-																	<p class="pt-3 text-xs text-slate-400 dark:text-navy-300">
-																		Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
-																		dolore non atque?
-																	</p>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-										</template>
-									</div>
-								</div>
-								<div x-show="activeTab === 'tabProfile'" x-transition:enter="transition-all duration-500 easy-in-out" x-transition:enter-start="opacity-0 [transform:translate3d(1rem,0,0)]" x-transition:enter-end="opacity-100 [transform:translate3d(0,0,0)]">
-
-									<% if("cardExists"){%>
-									<div class="relative mx-auto h-40 w-72 rounded-lg text-white shadow-xl transition-transform hover:scale-110 lg:h-48 lg:w-80">
-										<div class="h-full w-full rounded-lg bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400" :class="creditCardUI"></div>
-										<div class="absolute top-0 flex h-full w-full flex-col justify-between p-4 sm:p-5">
-											<div class="flex justify-between">
-												<div>
-													<p class="text-xs+ font-light">Name</p>
-													<p class="font-medium uppercase tracking-wide" x-text="nameOnCard">hnnnnnnnnnnn</p>
-												</div>
-												<template>
-													<img src="404-2.html" class="w-12 rounded-lg" alt="creditcard">
-												</template>
-											</div>
-											<div class="pt-4">
-												<p class="text-xs+ font-light">Card Number</p>
-												<p class="font-medium tracking-wide">6758 6655 6464 57</p>
-											</div>
-										</div>
-									</div>
-
-									<div x-data="{selectedItem:'item_1'}" class="my-3 mb-4">
-										<label class="block">
-											<span>Select Card</span>
-											<select id="itemmm" x-model="selectedItem" class="form-select mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:bg-navy-700 dark:hover:border-navy-400 dark:focus:border-accent">
-												<option value="item_1">xxx-xxx-4908</option>
-												<option value="item_2">xxx-xxx-xx</option>
-											</select>
-										</label>
-									</div>
-									<button class="btn mt-6 h-10 w-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
-										Pay now
-									</button>
-									<script>
-										//    change the card details on the card when, card gets select gets changed
-										// document.getElementById("itemmm").onchange = function(e) {
-										//     console.log("value changed", e)
-										// }
-									</script>
-									<%}else{%>
-									<div class="">
-										<div class="w-full h-40 btn btn-outline btn-outline-dashed btn-active-light-primary p-7 d-flex align-items-center mb-10" for="kt_create_account_form_account_type_personal">
-											<!--begin::Svg Icon | path: icons/duotune/communication/com005.svg-->
-											<span class="svg-icon svg-icon-3x me-5">
-												<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-													<path d="M20 14H18V10H20C20.6 10 21 10.4 21 11V13C21 13.6 20.6 14 20 14ZM21 19V17C21 16.4 20.6 16 20 16H18V20H20C20.6 20 21 19.6 21 19ZM21 7V5C21 4.4 20.6 4 20 4H18V8H20C20.6 8 21 7.6 21 7Z" fill="currentColor"></path>
-													<path opacity="0.3" d="M17 22H3C2.4 22 2 21.6 2 21V3C2 2.4 2.4 2 3 2H17C17.6 2 18 2.4 18 3V21C18 21.6 17.6 22 17 22ZM10 7C8.9 7 8 7.9 8 9C8 10.1 8.9 11 10 11C11.1 11 12 10.1 12 9C12 7.9 11.1 7 10 7ZM13.3 16C14 16 14.5 15.3 14.3 14.7C13.7 13.2 12 12 10.1 12C8.10001 12 6.49999 13.1 5.89999 14.7C5.59999 15.3 6.19999 16 7.39999 16H13.3Z" fill="currentColor"></path>
-												</svg>
-											</span>
-											<!--end::Svg Icon-->
-											<!--begin::Info-->
-											<span class="d-block fw-semibold text-start">
-												<span class="text-dark fw-bold d-block fs-4 mb-2">
-													No card found in account
-												</span>
-											</span>
-											<!--end::Info-->
-										</div>
-										<button class="btn mt-6 h-10 w-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
-											Make payment
-										</button>
-									</div>
-									<%}%>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- tab:end -->
-
-                                        <div class="card my-5 sm:px-5 px-4">
-                                            <h2 class="text-base font-medium tracking-wide text-slate-700 line-clamp-1 dark:text-navy-100 py-5">
-                                                Confirm Deposit
-                                            </h2>
-                                            <form action="">
-                                                <div class="filepond fp-bordered">
-                                                    <input type="file" x-init="$el._x_filepond = FilePond.create($el)" multiple />
-                                                </div>
-                                            </form>
-                                        </div>
-                                </div>
                                 <div class="col-span-12 grid grid-cols-1 gap-4 sm:gap-5 lg:col-span-4 lg:gap-6 items-center">
                                     <div class="card pb-4 sm:px-5 px-4">
                                         <div class="flex items-center justify-between py-3 ">
@@ -333,9 +156,9 @@
                                     
                                     <div class="card pb-5 lg:pb-6 mt-2 px-4 sm:px-5 order-first lg:order-none ">
                                         <div class="py-5 text-center lg:py-6">
-                                            <h3 class="text-primary mt-1 text-xl font-semibold text-slate-600 dark:text-navy-100">
+                                            <h2 class="dark:text-navy-100 font-medium line-clamp-1 py-5 text-base text-slate-700 tracking-wide">
                                                 Redeem PIK Giftcard
-                                            </h3>
+                                            </h2>
                                         </div>
                                         <label class="block">
                                             <input class="form-input w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="Redeem giftcard" type="text" />

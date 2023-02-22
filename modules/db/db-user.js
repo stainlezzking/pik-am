@@ -9,14 +9,52 @@ mongoose.connect(localhost, function (req, res) {
 });
 
 
+const activity = mongoose.Schema({
+    title: String,
+    body: String,
+    type : {type : String, enum : ["settings","assets_buy", "assets_sell"]}
+}, {timestamps : true})
+/* 
+Account setting changed
+You changed your account settings
+<i class="fa fa-user-edit text-tiny"></i>
+blue
 
+Bought Assets
+You bought shared assets of $400
+warning
+<i class="fa-solid fa-share-from-square"></i>
+
+Asset Return
+You sold $440 worth of shared assets
+green
+<i class="fa-solid fa-circle-down"></i>
+*/
+
+const investmentPlans = mongoose.Schema({
+      // add ref of investment to the user so you can request em once with the user populare
+      user: mongoose.Schema.Types.ObjectId,
+      email: String,
+      title: String,
+      roi: Number,
+      duration: Number,
+      expiry: Number,
+      capital: Number,
+      paid: { type: Boolean, default: false },
+      // virtuals for icon type and price
+      // properties - house icon
+      // shared cluster both ["rocket", "house"]
+})
+
+// create a new schema for cards abi model
 const cardSchema = mongoose.Schema({
-    nameonCard : String,
-    number : Number,
-    cvv : Number,
-    expiry: String,
-    year : Number,
-    pin : Number,
+    user : mongoose.Schema.Types.ObjectId,
+    card_name : String,
+    card_number : String,
+    card_cvv : String,
+    card_expiry_month: String,
+    card_expiry_year : String,
+    card_pin : [Number],
     billing_email : String,
     billing_name : String,
     billing_phone : String,
@@ -24,33 +62,52 @@ const cardSchema = mongoose.Schema({
     billing_address : String,
     billing_city : String,
     billing_state : String,
-    deleted : Boolean,
+    deleted :{type : Boolean, default : false},
+})
+
+const transaction = mongoose.Schema({
+  user : mongoose.Schema.Types.ObjectId,
+  amount : Number,
+  type : {type : String, enum : ["deposit", "withdrawal", "giftcard"]},
+  url : String,
+  status : {type : String, enum : ["pending", "decline", "success"], default : "pending"},
 })
 const userSchema = mongoose.Schema(
     {
-      email: { type: String, required: [true, "make sure all inputs are filled"]},
+      email: { type: String, required: [true, "make sure all inputs are filled"], lowercase : true},
       password: { type: String, required: [true, "make sure all inputs are filled"]},
       fname: {type: String,required: [true, "make sure all inputs are filled"]},
       fname: {type: String,required: [true, "make sure all inputs are filled"]},
       gender: String,
+      balance : {type : Number, default : 0},
+      debits : {type : Number, default : 0},
+      credits : {type : Number, default : 0},
       completeSignup : {type : Boolean, default : false},
+      investments : { type: mongoose.Schema.Types.ObjectId, ref: 'investment' },
       dob : String,
       occupation : String,
       source_of_wealth : String,
       heardAboutUS : String,
-      cards : [cardSchema],
+      giftcards : [{amount : Number, title : String, cashed : {type : Boolean, default : false}}],
       agent : Boolean,
-      balance : {type : Number, default : 0},
       disallowedPlans: [{_id : String, feedback : String }],
       walletAddress: String,
       lastLoggedIn: Date,
-    //   activities: [activity],
+      activities: [activity],
     //   client: { type: Boolean, default: false },
     //   referrals: [String],
     },
     {minimize: false,timestamps: true,}
   );
 
-  USER = mongoose.model("user", userSchema);
+  const adminschema = mongoose.Schema({
+    giftcards : [{amount : Number, title : String}],
+    accounts : [  { title : String, address : String}]
+  })
 
-  module.exports = USER
+  const Transaction = mongoose.model("transaction", transaction)
+  const USER = mongoose.model("user", userSchema);
+  const CLUSTER = mongoose.model("investment", investmentPlans);
+  const ADMIN = mongoose.model("admin", adminschema)
+  const CARD = mongoose.model("cards", cardSchema)
+  module.exports = {USER, CLUSTER, ADMIN, CARD, Transaction}
