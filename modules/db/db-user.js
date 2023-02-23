@@ -30,7 +30,7 @@ You sold $440 worth of shared assets
 green
 <i class="fa-solid fa-circle-down"></i>
 */
-
+const l = {title : "Starter", min : 100,max : 999,dividend : 6,waitime : 7,duration : 14}
 const investmentPlans = mongoose.Schema({
       // add ref of investment to the user so you can request em once with the user populare
       user: mongoose.Schema.Types.ObjectId,
@@ -38,8 +38,9 @@ const investmentPlans = mongoose.Schema({
       title: String,
       roi: Number,
       duration: Number,
-      expiry: Number,
+      expiry: Date,
       capital: Number,
+      lifetime : Boolean,
       paid: { type: Boolean, default: false },
       // virtuals for icon type and price
       // properties - house icon
@@ -102,7 +103,11 @@ const userSchema = mongoose.Schema(
 
   const adminschema = mongoose.Schema({
     giftcards : [{amount : Number, title : String}],
-    accounts : [  { title : String, address : String}]
+    accounts : [  { title : String, address : String}],
+    investments:[{title : String, min: Number,max:Number,roi : Number,waitime : Number,duration : Number,label : String,lifetime : Boolean, 
+    icon : {type : String, enum : ["boost", 'home', 'sign']}
+    }],
+        
   })
 
   const Transaction = mongoose.model("transaction", transaction)

@@ -1,8 +1,11 @@
 const express = require("express")
 const Router = express.Router()
-const {CARD, USER, Transaction }= require("../../modules/db/db-user")
+const {CARD, USER, Transaction, CLUSTER }= require("../../modules/db/db-user")
 const showError = require("../../modules/errormodule")
 
+
+
+Router.use(express.urlencoded({extended : false}))
 Router.use(async function(req,res,next){
     try{
         if(req.isAuthenticated()){
@@ -18,13 +21,12 @@ Router.use(async function(req,res,next){
         res.send("an error occured internally, please report")
     }
 })
-
 /*
 @ paywith new card - 
 deposit card ** 
 <users with no card>
 */
-Router.post("/stripe-payment-new", express.urlencoded({extended : false}), async function(req,res){
+Router.post("/stripe-payment-new",async function(req,res){
     try{
         deleted  = !Boolean(req.body.save)
         await CARD.create({...req.body, deleted , user : req.user._id })
@@ -42,7 +44,7 @@ Router.post("/stripe-payment-new", express.urlencoded({extended : false}), async
 deposit card **
 <users with available card>
 */
-Router.post("/stripe-payment-available", express.urlencoded({extended : false}), async function(req,res){
+Router.post("/stripe-payment-available", async function(req,res){
     try{
         const card = await CARD.findById(req.body.card_id)
         if(!card) return new Error("error locating account card, try again")
@@ -59,17 +61,29 @@ Router.post("/stripe-payment-available", express.urlencoded({extended : false}),
 <all users with>
 # send email
 */
-Router.post("/giftcard", express.urlencoded({extended : false}), async function(req,res){
+Router.post("/giftcard", async function(req,res){
     console.log(req.body)
     try{
         const {amount, title} = JSON.parse(req.body.giftcard)
         if(req.user.balance < Number(amount)) return showError(req, "/dashboard/withdraw#giftcard", "Insufficient balance", res)
-       await USER.updateOne({_id : req.user._id}, { balance : req.user.balance - Number(amount), $push : {giftcards :{amount,title} } })
+       await USER.updateOne({_id : req.user._id}, { balance : req.user.balance - Number(amount), $inc : { debits : Number(amount)}, $push : {giftcards :{amount,title} } })
        await Transaction.create({user : req.user._id, amount, type : "giftcard", status : "success"})
-        // send email
+        // send email+-
         return showError(req, "/dashboard/withdraw#giftcard", "purchase successful", res)
     }catch(err){
         return showError(req, "/dashboard/withdraw#giftcard", err.message, res)
+    }
+})
+
+Router.post("/buyAssets", function(req,res){
+    const newInv = {
+        user : req.user._id,
+        email : req.user.email,
+        title,
+        capital : req.body.amount,
+        duration,
+        expiry: 
+        lifetime,
     }
 })
 

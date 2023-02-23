@@ -7,9 +7,10 @@ const passport = require("passport")
 Router.use(async function(req,res,next){
     try{
         if(req.isAuthenticated()){
-            const admin = await ADMIN.findOne({}, "accounts giftcards").lean()
+            const admin = await ADMIN.findOne({}, "accounts giftcards investments").lean()
             req.user.cards = await CARD.find({user : req.user._id, deleted : false})
             res.locals.accounts = admin.accounts
+            res.locals.adminInvestments = admin.investments
             res.locals.giftcards = admin.giftcards
             res.locals.user = req.user
             return next()
@@ -26,6 +27,7 @@ Router.use(async function(req,res,next){
         res.send("an error occured internally, please report")
     }
 })
+
 
 Router.get("/", function(req, res) {
     res.render("realestate/user/dashboard.ejs")

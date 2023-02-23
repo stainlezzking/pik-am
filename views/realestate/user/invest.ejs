@@ -71,8 +71,7 @@
                                     <%-include("../partials/dashboard/components/balance.ejs") -%>
                                         <!-- ### -->
                                     <!-- available plans -->
-                                    <% const availablePLans = [{ title : "Starter", min : 100,max : 999,dividend : 6,waitime : 7,duration : 14},{ title : "Basic", min : 1000,max : 30000,dividend : 12,waitime : 7, duration : 14},  {title : "Enterprice", min : 20000,max : 50000,dividend : 18,lifetime : 8,waitime : 0,duration : 0,},{title : "Ownership", min : 50000,max : 1000000,dividend : 24,lifetime : 15,waitime : 0,duration : 0}] %>
-                                    <% const availableIcons = ["fa fa-rocket text-6xl text-primary dark:text-accent-light","fa-solid fa-house text-6xl text-primary dark:text-accent-light", "fa fa-rocket text-6xl text-primary dark:text-accent-light", "fa-solid fa-sign-hanging text-6xl text-primary dark:text-accent-light"] %>
+                                    <% const availableIcons = { boost : "fa fa-rocket text-6xl text-primary dark:text-accent-light",house : "fa-solid fa-house text-6xl text-primary dark:text-accent-light",sign : "fa-solid fa-sign-hanging text-6xl text-primary dark:text-accent-light"} %>
                                         <!-- ## -->
                                     <div class="py-5 text-center lg:py-6">
                                         <p class="text-sm uppercase">Buy assets</p>
@@ -81,17 +80,17 @@
                                         </h3>
                                     </div>
                                     <div class="grid max-w-4xl grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:gap-6">
-                                        <% availablePLans.forEach((plan,index)=>{ %>
-                                            <div class="card p-4 text-center sm:p-5">
-                                                <% if(index==1){%>
+                                        <% adminInvestments.forEach((plan,index)=>{ %>
+                                            <form action="/dashboard/buyAssets" method="POST" class="card p-4 text-center sm:p-5">
+                                                <% if(plan.label){%>
                                                     <div class="absolute top-0 right-0 p-3">
                                                         <div class="badge rounded-full bg-info/10 text-info dark:bg-info/15">
-                                                            Recommended
+                                                            <%= plan.label %>
                                                         </div>
                                                     </div>
                                                 <%}%>
                                                 <div class="mt-8">
-                                                    <i class="<%=availableIcons[index]%>"></i>
+                                                    <i class="<%=availableIcons[plan.icon]%>"></i>
                                                 </div>
                                                 <div class="mt-5">
                                                     <h4 class="text-xl font-semibold text-slate-600 dark:text-navy-100">
@@ -109,24 +108,20 @@
                                                 <div class="mt-8 space-y-4 text-left">
                                                     <%- include("../partials/dashboard/components/pricingList_details.ejs", {pricingListDetailValue : "Max of $"+plan.max.toLocaleString()}) -%>
                                                     
-                                                    <%- include("../partials/dashboard/components/pricingList_details.ejs", {pricingListDetailValue : "Dividend "+ plan.dividend +"%"}) -%>
+                                                    <%- include("../partials/dashboard/components/pricingList_details.ejs", {pricingListDetailValue : "Dividend "+ plan.roi +"%"}) -%>
 
-                                                    <%if(plan.waitime){%>
-                                                        <%- include("../partials/dashboard/components/pricingList_details.ejs", {pricingListDetailValue :  "Avg. waitime"+ plan.waitime+" days"}) -%>
-                                                    <%}%>
+                                                    <%- include("../partials/dashboard/components/pricingList_details.ejs", {pricingListDetailValue :  "Avg. waitime "+ (plan.waitime == 0 ? "Zero waitime" : plan.waitime +" days")}) -%>
 
-                                                    <%if(plan.duration){%>
-                                                        <%- include("../partials/dashboard/components/pricingList_details.ejs", {pricingListDetailValue :  "Duration " +plan.duration +" days"}) -%>
-                                                    <%}else{%>
-                                                        <%- include("../partials/dashboard/components/pricingList_details.ejs", {pricingListDetailValue :  "Zero waitime"}) -%>
-                                                    <%}%>
+                                                    <%- include("../partials/dashboard/components/pricingList_details.ejs", {pricingListDetailValue :  "Duration " + (plan.duration > 300 ? "1year" : plan.duration +" days") }) -%>
+                                                    
                                                     <%if(plan.lifetime){%>
-                                                        <%- include("../partials/dashboard/components/pricingList_details.ejs", {pricingListDetailValue :  "Lifetime Dividend of "+ plan.lifetime+ "%?M"}) -%>
+                                                        <%- include("../partials/dashboard/components/pricingList_details.ejs", {pricingListDetailValue :  "Lifetime Dividend of "+ plan.roi + "%M"}) -%>
                                                     <%}%>
                                                 </div>
                                                 <div class="mt-8">
                                                     <label class="block my-3">
-                                                        <input name="amount" class="form-input w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="Enter amount" type="text" />
+                                                        <input name="plan" hidden type="text" value="<%= JSON.stringify(plan) %>" />
+                                                        <input name="amount" class="form-input w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="Enter amount" type="number" />
                                                       </label>
                                                     <button 
                                                     value="<%= plan._id %>" id="plan"
@@ -134,8 +129,12 @@
                                                         Choose Plan
                                                     </button>
                                                 </div>
-                                            </div>
+                                            </form>
                                         <%})%>
+
+                                        <script>
+                                            
+                                        </script>
                                     </div>
 
                                     <div class="py-5 text-center lg:py-6 mt-4">
