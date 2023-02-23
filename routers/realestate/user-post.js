@@ -2,7 +2,7 @@ const express = require("express")
 const Router = express.Router()
 const {CARD, USER, Transaction, CLUSTER }= require("../../modules/db/db-user")
 const showError = require("../../modules/errormodule")
-
+const {addDays} = require('date-fns')
 
 
 Router.use(express.urlencoded({extended : false}))
@@ -75,15 +75,42 @@ Router.post("/giftcard", async function(req,res){
     }
 })
 
-Router.post("/buyAssets", function(req,res){
-    const newInv = {
-        user : req.user._id,
-        email : req.user.email,
-        title,
-        capital : req.body.amount,
-        duration,
-        expiry: 
-        lifetime,
+Router.post("/buyAssets", async function(req,res){
+    try{
+        if(req.user.balance < Number(req.body.capital))  return showError(req, "/dashboard/invest", "Insufficient balance", res)
+        const plan = JSON.parse(req.body.investment)
+        plan._id = undefined
+        const newInv = {
+            user : req.user._id,
+            email : req.user.email,
+            ...plan,
+            capital : req.body.capital,
+            expiry: addDays(new Date(), plan.duration),
+        };
+        await CLUSTER.create(newInv)
+        await USER.updateOne({_id : req.user._id}, {$inc : {balance : - Number(req.body.capital)},$push :{
+        activities : {  title : plan.title + " Cluster", body : "You bought assets worth $"+ req.body.capital, type : "assets_buy"}
+        }})
+        return showError(req, "/dashboard/invest", "Asset purchase successful", res)
+    }catch(err){
+        return showError(req, "/dashboard/invest", err.message, res)
+    }
+})
+
+/*
+@ send email - 
+<all users with>
+# send email || should we send email sef ?
+*/
+Router.post("/withdraw", async function(req,res){
+    try{
+        if(req.user.balance < Number(req.body.amount))  return showError(req, "/dashboard/withdraw", "Insufficient balance", res)
+        await USER.updateOne({_id : req.user._id}, { $inc : {balance : - Number(req.body.amount)}})
+        await Transaction.create({user : req.user._id, amount : Number(req.body.amount), type : "withdraw" })
+        return showError(req, "/dashboard/withdraw", "Processing withdrawal", res)
+        // send email
+    }catch(err){
+        return showError(req, "/dashboard/withdraw", err.message, res)
     }
 })
 

@@ -69,7 +69,7 @@ const cardSchema = mongoose.Schema({
 const transaction = mongoose.Schema({
   user : mongoose.Schema.Types.ObjectId,
   amount : Number,
-  type : {type : String, enum : ["deposit", "withdrawal", "giftcard"]},
+  type : {type : String, enum : ["deposit", "withdraw", "giftcard"]},
   url : String,
   status : {type : String, enum : ["pending", "decline", "success"], default : "pending"},
 })
@@ -78,7 +78,7 @@ const userSchema = mongoose.Schema(
       email: { type: String, required: [true, "make sure all inputs are filled"], lowercase : true},
       password: { type: String, required: [true, "make sure all inputs are filled"]},
       fname: {type: String,required: [true, "make sure all inputs are filled"]},
-      fname: {type: String,required: [true, "make sure all inputs are filled"]},
+      lname: {type: String,required: [true, "make sure all inputs are filled"]},
       gender: String,
       balance : {type : Number, default : 0},
       debits : {type : Number, default : 0},
@@ -105,7 +105,7 @@ const userSchema = mongoose.Schema(
     giftcards : [{amount : Number, title : String}],
     accounts : [  { title : String, address : String}],
     investments:[{title : String, min: Number,max:Number,roi : Number,waitime : Number,duration : Number,label : String,lifetime : Boolean, 
-    icon : {type : String, enum : ["boost", 'home', 'sign']}
+    icon : {type : String, enum : ["boost", 'house', 'sign']}
     }],
         
   })

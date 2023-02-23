@@ -234,9 +234,6 @@ var KTCreateAccount = function () {
 							notEmpty: {
 								message: 'Card member is required'
 							},
-                            creditCard: {
-                                message: 'Card number is not valid'
-                            }
 						}
 					},
 					'card_expiry_month': {

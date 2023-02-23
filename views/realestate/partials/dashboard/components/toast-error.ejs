@@ -18,16 +18,14 @@
     </div>
   </div>
 
-  <% if(messages.error){%>
   <script>
     	const liveToast = document.getElementById('_liveToast')
       const toast = new bootstrap.Toast(liveToast)
+      const toastEl = document.querySelector("div[x-toast-error-selector]")
+  </script>
+  <% if(messages.error){%>
+  <script>
       toast.show()
   </script>
-  <%}else{%>
-    <script>
-    	const liveToast = document.getElementById('_liveToast')
-      const toast = new bootstrap.Toast(liveToast)
-  </script>
-  <% }%>
+  <%}%>
 <!-- ########## -->

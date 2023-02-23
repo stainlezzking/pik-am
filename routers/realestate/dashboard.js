@@ -17,7 +17,7 @@ Router.use(async function(req,res,next){
         }
         // res redirect to login page
         console.log("not authenticated")
-        const user = await USER.findOne({email : "somtrcu@sidin.cniy"})
+        const user = await USER.findOne({email : "chinedubihop@gmail.com"})
         return req.login(user, function(err){
             if(err) return console.log(err.message)
             return next()
@@ -107,4 +107,16 @@ Router.post("/auth/register", express.urlencoded({extended : false}), function(r
 #JSON Response
 OTP request for register page
 */
+
+Router.post("/auth/OTP", express.json({extended : false}), async function(req,res){
+    const OTP = (Math.random()*1000000).toFixed()
+    //send email
+    try{
+        const user = await USER.findOne({email : req.body.email})
+        if(user) return res.json({error : "This email has been used"})
+        return res.json({success : true, OTP})
+    }catch(err){
+        return res.json({error : "An error occured, please try again"})
+    }
+})
 module.exports = Router

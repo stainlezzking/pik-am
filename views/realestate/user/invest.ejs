@@ -37,6 +37,10 @@
         <div class="app-preloader-inner relative inline-block h-48 w-48"></div>
     </div>
 
+    <!-- import toast error -->
+		<%- include("../partials/dashboard/components/toast-error.ejs") -%>
+		<!-- toasterror:end -->
+
     <!-- importing copy to clipboard function -->
     <%- include("../partials/dashboard/components/clipboard.ejs") -%>
         <!-- #### -->
@@ -120,8 +124,8 @@
                                                 </div>
                                                 <div class="mt-8">
                                                     <label class="block my-3">
-                                                        <input name="plan" hidden type="text" value="<%= JSON.stringify(plan) %>" />
-                                                        <input name="amount" class="form-input w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="Enter amount" type="number" />
+                                                        <input name="investment" hidden type="text" value="<%= JSON.stringify(plan) %>" />
+                                                        <input name="capital" class="form-input w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="Enter amount" type="number" />
                                                       </label>
                                                     <button 
                                                     value="<%= plan._id %>" id="plan"
@@ -133,7 +137,23 @@
                                         <%})%>
 
                                         <script>
-                                            
+                                            const forms = document.querySelectorAll("form")
+                                            forms.forEach(form=>{
+                                                form.addEventListener("submit", function(e){
+                                                    e.preventDefault()
+                                                    const plan = JSON.parse(form.querySelectorAll("input")[0].value)
+                                                    const capital = Number(form.querySelectorAll("input")[1].value)
+                                                    if(capital > Number("<%= user.balance %>")){
+                                                        e.preventDefault()
+                                                        toastEl.innerHTML = "Insufficient Balance"
+                                                        return toast.show()
+                                                    } 
+                                                    if(capital < plan.min || capital > plan.max ) {
+                                                        toastEl.innerHTML = `can't invest $${capital} in ${plan.title}`
+                                                        return toast.show()
+                                                    }                                              
+                                                 })
+                                            })
                                         </script>
                                     </div>
 
