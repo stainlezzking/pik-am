@@ -66,14 +66,13 @@
 								</a>
 							</div>
 							<div class="scrollbar-sm flex space-x-4 overflow-x-auto overflow-y-hidden px-4 pb-2 sm:px-5">
-								<% if(user.investments && user.investments.lenght){ %>
-									
+								<% if(investments && investments.length){ %>
 									<!-- make sure expired investments dont show here -->
-									<% user.investments.filter(invs=> Date.now() > new Date(investment.expiry).getTime()).forEach(investment=>{ %>
-
+									<% const availableIcons = { boost : "fa fa-rocket text-primary",house : "fa-solid fa-house text-primary",sign : "fa-solid fa-sign-hanging text-primary"} %>
+									<% investments.filter(investment=> !investment.ended ).forEach(investment=>{ %>
 										<div class="flex w-72 shrink-0 flex-col">
 											<div class="flex items-center space-x-2">
-												<i class="fa fa-<%= investment.icon %>  text-primary dark:text-accent-light"></i>
+												<i class="fa fa-<%= availableIcons[investment.type] %> dark:text-accent-light"></i>
 												<div>
 													<span><%= investment.title %></span>
 												</div>
@@ -96,7 +95,6 @@
 												</div>
 											</div>
 										</div>
-
 									<%})%>
 								<%}else{%>
 									<div class="flex w-72 shrink-0 flex-col">
@@ -163,25 +161,23 @@
 						<!-- depositcard:end -->
 							<div class="mx-4 my-3 h-px bg-slate-200 dark:bg-navy-500 sm:mx-5"></div>
 
-						</div>
-
-							<div class="mt-3 sm:px-5 ">
-								<div>
-									<h2 class="font-medium tracking-wide text-slate-700 dark:text-navy-100">
-										Buy PIK Gift card
-									</h2>
-									<p> gift friends and family their first landed assets </p>
-								</div>
-							</div>
-							<div class="">
-								<!-- hear lies balance -->
-								<%-include("../partials/dashboard/components/giftcard.ejs") -%>
-								<!-- ### -->
-							</div>
-
 					</div>
 
+					<div class="mt-3 sm:px-5 ">
+						<div>
+							<h2 class="font-medium tracking-wide text-slate-700 dark:text-navy-100">
+								Buy PIK Gift card
+							</h2>
+							<p> gift friends and family their first landed assets </p>
+						</div>
+					</div>
+					<div class="">
+						<!-- hear giftcard -->
+						<%-include("../partials/dashboard/components/giftcard.ejs") -%>
+						<!-- ### -->
+					</div>
 
+				</div>
 				</div>
 			</main>
 		</div>

@@ -140,7 +140,6 @@
                                             const forms = document.querySelectorAll("form")
                                             forms.forEach(form=>{
                                                 form.addEventListener("submit", function(e){
-                                                    e.preventDefault()
                                                     const plan = JSON.parse(form.querySelectorAll("input")[0].value)
                                                     const capital = Number(form.querySelectorAll("input")[1].value)
                                                     if(capital > Number("<%= user.balance %>")){
@@ -149,6 +148,7 @@
                                                         return toast.show()
                                                     } 
                                                     if(capital < plan.min || capital > plan.max ) {
+                                                        e.preventDefault()
                                                         toastEl.innerHTML = `can't invest $${capital} in ${plan.title}`
                                                         return toast.show()
                                                     }                                              

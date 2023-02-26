@@ -13,37 +13,49 @@
                     <p class="font-medium text-slate-700 dark:text-navy-100">
                       Name
                     </p>
-                    <p class="text-right">Chukwuebuka Azuka</p>
+                    <p class="text-right"> <%= user.fname %> <%= user.lname %></p>
+                  </div>
+                  <div class="flex justify-between">
+                    <p class="font-medium text-slate-700 dark:text-navy-100">
+                      Email
+                    </p>
+                    <p class="text-right"> <%= user.email %></p>
                   </div>
                 <div class="flex justify-between">
                 <p class="font-medium text-slate-700 dark:text-navy-100">
                   D.O.B.
                 </p>
-                <p class="text-right">25 Jan 1998</p>
+                <p class="text-right"> <%= user.dob %></p>
               </div>
               <div class="flex justify-between">
                 <p class="font-medium text-slate-700 dark:text-navy-100">
-                  Weight
+                  phone number
                 </p>
-                <p class="text-right">56 kg</p>
+                <p class="text-right"> <%= user.mobile %></p>
               </div>
               <div class="flex justify-between">
                 <p class="font-medium text-slate-700 dark:text-navy-100">
-                  Height
+                  Country 
                 </p>
-                <p class="text-right">164 cm</p>
+                <p class="text-right"> <%= user.country %> </p>
               </div>
               <div class="flex justify-between">
                 <p class="font-medium text-slate-700 dark:text-navy-100">
-                  Last Appointment
+                  Sex
                 </p>
-                <p class="text-right">25 May 2021</p>
+                <p class="text-right"> <%= user.gender %></p>
               </div>
               <div class="flex justify-between">
                 <p class="font-medium text-slate-700 dark:text-navy-100">
-                  Register Date
+                  Balance 
                 </p>
-                <p class="text-right">16 Jun 2020</p>
+                <p class="text-right"> $<%= user.balance %> </p>
+              </div>
+              <div class="flex justify-between">
+                <p class="font-medium text-slate-700 dark:text-navy-100">
+                  kyc verification 
+                </p>
+                <p class="text-right"> <%= user.kyc %> </p>
               </div>
             </div>
           </div>

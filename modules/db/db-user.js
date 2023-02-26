@@ -30,7 +30,6 @@ You sold $440 worth of shared assets
 green
 <i class="fa-solid fa-circle-down"></i>
 */
-const l = {title : "Starter", min : 100,max : 999,dividend : 6,waitime : 7,duration : 14}
 const investmentPlans = mongoose.Schema({
       // add ref of investment to the user so you can request em once with the user populare
       user: mongoose.Schema.Types.ObjectId,
@@ -42,6 +41,8 @@ const investmentPlans = mongoose.Schema({
       capital: Number,
       lifetime : Boolean,
       paid: { type: Boolean, default: false },
+      ended : { type : Boolean, default : false},
+      type : {type : String, enum : ["boost", 'house', 'sign']}
       // virtuals for icon type and price
       // properties - house icon
       // shared cluster both ["rocket", "house"]
@@ -71,7 +72,7 @@ const transaction = mongoose.Schema({
   amount : Number,
   type : {type : String, enum : ["deposit", "withdraw", "giftcard"]},
   url : String,
-  status : {type : String, enum : ["pending", "decline", "success"], default : "pending"},
+  status : {type : String, enum : ["pending", "declined", "success"], default : "pending"},
 })
 const userSchema = mongoose.Schema(
     {
@@ -79,10 +80,12 @@ const userSchema = mongoose.Schema(
       password: { type: String, required: [true, "make sure all inputs are filled"]},
       fname: {type: String,required: [true, "make sure all inputs are filled"]},
       lname: {type: String,required: [true, "make sure all inputs are filled"]},
-      gender: String,
       balance : {type : Number, default : 0},
       debits : {type : Number, default : 0},
       credits : {type : Number, default : 0},
+      gender: String,
+      country : String,
+      mobile : String,
       completeSignup : {type : Boolean, default : false},
       investments : { type: mongoose.Schema.Types.ObjectId, ref: 'investment' },
       dob : String,
@@ -93,10 +96,14 @@ const userSchema = mongoose.Schema(
       agent : Boolean,
       disallowedPlans: [{_id : String, feedback : String }],
       walletAddress: String,
+      kyc : {type : Boolean, default : false},
       lastLoggedIn: Date,
       activities: [activity],
+      referredBy : mongoose.Schema.Types.ObjectId,
+      advert : String,
+      other_means_ad : String,
+      deactivated : { type : Boolean, default : false}
     //   client: { type: Boolean, default: false },
-    //   referrals: [String],
     },
     {minimize: false,timestamps: true,}
   );

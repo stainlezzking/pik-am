@@ -81,27 +81,27 @@
                                                 </p>
                                             </div>
                                             <div class="space-y-4">
-                                            <% if(user.transactions && user.transactions.length){%>
-                                                <% user.transactions.forEach(transaction=>{ %>
+                                            <% if(transactions && transactions.length){%>
+                                                <% transactions.forEach(transaction=>{ %>
                                                     <div class="flex cursor-pointer items-center justify-between">
                                                         <div class="flex items-start space-x-3">
                                                             <div class="avatar">
-                                                               <% if(transaction.type == 'pending'){ %>
-                                                                    <div class="btn h-7 w-7 rounded-full bg-info/10 p-0 text-secondary hover:bg-info/20 focus:bg-info/20 active:bg-info/25">
+                                                               <% if(transaction.status == "pending"){ %>
+                                                                    <div class="btn h-7 w-7 rounded-full bg-info/10 p-0 text-info hover:bg-info/20 focus:bg-info/20 active:bg-info/25">
                                                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                                                       </svg>
                                                                     </div>
                                                               <%  } %>
 
-                                                              <%if(transaction.type == 'decline'){ %>
+                                                              <%if(transaction.status == 'declined'){ %>
                                                                 <div class="btn h-7 w-7 rounded-full bg-error/10 p-0 text-error hover:bg-error/20 focus:bg-error/20 active:bg-error/25">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                                                                     </svg>
                                                                   </div>
                                                               <%}%>
-                                                              <%if(transaction.type == 'success'){ %>
+                                                              <%if(transaction.status == 'success'){ %>
                                                                 <div class="btn h-7 w-7 rounded-full bg-success/10 p-0 text-success hover:bg-success/20 focus:bg-success/20 active:bg-success/25">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
@@ -111,14 +111,14 @@
                                                             </div>
                                                             <div>
                                                                 <p class="text-slate-700 dark:text-navy-100">
-                                                                    <%= transaction.title %>
+                                                                    <%= transaction.type %>
                                                                 </p>
                                                                 <p class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200">
-                                                                    <!-- Dec 21, 2021 - 08:05 -->
+                                                                    Dec 21, 2021 - 08:05
                                                                 </p>
                                                             </div>
                                                         </div>
-                                                        <p class="font-medium <%= transaction.type == 'success'? 'text-success' : (transaction.type == 'decline') ? 'text-error' : 'text-info'%> ">$<%= transaction.amount %></p>
+                                                        <p class="font-medium <%= transaction.status == 'success'? 'text-success' : (transaction.status == 'declined') ? 'text-error' : 'text-info'%> ">$<%= transaction.amount %></p>
                                                     </div>
 
                                                 <% })%>

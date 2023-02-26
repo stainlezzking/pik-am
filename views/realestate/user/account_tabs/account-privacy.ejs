@@ -5,7 +5,7 @@ x-show="activeTab === 'tabPrivacy'" x-transition:enter="transition-all duration-
 <h2 class="text-lg font-medium tracking-wide text-slate-700 dark:text-navy-100">
     Account Administration
 </h2>
-    <div class="flex items-center justify-between pt-4">
+    <form action="/dashboard/deleteaccount" class="flex items-center justify-between pt-4">
         <div class="flex items-center space-x-4">
             <p class="font-medium line-clamp-1">
                 <span class="avatar border inline-block p-2 text-center" style="border-radius: 50%;">
@@ -14,8 +14,9 @@ x-show="activeTab === 'tabPrivacy'" x-transition:enter="transition-all duration-
                 Deactivate account
             </p>
         </div>
-        <button class="btn h-8 rounded-full border border-slate-200 px-3 text-xs+ font-medium text-error hover:bg-error/20 focus:bg-slate-150 active:bg-slate-150/80 dark:border-navy-500 dark:text-accent-light dark:hover:bg-navy-500 dark:focus:bg-navy-500 dark:active:bg-navy-500/90">
+        <button type="submit" class="btn h-8 rounded-full border border-slate-200 px-3 text-xs+ font-medium text-error hover:bg-error/20 focus:bg-slate-150 active:bg-slate-150/80 dark:border-navy-500 dark:text-accent-light dark:hover:bg-navy-500 dark:focus:bg-navy-500 dark:active:bg-navy-500/90">
             Delete
         </button>
-    </div>
+    </form>
 </div>
+<!-- after 14 days deactivated accounts will be deleted from our servers permanently-->

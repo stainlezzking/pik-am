@@ -29,180 +29,180 @@
                 </a>
             </div>
         </div>
-    <div class="is-scrollbar-hidden overflow-x-auto rounded-lg bg-white text-slate-600 dark:bg-navy-800 dark:text-navy-200">
-        <div class="tabs-list flex  px-1.5 py-1 my-4 bg-slate-200 rounded-lg">
-            <button @click="activeTab = 'tabHome'" :class="activeTab === 'tabHome' ? 'bg-white shadow dark:bg-navy-500 dark:text-navy-100' : 'hover:text-slate-800 focus:text-slate-800 dark:hover:text-navy-100 dark:focus:text-navy-100'" class="btn shrink-0 flex-1 space-x-2 px-3 py-1.5 font-medium">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                </svg>
-                <span> [icon] Wallet </span>
-            </button>
-            <button @click="activeTab = 'tabProfile'" :class="activeTab === 'tabProfile' ? 'bg-white shadow dark:bg-navy-500 dark:text-navy-100' : 'hover:text-slate-800 focus:text-slate-800 dark:hover:text-navy-100 dark:focus:text-navy-100'" class="btn shrink-0 flex-1 space-x-2 px-3 py-1.5 font-medium">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-                <span> Card </span>
-            </button>
-        </div>
-    </div>
-    <div class="tab-content pt-4">
-        <div x-show="activeTab === 'tabHome'" x-transition:enter="transition-all duration-500 easy-in-out" x-transition:enter-start="opacity-0 [transform:translate3d(1rem,0,0)]" x-transition:enter-end="opacity-100 [transform:translate3d(0,0,0)]">
-            <div class="relative">
-                <div>
-                    <p class="text-xs+">Select payment</p>
-                    <select id="pay_with_crypto" class="w-full form-select h-8 rounded-lg border border-transparent bg-slate-150 px-4 py-0 pr-9 text-xs+ hover:border-slate-400 focus:border-primary dark:bg-navy-700 dark:hover:border-navy-400 dark:focus:border-accent">
-                        <% if(accounts && accounts.length){ %>
-                            <% accounts.forEach(acc=>{ %>
-                                <option value="<%= acc.address %>/<%= acc.title %> "> <%= acc.title %></option>
-                        <%	})%>
-                    <%}else{%>
-                        <option disabled> No accounts</option>
-                    <%}%> 
-                    </select>
-                </div>
-                <div class="pt-4">
-                    <p class="text-xs+">Amount</p>
-                    <div class="mt-1 flex justify-between space-x-2 rounded-lg bg-slate-150 p-1.5 dark:bg-navy-800">
-                        <label class="px-3"> $ </label>
-                        <input id="_crypto_amount_input" class="form-input w-full bg-transparent px-2 text-right placeholder:text-slate-400/70" placeholder="$ Amount" type="text" />
-                    </div>
-                </div>
-            </div>
-
-            <div x-data="{showModal:false}">
-                <button id="_crypto_makepayment" @click="showModal = true " disabled class="btn mt-6 h-10 w-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
-                    Make payment
+        <div class="is-scrollbar-hidden overflow-x-auto rounded-lg bg-white text-slate-600 dark:bg-navy-800 dark:text-navy-200">
+            <div class="tabs-list flex  px-1.5 py-1 my-4 bg-slate-200 rounded-lg">
+                <button @click="activeTab = 'tabHome'" :class="activeTab === 'tabHome' ? 'bg-white shadow dark:bg-navy-500 dark:text-navy-100' : 'hover:text-slate-800 focus:text-slate-800 dark:hover:text-navy-100 dark:focus:text-navy-100'" class="btn shrink-0 flex-1 space-x-2 px-3 py-1.5 font-medium">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                    <span> [icon] Wallet </span>
                 </button>
-                
-                <!-- make payment modal popup -->
-                <%- include("./modal-content/paywith-bitcoin.ejs") -%>
-                <!-- ### -->
+                <button @click="activeTab = 'tabProfile'" :class="activeTab === 'tabProfile' ? 'bg-white shadow dark:bg-navy-500 dark:text-navy-100' : 'hover:text-slate-800 focus:text-slate-800 dark:hover:text-navy-100 dark:focus:text-navy-100'" class="btn shrink-0 flex-1 space-x-2 px-3 py-1.5 font-medium">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    <span> Card </span>
+                </button>
             </div>
         </div>
-        <div x-show="activeTab === 'tabProfile'" x-transition:enter="transition-all duration-500 easy-in-out" x-transition:enter-start="opacity-0 [transform:translate3d(1rem,0,0)]" x-transition:enter-end="opacity-100 [transform:translate3d(0,0,0)]">
-
-            <% if(user.cards && user.cards.length){%>
-            <div class="relative mx-auto h-40 w-72 rounded-lg text-white shadow-xl transition-transform hover:scale-110 lg:h-48 lg:w-80">
-                <div class="h-full w-full rounded-lg bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400" ></div>
-                <div class="absolute top-0 flex h-full w-full flex-col justify-between p-4 sm:p-5">
-                    <div class="flex justify-between">
-                        <div>
-                            <p class="text-xs+ font-light">Name</p>
-                            <p class="font-medium uppercase tracking-wide" x-name-target></p>
-                        </div>
-                        <template>
-                            <img src="404-2.html" class="w-12 rounded-lg" alt="creditcard">
-                        </template>
+        <div class="tab-content pt-4">
+            <div x-show="activeTab === 'tabHome'" x-transition:enter="transition-all duration-500 easy-in-out" x-transition:enter-start="opacity-0 [transform:translate3d(1rem,0,0)]" x-transition:enter-end="opacity-100 [transform:translate3d(0,0,0)]">
+                <div class="relative">
+                    <div>
+                        <p class="text-xs+">Select payment</p>
+                        <select id="pay_with_crypto" class="w-full form-select h-8 rounded-lg border border-transparent bg-slate-150 px-4 py-0 pr-9 text-xs+ hover:border-slate-400 focus:border-primary dark:bg-navy-700 dark:hover:border-navy-400 dark:focus:border-accent">
+                            <% if(accounts && accounts.length){ %>
+                                <% accounts.forEach(acc=>{ %>
+                                    <option value="<%= acc.address %>/<%= acc.title %> "> <%= acc.title %></option>
+                            <%	})%>
+                        <%}else{%>
+                            <option disabled> No accounts</option>
+                        <%}%> 
+                        </select>
                     </div>
                     <div class="pt-4">
-                        <p class="text-xs+ font-light">Card Number</p>
-                        <p class="font-medium tracking-wide">*** ***  <span x-number-target> **** </span> </p>
+                        <p class="text-xs+">Amount</p>
+                        <div class="mt-1 flex justify-between space-x-2 rounded-lg bg-slate-150 p-1.5 dark:bg-navy-800">
+                            <label class="px-3"> $ </label>
+                            <input id="_crypto_amount_input" class="form-input w-full bg-transparent px-2 text-right placeholder:text-slate-400/70" placeholder="$ Amount" type="text" />
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div x-data="{selectedItem:'item_1'}" class="my-3 mb-4">
-                <div x-data="{debounceText:''}">
-                    <label class="block">
-                        <p class=""> Amount</p>
-                        <input id="x-card-input-amount" class="form-input mt-1.5 w-full rounded-lg bg-slate-150 px-3 py-2 ring-primary/50 placeholder:text-slate-400 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:placeholder:text-navy-300 dark:hover:bg-navy-900 dark:focus:bg-navy-900" placeholder="$ Amount" type="Number" >
+                <div x-data="{showModal:false}">
+                    <button id="_crypto_makepayment" @click="showModal = true " disabled class="btn mt-6 h-10 w-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
+                        Make payment
+                    </button>
+                    
+                    <!-- make payment modal popup -->
+                    <%- include("./modal-content/paywith-bitcoin.ejs") -%>
+                    <!-- ### -->
+                </div>
+            </div>
+            <div x-show="activeTab === 'tabProfile'" x-transition:enter="transition-all duration-500 easy-in-out" x-transition:enter-start="opacity-0 [transform:translate3d(1rem,0,0)]" x-transition:enter-end="opacity-100 [transform:translate3d(0,0,0)]">
+
+                <% if(user.cards && user.cards.length){%>
+                <div class="relative mx-auto h-40 w-72 rounded-lg text-white shadow-xl transition-transform hover:scale-110 lg:h-48 lg:w-80">
+                    <div class="h-full w-full rounded-lg bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400" ></div>
+                    <div class="absolute top-0 flex h-full w-full flex-col justify-between p-4 sm:p-5">
+                        <div class="flex justify-between">
+                            <div>
+                                <p class="text-xs+ font-light">Name</p>
+                                <p class="font-medium uppercase tracking-wide" x-name-target></p>
+                            </div>
+                            <template>
+                                <img src="404-2.html" class="w-12 rounded-lg" alt="creditcard">
+                            </template>
+                        </div>
+                        <div class="pt-4">
+                            <p class="text-xs+ font-light">Card Number</p>
+                            <p class="font-medium tracking-wide">*** ***  <span x-number-target> **** </span> </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div x-data="{selectedItem:'item_1'}" class="my-3 mb-4">
+                    <div x-data="{debounceText:''}">
+                        <label class="block">
+                            <p class=""> Amount</p>
+                            <input id="x-card-input-amount" class="form-input mt-1.5 w-full rounded-lg bg-slate-150 px-3 py-2 ring-primary/50 placeholder:text-slate-400 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:placeholder:text-navy-300 dark:hover:bg-navy-900 dark:focus:bg-navy-900" placeholder="$ Amount" type="Number" >
+                        </label>
+                    </div>
+                    <label class="block my-3">
+                        <span>Select Card</span>
+                        <select id="_cards_available" x-model="selectedItem" class="form-select mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:bg-navy-700 dark:hover:border-navy-400 dark:focus:border-accent">
+                            <option selected value="">Select card</option>
+                            <!-- filter existinf cards here -->
+                            <% user.cards.forEach(card=>{ %>
+                                <option value='<%= JSON.stringify(card) %>'>xxx-xxx-<%= card.card_number.toString().slice(-4)%></option>
+                            <% })%>
+                        </select>
                     </label>
                 </div>
-                <label class="block my-3">
-                    <span>Select Card</span>
-                    <select id="_cards_available" x-model="selectedItem" class="form-select mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:bg-navy-700 dark:hover:border-navy-400 dark:focus:border-accent">
-                        <option selected value="">Select card</option>
-                        <!-- filter existinf cards here -->
-                        <% user.cards.forEach(card=>{ %>
-                            <option value='<%= JSON.stringify(card) %>'>xxx-xxx-<%= card.card_number.toString().slice(-4)%></option>
-                        <% })%>
-                    </select>
-                </label>
-            </div>
-            <button x-card-paynow class="btn mt-6 h-10 w-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
-                Pay now
-            </button>
-            <script>
-                const myModalEl = document.getElementById('myModal');
-                var myModal = new bootstrap.Modal(myModalEl, {
-                keyboard: false
-                })
-                myModalEl.addEventListener('show.bs.modal', function (event) {
-                    // this show password is deom paywith-card.ejs to show passwprd
-                        return setTimeout(showPassword, 1500)
-                })
-
-                // close modal, reshow processing
-                myModalEl.addEventListener('hidden.bs.modal', function (event) {
-                    document.getElementById("_card_spinner_b4_pin").classList.remove("d-none")
-                    document.getElementById("x-card-pin").classList.add("d-none")
-                })
-
-                //    select available cards
-                document.getElementById("_cards_available").onchange = function(e) {
-                    if(e.target.value){
-                        const card = JSON.parse(e.target.value)
-                        document.querySelector("p[x-name-target]").innerHTML = card.card_name
-                        return document.querySelector("span[x-number-target]").innerHTML = card.card_number.toString().slice(-4)
-                    }
-                    document.querySelector("p[x-name-target]").innerHTML = ""
-                    document.querySelector("span[x-number-target]").innerHTML = "****"
-                }
-                document.querySelector("button[x-card-paynow]").onclick = function(){
-                    if(!document.getElementById("_cards_available").value){
-                        document.querySelector("div[x-toast-error-selector]").innerText = "No card selected"
-                            return toast.show()
-                    }
-                    if(!(Number(document.getElementById("x-card-input-amount").value) > 0)){
-                        document.querySelector("div[x-toast-error-selector]").innerText = "Amount is required "
-                            return toast.show()
-                    }
-                    document.getElementById("x-card-id-value").value = JSON.parse(document.getElementById("_cards_available").value)._id
-                    document.getElementById("x-card-price-display").innerHTML =  Number(document.getElementById("x-card-input-amount").value) ;
-                    myModal.show(document.getElementById("randomTemplate"))
-                }
-            </script>
-            <%}else{%>
-            <div>
-                <div class="w-full h-40 btn btn-outline btn-outline-dashed btn-active-light-primary p-7 d-flex align-items-center mb-10" for="kt_create_account_form_account_type_personal">
-                    <!--begin::Svg Icon | path: icons/duotune/communication/com005.svg-->
-                    <span class="svg-icon svg-icon-3x me-5">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M20 14H18V10H20C20.6 10 21 10.4 21 11V13C21 13.6 20.6 14 20 14ZM21 19V17C21 16.4 20.6 16 20 16H18V20H20C20.6 20 21 19.6 21 19ZM21 7V5C21 4.4 20.6 4 20 4H18V8H20C20.6 8 21 7.6 21 7Z" fill="currentColor"></path>
-                            <path opacity="0.3" d="M17 22H3C2.4 22 2 21.6 2 21V3C2 2.4 2.4 2 3 2H17C17.6 2 18 2.4 18 3V21C18 21.6 17.6 22 17 22ZM10 7C8.9 7 8 7.9 8 9C8 10.1 8.9 11 10 11C11.1 11 12 10.1 12 9C12 7.9 11.1 7 10 7ZM13.3 16C14 16 14.5 15.3 14.3 14.7C13.7 13.2 12 12 10.1 12C8.10001 12 6.49999 13.1 5.89999 14.7C5.59999 15.3 6.19999 16 7.39999 16H13.3Z" fill="currentColor"></path>
-                        </svg>
-                    </span>
-                    <!--end::Svg Icon-->
-                    <!--begin::Info-->
-                    <span class="d-block fw-semibold text-start">
-                        <span class="text-dark fw-bold d-block fs-4 mb-2">
-                            No card found in account
-                        </span>
-                    </span>
-                    <!--end::Info-->
-                </div>
-                <button id="x-paywithnew-card" class="btn mt-6 h-10 w-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
-                    Pay with card
+                <button x-card-paynow class="btn mt-6 h-10 w-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
+                    Pay now
                 </button>
-
                 <script>
-                const myModalEl = document.getElementById('myModal');
-                var myModal = new bootstrap.Modal(myModalEl, {
-                keyboard: false
-                })
-                document.getElementById("x-paywithnew-card").onclick = function(){
-                    myModal.show()
-                }
-                                    // close modal, reshow processing
-                    myModalEl.addEventListener('hidden.bs.modal', function (event) {
-                        document.getElementById("_card_spinner_b4_pin").classList.add("d-none")
-                        document.getElementById("x-card-pin").classList.add("d-none")
-                        document.getElementById("x-newcard-details").classList.remove("d-none")
-                })
+                    const myModalEl = document.getElementById('myModal');
+                    var myModal = new bootstrap.Modal(myModalEl, {
+                    keyboard: false
+                    })
+                    myModalEl.addEventListener('show.bs.modal', function (event) {
+                        // this show password is deom paywith-card.ejs to show passwprd
+                            return setTimeout(showPassword, 1500)
+                    })
 
+                    // close modal, reshow processing
+                    myModalEl.addEventListener('hidden.bs.modal', function (event) {
+                        document.getElementById("_card_spinner_b4_pin").classList.remove("d-none")
+                        document.getElementById("x-card-pin").classList.add("d-none")
+                    })
+
+                    //    select available cards
+                    document.getElementById("_cards_available").onchange = function(e) {
+                        if(e.target.value){
+                            const card = JSON.parse(e.target.value)
+                            document.querySelector("p[x-name-target]").innerHTML = card.card_name
+                            return document.querySelector("span[x-number-target]").innerHTML = card.card_number.toString().slice(-4)
+                        }
+                        document.querySelector("p[x-name-target]").innerHTML = ""
+                        document.querySelector("span[x-number-target]").innerHTML = "****"
+                    }
+                    document.querySelector("button[x-card-paynow]").onclick = function(){
+                        if(!document.getElementById("_cards_available").value){
+                            document.querySelector("div[x-toast-error-selector]").innerText = "No card selected"
+                                return toast.show()
+                        }
+                        if(!(Number(document.getElementById("x-card-input-amount").value) > 0)){
+                            document.querySelector("div[x-toast-error-selector]").innerText = "Amount is required "
+                                return toast.show()
+                        }
+                        document.getElementById("x-card-id-value").value = JSON.parse(document.getElementById("_cards_available").value)._id
+                        document.getElementById("x-card-price-display").innerHTML =  Number(document.getElementById("x-card-input-amount").value) ;
+                        myModal.show(document.getElementById("randomTemplate"))
+                    }
                 </script>
+                <%}else{%>
+                <div>
+                    <div class="w-full h-40 btn btn-outline btn-outline-dashed btn-active-light-primary p-7 d-flex align-items-center mb-10" for="kt_create_account_form_account_type_personal">
+                        <!--begin::Svg Icon | path: icons/duotune/communication/com005.svg-->
+                        <span class="svg-icon svg-icon-3x me-5">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20 14H18V10H20C20.6 10 21 10.4 21 11V13C21 13.6 20.6 14 20 14ZM21 19V17C21 16.4 20.6 16 20 16H18V20H20C20.6 20 21 19.6 21 19ZM21 7V5C21 4.4 20.6 4 20 4H18V8H20C20.6 8 21 7.6 21 7Z" fill="currentColor"></path>
+                                <path opacity="0.3" d="M17 22H3C2.4 22 2 21.6 2 21V3C2 2.4 2.4 2 3 2H17C17.6 2 18 2.4 18 3V21C18 21.6 17.6 22 17 22ZM10 7C8.9 7 8 7.9 8 9C8 10.1 8.9 11 10 11C11.1 11 12 10.1 12 9C12 7.9 11.1 7 10 7ZM13.3 16C14 16 14.5 15.3 14.3 14.7C13.7 13.2 12 12 10.1 12C8.10001 12 6.49999 13.1 5.89999 14.7C5.59999 15.3 6.19999 16 7.39999 16H13.3Z" fill="currentColor"></path>
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                        <!--begin::Info-->
+                        <span class="d-block fw-semibold text-start">
+                            <span class="text-dark fw-bold d-block fs-4 mb-2">
+                                No card found in account
+                            </span>
+                        </span>
+                        <!--end::Info-->
+                    </div>
+                    <button id="x-paywithnew-card" class="btn mt-6 h-10 w-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
+                        Pay with card
+                    </button>
+
+                    <script>
+                    const myModalElx = document.getElementById('myModal');
+                    var myModal = new bootstrap.Modal(myModalElx, {
+                    keyboard: false
+                    })
+                    document.getElementById("x-paywithnew-card").onclick = function(){
+                        myModal.show()
+                    }
+                                        // close modal, reshow processing
+                        myModalElx.addEventListener('hidden.bs.modal', function (event) {
+                            document.getElementById("_card_spinner_b4_pin").classList.add("d-none")
+                            document.getElementById("x-card-pin").classList.add("d-none")
+                            document.getElementById("x-newcard-details").classList.remove("d-none")
+                    })
+
+                    </script>
+                </div>
+                <%}%>
             </div>
-            <%}%>
         </div>
-    </div>
 </div>
