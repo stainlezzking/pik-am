@@ -114,11 +114,11 @@
                                                                     <%= transaction.type %>
                                                                 </p>
                                                                 <p class="text-xs text-slate-400 line-clamp-1 dark:text-navy-200">
-                                                                    Dec 21, 2021 - 08:05
+                                                                    <%= datefns.format(transaction.createdAt, "d MMM, yyyy")%>
                                                                 </p>
                                                             </div>
                                                         </div>
-                                                        <p class="font-medium <%= transaction.status == 'success'? 'text-success' : (transaction.status == 'declined') ? 'text-error' : 'text-info'%> ">$<%= transaction.amount %></p>
+                                                        <p class="font-medium <%= transaction.status == 'success'? 'text-success' : (transaction.status == 'declined') ? 'text-error' : 'text-info'%> ">$<%= transaction.amount.toLocaleString() %></p>
                                                     </div>
 
                                                 <% })%>

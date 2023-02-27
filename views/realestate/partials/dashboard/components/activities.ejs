@@ -8,18 +8,18 @@
         </div>
         <div class="px-4 pb-4 sm:px-5">
             <ol class="timeline line-space max-w-sm [--size:1.5rem]">
-                <% all_activity_icons = { settings : "fa fa-user-edit text-tiny", assets_buy : "fa-share-from-square", assets_sell : "fa-solid fa-circle-down" } %>
+                <% all_activity_icons = { settings : "fa fa-user-edit text-tiny", assets_buy : "fa-solid fa-share-from-square", assets_sell : "fa-solid fa-circle-down" } %>
                 <% user.activities.forEach(activity=>{ %>
                     <li class="timeline-item">
-                        <div class="timeline-item-point <%= activity.type == 'settings' ? 'text-primary' : activity.type == 'assets_buy' ? 'text-warning' : 'text-success' %> rounded-full border border-current bg-white  dark:bg-navy-700 dark:text-secondary-light">
-                            <i class="<%= all_activity_icons[activity.type] %>"></i>
+                        <div class="timeline-item-point w-10 flex h-10 items-center justify-center  <%= activity.type == 'settings' ? 'text-primary' : activity.type == 'assets_buy' ? 'text-warning' : 'text-success' %> rounded-full border border-current bg-white  dark:bg-navy-700 dark:text-secondary-light">
+                            <i class="<%= all_activity_icons[activity.type] %> "></i>
                         </div>
                         <div class="timeline-item-content flex-1 pl-4 sm:pl-8">
                             <div class="flex flex-col justify-between pb-2 sm:flex-row sm:pb-0">
                                 <p class="pb-2 font-medium leading-none text-slate-600 dark:text-navy-100 sm:pb-0">
                                     <%= activity.title %>
                                 </p>
-                                <span class="text-xs text-slate-400 dark:text-navy-300"> <%= activity.createdAt.to %></span>
+                                <span class="text-xs text-slate-400 dark:text-navy-300"> <%= datefns.format(activity.createdAt, "d MMM yyyy") %></span>
                             </div>
                             <p class="py-1"> <%= activity.body %> </p>
                         </div>
@@ -35,7 +35,6 @@
                             <p class="pb-2 font-medium leading-none text-slate-600 dark:text-navy-100 sm:pb-0">
                                 Weekly Report
                             </p>
-                            <span class="text-xs text-slate-400 dark:text-navy-300">a day ago</span>
                         </div>
                         <p class="py-1">Read about us</p>
                         <div>

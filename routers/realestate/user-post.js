@@ -67,18 +67,44 @@ Router.post("/stripe-payment-available", async function(req,res){
 @ Buy giftcard - 
 <all users with>
 # send email
+giftcard key is made of => key : req.user.id + Date.now
 */
 Router.post("/giftcard", async function(req,res){
-    console.log(req.body)
     try{
         const {amount, title} = JSON.parse(req.body.giftcard)
         if(req.user.balance < Number(amount)) return showError(req, "/dashboard/withdraw#giftcard", "Insufficient balance", res)
-       await USER.updateOne({_id : req.user._id}, { balance : req.user.balance - Number(amount), $inc : { debits : Number(amount)}, $push : {giftcards :{amount,title} } })
-       await Transaction.create({user : req.user._id, amount, type : "giftcard", status : "success"})
+       await USER.updateOne({_id : req.user._id}, { balance : req.user.balance - Number(amount), $inc : { debits : Number(amount)}, $push : {giftcards :{amount,title, key : req.user.id + "x" + Date.now()} } })
+       await Transaction.create({user : req.user._id, amount : -amount, type : "giftcard", status : "success"})
         // send email+-
         return showError(req, "/dashboard/withdraw#giftcard", "purchase successful", res)
     }catch(err){
         return showError(req, "/dashboard/withdraw#giftcard", err.message, res)
+    }
+})
+
+/*
+send email 
+to redeemer of the giftcard
+*/
+Router.post("/redeemgiftcard", async function(req,res){
+    try{
+       const user = await USER.findOne({_id : req.body.key.split("x")[0], "giftcards.key" : req.body.key, "giftcards.cashed": false}, "giftcards")
+       if(!user) return showError(req, "/dashboard/deposit#redeem", "invalid giftcard key", res)
+       user.giftcards.forEach(gftcd=> {
+           if(gftcd.key == req.body.key.trim()){
+               gftcd.cashed = true,
+               gftcd.cashedBy = req.user._id
+            }
+        })
+        await user.save()
+        const giftcard = user.giftcards.find(cd=> cd.key == req.body.key.trim())
+       const giftcardAmount = giftcard.amount - (giftcard.amount * 0.05).toFixed()
+        await USER.updateOne({_id : req.user._id}, {$inc : {balance : giftcardAmount,credits : giftcard.amount}})
+        await Transaction.create({user : req.user._id, amount : giftcardAmount, type : "giftcard", status : "success"})
+        return showError(req, "/dashboard", "succesfully redeemed ", res)
+    }catch(err){
+        console.log(err)
+        return showError(req, "/dashboard/deposit#redeem", err.message, res)
     }
 })
 
@@ -96,7 +122,7 @@ Router.post("/buyAssets", async function(req,res){
         };
         await CLUSTER.create(newInv)
         await USER.updateOne({_id : req.user._id}, {$inc : {balance : - Number(req.body.capital)},$push :{
-        activities : {  title : plan.title + " Cluster", body : "You bought assets worth $"+ req.body.capital, type : "assets_buy"}
+        activities : {  title : plan.title + " Cluster", body : "You bought assets worth $"+ Number(req.body.capital).toLocaleString(), type : "assets_buy"}
         }})
         return showError(req, "/dashboard/invest", "Asset purchase successful", res)
     }catch(err){

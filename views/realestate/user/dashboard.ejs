@@ -72,7 +72,7 @@
 									<% investments.filter(investment=> !investment.ended ).forEach(investment=>{ %>
 										<div class="flex w-72 shrink-0 flex-col">
 											<div class="flex items-center space-x-2">
-												<i class="fa fa-<%= availableIcons[investment.type] %> dark:text-accent-light"></i>
+												<i class="fa fa-<%= availableIcons[investment.icon] %> dark:text-accent-light"></i>
 												<div>
 													<span><%= investment.title %></span>
 												</div>
@@ -84,7 +84,7 @@
 												</div>
 												<div class="flex w-36 flex-col items-center rounded-lg bg-slate-100 py-2 font-inter dark:bg-navy-500">
 													<p class="text-xl font-medium text-slate-700 line-clamp-1 dark:text-navy-100">
-														$<%= investment.capital.toLocaleString() %>
+														$<%= (investment.capital + ((investment.roi/100)*investment.capital )).toLocaleString() %>
 													</p>
 													<p class="mt-1 flex items-center space-x-0.5 text-xs text-success">
 														<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

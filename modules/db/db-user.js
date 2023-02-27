@@ -1,6 +1,7 @@
 const mongoose = require("mongoose")
 require("dotenv").config();
 mongoose.set('strictQuery', false);
+const {format, differenceInDays} = require('date-fns')
 
 // let online = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@cluster0.hqwfrk3.mongodb.net/pik-am`;
 let localhost = "mongodb://127.0.0.1:27017/pik-am";
@@ -42,10 +43,17 @@ const investmentPlans = mongoose.Schema({
       lifetime : Boolean,
       paid: { type: Boolean, default: false },
       ended : { type : Boolean, default : false},
-      type : {type : String, enum : ["boost", 'house', 'sign']}
+      icon : {type : String, enum : ["boost", 'house', 'sign']}
       // virtuals for icon type and price
       // properties - house icon
       // shared cluster both ["rocket", "house"]
+}, {timestamps : true})
+
+investmentPlans.virtual('percentage12')
+.get(function(){
+ const  daysLeft = differenceInDays(this.expiry,new Date())
+ const percentage =  daysLeft < 0 ? 12 : (((this.duration - daysLeft)*12)/this.duration).toFixed() 
+  return {percentage, daysLeft};
 })
 
 // create a new schema for cards abi model
@@ -73,7 +81,7 @@ const transaction = mongoose.Schema({
   type : {type : String, enum : ["deposit", "withdraw", "giftcard"]},
   url : String,
   status : {type : String, enum : ["pending", "declined", "success"], default : "pending"},
-})
+}, {timestamps : true})
 const userSchema = mongoose.Schema(
     {
       email: { type: String, required: [true, "make sure all inputs are filled"], lowercase : true},
@@ -92,7 +100,7 @@ const userSchema = mongoose.Schema(
       occupation : String,
       source_of_wealth : String,
       heardAboutUS : String,
-      giftcards : [{amount : Number, title : String, cashed : {type : Boolean, default : false}}],
+      giftcards : [{amount : Number, key : String, title : String, cashed : {type : Boolean, default : false}, cashedBy : mongoose.Schema.Types.ObjectId}],
       agent : Boolean,
       disallowedPlans: [{_id : String, feedback : String }],
       walletAddress: String,

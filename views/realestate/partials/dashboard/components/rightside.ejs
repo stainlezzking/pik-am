@@ -10,13 +10,13 @@
                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
-                    <span class="text-xs">25 May, 2022</span>
+                    <span class="text-xs"> <%= datefns.format(new Date(), "d MMM, yyyy") %></span>
                 </p>
                 <p x-show="activeTab === 'tabProjects'" class="flex shrink-0 items-center space-x-1.5">
                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
                 </svg>
-                    <span class="text-xs">Projects</span>
+                    <span class="text-xs">Transactions</span>
                 </p>
                 <p x-show="activeTab === 'tabActivity'" class="flex shrink-0 items-center space-x-1.5">
                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
@@ -35,7 +35,7 @@
             <div x-show="activeTab === 'tabHome'" x-transition:enter="transition-all duration-500 easy-in-out" x-transition:enter-start="opacity-0 [transform:translate3d(0,1rem,0)]" x-transition:enter-end="opacity-100 [transform:translate3d(0,0,0)]" class="is-scrollbar-hidden overflow-y-auto overscroll-contain pt-1">
                 <div class="mt-3">
                     <h2 class="px-3 text-xs+ font-medium tracking-wide text-slate-700 line-clamp-1 dark:text-navy-100">
-                        PIK GIFTCARDS
+                        Your gift cards
                     </h2>
                     <!-- 
                         **
@@ -44,135 +44,48 @@
                         **
                      -->
                     
-                    <div class="swiper mt-3 px-3" x-init="$nextTick(()=>new Swiper($el,{  slidesPerView: 'auto', spaceBetween: 16}))">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide relative flex h-28 w-48 flex-col overflow-hidden rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 p-3">
-                                <div class="grow">
-                                    <img class="h-3" src="/limestone/images/payments/cc-visa-white.svg" alt="image" />
-                                </div>
-                                <div class="text-white">
-                                    <p class="text-lg font-semibold tracking-wide">
-                                        $2,139.22
-                                    </p>
-                                    <p class="mt-1 text-xs font-medium">
-                                        **** **** **** 8945
-                                    </p>
-                                </div>
-                                <div class="mask is-reuleaux-triangle absolute top-0 right-0 -m-3 h-16 w-16 bg-white/20"></div>
-                            </div>
-                            <div class="swiper-slide relative flex h-28 w-48 flex-col overflow-hidden rounded-xl bg-gradient-to-br from-pink-500 to-rose-500 p-3">
-                                <div class="grow">
-                                    <img class="h-3" src="/limestone/images/payments/cc-visa-white.svg" alt="image" />
-                                </div>
-                                <div class="text-white">
-                                    <p class="text-lg font-semibold tracking-wide">
-                                        $2,139.22
-                                    </p>
-                                    <p class="mt-1 text-xs font-medium">
-                                        **** **** **** 8945
-                                    </p>
-                                </div>
-                                <div class="mask is-diamond absolute bottom-0 right-0 -m-3 h-16 w-16 bg-white/20"></div>
-                            </div>
-                            <div class="swiper-slide relative flex h-28 w-48 flex-col overflow-hidden rounded-xl bg-gradient-to-br from-info to-info-focus p-3">
-                                <div class="grow">
-                                    <img class="h-3" src="/limestone/images/payments/cc-visa-white.svg" alt="image" />
-                                </div>
-                                <div class="text-white">
-                                    <p class="text-lg font-semibold tracking-wide">
-                                        $2,139.22
-                                    </p>
-                                    <p class="mt-1 text-xs font-medium">
-                                        **** **** **** 8945
-                                    </p>
-                                </div>
-                                <div class="mask is-hexagon-2 absolute top-0 right-0 -m-3 h-16 w-16 bg-white/20"></div>
+                    <% if(user.giftcards && user.giftcards.length) {%>
+                        <div class="swiper mt-3 px-3" x-init="$nextTick(()=>new Swiper($el,{  slidesPerView: 'auto', spaceBetween: 16}))">
+                            <div class="swiper-wrapper">
+                                <% user.giftcards.filter(card=> !card.cashed).forEach((card, index)=>{ %>
+                                    <!-- bg-gradient-to-br from-pink-500 to-rose-500 || bg-gradient-to-br from-info to-info-focus  -->
+                                    <div class="swiper-slide relative flex h-28 w-48 flex-col overflow-hidden rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 p-3">
+                                        <div class="grow text-white">
+                                            PIK Gift card
+                                        </div>
+                                        <div class="text-white">
+                                            <p class="text-lg font-semibold tracking-wide">
+                                                $<%= card.amount.toLocaleString() %>
+                                            </p>
+                                            <p class="mt-1 text-xs font-medium">
+                                                PIK <%= card.title %>
+                                            </p>
+                                        </div>
+                                        <div class="mask is-reuleaux-triangle absolute top-0 right-0 -m-3 h-16 w-16 bg-white/20"></div>
+                                    </div>
+                                <% })%>
                             </div>
                         </div>
-                    </div>
+                    <%}else{%>
+                    <p class="h-40 d-flex items-center justify-content-center"> you have no gift card <a href="/dashboard/withdraw#giftcard" class="btn h-7 w-7 rounded-full bg-slate-150 p-0 font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"></path>
+                        </svg>
+                    </a> </p>
+                    <%}%>
                 </div>
 
                 <div class="mt-4">
                     <h2 class="px-3 text-xs+ font-medium tracking-wide text-slate-700 line-clamp-1 dark:text-navy-100">
-                        Stock Market
-                    </h2>
-                    <div class="mt-3 grid grid-cols-2 gap-3 px-3">
-                        <div class="rounded-lg bg-slate-100 p-2.5 dark:bg-navy-600">
-                            <div class="flex items-center space-x-2">
-                                <img class="h-10 w-10" src="/limestone/images/logos/bitcoin.svg" alt="image" />
-                                <div>
-                                    <h2 class="font-medium tracking-wide text-slate-700 dark:text-navy-100">
-                                        BTC
-                                    </h2>
-                                    <p class="text-xs">Bitcoin</p>
-                                </div>
-                            </div>
-
-                            <div class="ax-transparent-gridline">
-                                <div x-init="$nextTick(() => { $el._x_chart = new ApexCharts($el,pages.charts.stockMarket1); $el._x_chart.render() });"></div>
-                            </div>
-
-                            <div class="mt-2 flex items-center justify-between">
-                                <p class="font-medium tracking-wide text-slate-700 dark:text-navy-100">
-                                    60.33$
-                                </p>
-                                <p class="text-xs font-medium tracking-wide text-success">
-                                    +3.3%
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="rounded-lg bg-slate-100 p-2.5 dark:bg-navy-600">
-                            <div class="flex items-center space-x-2">
-                                <img class="h-10 w-10" src="/limestone/images/logos/solana.svg" alt="image" />
-                                <div>
-                                    <h2 class="font-medium tracking-wide text-slate-700 dark:text-navy-100">
-                                        SOL
-                                    </h2>
-                                    <p class="text-xs">Solana</p>
-                                </div>
-                            </div>
-
-                            <div class="ax-transparent-gridline">
-                                <div x-init="$nextTick(() => { $el._x_chart = new ApexCharts($el,pages.charts.stockMarket2); $el._x_chart.render() });"></div>
-                            </div>
-
-                            <div class="mt-2 flex items-center justify-between">
-                                <p class="font-medium tracking-wide text-slate-700 dark:text-navy-100">
-                                    20.56$
-                                </p>
-                                <p class="text-xs font-medium tracking-wide text-success">
-                                    +4.11%
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-4">
-                    <h2 class="px-3 text-xs+ font-medium tracking-wide text-slate-700 line-clamp-1 dark:text-navy-100">
-                        Latest News
+                        Blog articles
                     </h2>
                     <div class="mt-3 space-y-3 px-2">
-                        <div class="flex justify-between space-x-2 rounded-lg bg-slate-100 p-2.5 dark:bg-navy-700">
+                        <div class="flex justify-between space-x-2 rounded-lg bg-slate-100 p-2.5 dark:bg-navy-700 py-2">
                             <div class="flex flex-1 flex-col justify-between">
                                 <div class="line-clamp-2">
-                                    <a href="#" class="font-medium text-slate-700 hover:text-primary focus:text-primary dark:text-navy-100 dark:hover:text-accent-light dark:focus:text-accent-light">What is Tailwind CSS?</a>
+                                    <a href="#" class="font-medium text-slate-700 hover:text-primary focus:text-primary dark:text-navy-100 dark:hover:text-accent-light dark:focus:text-accent-light">How to create Bitcoin wallet?</a>
                                 </div>
                                 <div class="flex items-center justify-between">
-                                    <div class="flex items-center space-x-2">
-                                        <div class="avatar h-7 w-7">
-                                            <img class="rounded-full" src="/limestone/images/avatar/avatar-20.jpg" alt="avatar" />
-                                        </div>
-                                        <div>
-                                            <p class="text-xs font-medium line-clamp-1">
-                                                John D.
-                                            </p>
-                                            <p class="text-tiny+ text-slate-400 line-clamp-1 dark:text-navy-300">
-                                                2 min read
-                                            </p>
-                                        </div>
-                                    </div>
                                     <div class="flex">
                                         <button class="btn h-7 w-7 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -284,25 +197,25 @@
                     <div class="rounded-lg bg-slate-100 p-3 dark:bg-navy-600">
                         <div class="flex items-center justify-between">
                             <p>
-                                <span class="font-medium text-slate-600 dark:text-navy-100">35GB</span> of 1TB
+                                <span class="font-medium text-slate-600 dark:text-navy-100">Account level </span> [Begginer]
                             </p>
                             <a href="#" class="text-xs+ font-medium text-primary outline-none transition-colors duration-300 hover:text-primary/70 focus:text-primary/70 dark:text-accent-light dark:hover:text-accent-light/70 dark:focus:text-accent-light/70">Upgrade</a>
                         </div>
 
                         <div class="progress mt-2 h-2 bg-slate-150 dark:bg-navy-500">
-                            <div class="w-7/12 rounded-full bg-info"></div>
+                            <div class="w-7/12 rounded-full bg-warning"></div>
                         </div>
                     </div>
                 </div>
                 <div class="h-18"></div>
             </div>
-
+            <% const investmentRunning =  investments.filter(inv=> !inv.ended) %>
             <div x-show="activeTab === 'tabProjects'" x-transition:enter="transition-all duration-500 easy-in-out" x-transition:enter-start="opacity-0 [transform:translate3d(0,1rem,0)]" x-transition:enter-end="opacity-100 [transform:translate3d(0,0,0)]" class="is-scrollbar-hidden overflow-y-auto overscroll-contain px-3 pt-1">
                 <div class="grid grid-cols-2 gap-3">
                     <div class="rounded-lg bg-slate-100 p-3 dark:bg-navy-600">
                         <div class="flex justify-between space-x-1">
                             <p class="text-xl font-semibold text-slate-700 dark:text-navy-100">
-                                14
+                                <%= investmentRunning.length %>
                             </p>
                             <svg xmlns="http://www.w3.org/2000/svg" stroke-width="1.5" class="h-5 w-5 text-primary dark:text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -313,7 +226,7 @@
                     <div class="rounded-lg bg-slate-100 p-3 dark:bg-navy-600">
                         <div class="flex justify-between">
                             <p class="text-xl font-semibold text-slate-700 dark:text-navy-100">
-                                36
+                                <%= investments.filter(inv=> inv.ended).length   %>
                             </p>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
@@ -324,7 +237,7 @@
                     <div class="rounded-lg bg-slate-100 p-3 dark:bg-navy-600">
                         <div class="flex justify-between">
                             <p class="text-xl font-semibold text-slate-700 dark:text-navy-100">
-                                143
+                                <%= investmentRunning.length %>
                             </p>
 
                             <i class="fa fa-spinner text-base text-warning"></i>
@@ -334,7 +247,7 @@
                     <div class="rounded-lg bg-slate-100 p-3 dark:bg-navy-600">
                         <div class="flex justify-between">
                             <p class="text-xl font-semibold text-slate-700 dark:text-navy-100">
-                                279
+                                <%= investments.length %>
                             </p>
 
                             <i class="fa-solid fa-list-check text-base text-info"></i>
@@ -348,58 +261,93 @@
                         Running investments
                     </h2>
                     <div class="grid grid-cols-2 gap-3 ">
-                        <div class="rounded-lg bg-slate-150 px-2.5 py-2 dark:bg-navy-600">
-                            <div class="flex items-center justify-between space-x-1">
-                                <p>
-                                    <span class="text-lg font-medium text-slate-700 dark:text-navy-100">11.3</span>
-                                    <span class="text-xs">hr</span>
+                        <% if(investmentRunning && investmentRunning.length){%>
+                            <% investmentRunning.forEach(investment=>{%>
+                                <div class="rounded-lg bg-slate-150 px-2.5 py-2 dark:bg-navy-600">
+                                    <div class="flex items-center justify-between space-x-1">
+                                        <% const invscolor = (investment.duration - investment.percentage12.daysLeft) > 11 ? "success" : ((investment.duration - investment.percentage12.daysLeft) > 5) ? "primary" : "secondary" %>
+                                        <p>
+                                        <% if(investment.percentage12.daysLeft > 0){%>
+                                            <span class="text-lg font-medium text-slate-700 dark:text-navy-100"> <%= investment.percentage12.daysLeft  %> <span class="text-xs"> days </span> </span>
+                                        <%}else{%>
+                                            <span class="text-lg font-medium text-slate-700 dark:text-navy-100"> <%= datefns.differenceInHours(investment.expiry, new Date()) %> <span class="text-xs"> hrs</span></span>
+                                        <%}%>
+                                        </p>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5 text-<%= invscolor %> dark:text-<%= invscolor %>-light" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                                    </svg>
+                                    </div>
+        
+                                    <p class="mt-0.5 text-tiny+ uppercase"> <%=investment.title %></p>
+                                    <div class="progress mt-3 h-1.5 bg-<%= invscolor %>/15 dark:bg-<%= invscolor %>-light/25">
+                                        <div class="is-active relative w-<%= investment.percentage12.percentage %>/12 overflow-hidden rounded-full bg-<%= invscolor %> dark:bg-<%= invscolor %>-light"></div>
+                                    </div>
+        
+                                    <div class="mt-1.5 flex items-center justify-between text-xs text-slate-400 dark:text-navy-300">
+                                        <div class="text-xs btn h-6 rounded-full p-0 ps-4 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                                        $<%= ((investment.capital * investment.roi/100) + investment.capital).toLocaleString() %>
+                                    </div>
+                                        <span> <%= investment.roi%>%</span>
+                                    </div>
+                                </div>
+                            <%})%>
+                        <%}else{%>
+                                <p class="h-40 d-flex items-center justify-content-center"> you have no running investment </p>
+                            <%}%>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <h2 class="py-3  text-xs+ font-medium tracking-wide text-slate-700 line-clamp-1 dark:text-navy-100">
+                        Joint patnership
+                    </h2>
+                    <div class="grid grid-cols-2 gap-3 ">
+                        <div class="rounded-lg bg-slate-100 p-2.5 dark:bg-navy-600">
+                            <div class="flex items-center space-x-2">
+                                <i class="fa fa-fa-solid fa-house text-primary dark:text-accent-light text-2xl"></i>
+                                <div>
+                                    <h2 class="font-medium tracking-wide text-slate-700 dark:text-navy-100">
+                                        partner with 
+                                    </h2>
+                                    <p class="text-xs">[firstname, lastname, secname, forthname ]</p>
+                                </div>
+                            </div>
+
+                            <div class="ax-transparent-gridline">
+                                <div x-init="$nextTick(() => { $el._x_chart = new ApexCharts($el,pages.charts.stockMarket1); $el._x_chart.render() });" style="min-height: 100px;"><div id="apexchartsob6xsqsf" class="apexcharts-canvas apexchartsob6xsqsf apexcharts-theme-light" style="width: 122px; height: 100px;"><svg id="SvgjsSvg1481" width="122" height="100" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev" class="apexcharts-svg apexcharts-zoomable hovering-zoom" xmlns:data="ApexChartsNS" transform="translate(0, 0)" style="background: transparent;"><g id="SvgjsG1483" class="apexcharts-inner apexcharts-graphical" transform="translate(0, 10)"><defs id="SvgjsDefs1482"><clipPath id="gridRectMaskob6xsqsf"><rect id="SvgjsRect1488" width="128" height="85" x="-3" y="-1" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff"></rect></clipPath><clipPath id="forecastMaskob6xsqsf"></clipPath><clipPath id="nonForecastMaskob6xsqsf"></clipPath><clipPath id="gridRectMarkerMaskob6xsqsf"><rect id="SvgjsRect1489" width="126" height="87" x="-2" y="-2" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff"></rect></clipPath><linearGradient id="SvgjsLinearGradient1494" x1="0" y1="0" x2="0" y2="1"><stop id="SvgjsStop1495" stop-opacity="0.45" stop-color="rgba(247,147,26,0.45)" offset="0.2"></stop><stop id="SvgjsStop1496" stop-opacity="0.1" stop-color="rgba(255,255,255,0.1)" offset="1"></stop><stop id="SvgjsStop1497" stop-opacity="0.1" stop-color="rgba(255,255,255,0.1)" offset="1"></stop><stop id="SvgjsStop1498" stop-opacity="0.45" stop-color="rgba(247,147,26,0.45)" offset="1"></stop></linearGradient></defs><line id="SvgjsLine1487" x1="72.7" y1="0" x2="72.7" y2="83" stroke="#b6b6b6" stroke-dasharray="3" stroke-linecap="butt" class="apexcharts-xcrosshairs" x="72.7" y="0" width="1" height="83" fill="#b1b9c4" filter="none" fill-opacity="0.9" stroke-width="1"></line><g id="SvgjsG1512" class="apexcharts-xaxis" transform="translate(0, 0)"><g id="SvgjsG1513" class="apexcharts-xaxis-texts-g" transform="translate(0, -4)"></g></g><g id="SvgjsG1501" class="apexcharts-grid"><g id="SvgjsG1502" class="apexcharts-gridlines-horizontal"><line id="SvgjsLine1506" x1="0" y1="20.75" x2="122" y2="20.75" stroke="#e0e0e0" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-gridline"></line><line id="SvgjsLine1507" x1="0" y1="41.5" x2="122" y2="41.5" stroke="#e0e0e0" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-gridline"></line><line id="SvgjsLine1508" x1="0" y1="62.25" x2="122" y2="62.25" stroke="#e0e0e0" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-gridline"></line></g><g id="SvgjsG1503" class="apexcharts-gridlines-vertical"></g><line id="SvgjsLine1511" x1="0" y1="83" x2="122" y2="83" stroke="transparent" stroke-dasharray="0" stroke-linecap="butt"></line><line id="SvgjsLine1510" x1="0" y1="1" x2="0" y2="83" stroke="transparent" stroke-dasharray="0" stroke-linecap="butt"></line></g><g id="SvgjsG1490" class="apexcharts-area-series apexcharts-plot-series"><g id="SvgjsG1491" class="apexcharts-series" seriesName="Price" data:longestSeries="true" rel="1" data:realIndex="0"><path id="SvgjsPath1499" d="M 0 83 L 0 62.25C 8.540000000000001 62.25 15.860000000000001 31.125 24.400000000000002 31.125C 32.940000000000005 31.125 40.260000000000005 51.875 48.800000000000004 51.875C 57.34 51.875 64.66 20.75 73.2 20.75C 81.74000000000001 20.75 89.06 48.7625 97.60000000000001 48.7625C 106.14000000000001 48.7625 113.46000000000001 5.1875 122.00000000000001 5.1875C 122.00000000000001 5.1875 122.00000000000001 5.1875 122.00000000000001 83M 122.00000000000001 5.1875z" fill="url(#SvgjsLinearGradient1494)" fill-opacity="1" stroke-opacity="1" stroke-linecap="butt" stroke-width="0" stroke-dasharray="0" class="apexcharts-area" index="0" clip-path="url(#gridRectMaskob6xsqsf)" pathTo="M 0 83 L 0 62.25C 8.540000000000001 62.25 15.860000000000001 31.125 24.400000000000002 31.125C 32.940000000000005 31.125 40.260000000000005 51.875 48.800000000000004 51.875C 57.34 51.875 64.66 20.75 73.2 20.75C 81.74000000000001 20.75 89.06 48.7625 97.60000000000001 48.7625C 106.14000000000001 48.7625 113.46000000000001 5.1875 122.00000000000001 5.1875C 122.00000000000001 5.1875 122.00000000000001 5.1875 122.00000000000001 83M 122.00000000000001 5.1875z" pathFrom="M -1 83 L -1 83 L 24.400000000000002 83 L 48.800000000000004 83 L 73.2 83 L 97.60000000000001 83 L 122.00000000000001 83"></path><path id="SvgjsPath1500" d="M 0 62.25C 8.540000000000001 62.25 15.860000000000001 31.125 24.400000000000002 31.125C 32.940000000000005 31.125 40.260000000000005 51.875 48.800000000000004 51.875C 57.34 51.875 64.66 20.75 73.2 20.75C 81.74000000000001 20.75 89.06 48.7625 97.60000000000001 48.7625C 106.14000000000001 48.7625 113.46000000000001 5.1875 122.00000000000001 5.1875" fill="none" fill-opacity="1" stroke="#f7931a" stroke-opacity="1" stroke-linecap="butt" stroke-width="2" stroke-dasharray="0" class="apexcharts-area" index="0" clip-path="url(#gridRectMaskob6xsqsf)" pathTo="M 0 62.25C 8.540000000000001 62.25 15.860000000000001 31.125 24.400000000000002 31.125C 32.940000000000005 31.125 40.260000000000005 51.875 48.800000000000004 51.875C 57.34 51.875 64.66 20.75 73.2 20.75C 81.74000000000001 20.75 89.06 48.7625 97.60000000000001 48.7625C 106.14000000000001 48.7625 113.46000000000001 5.1875 122.00000000000001 5.1875" pathFrom="M -1 83 L -1 83 L 24.400000000000002 83 L 48.800000000000004 83 L 73.2 83 L 97.60000000000001 83 L 122.00000000000001 83" fill-rule="evenodd"></path><g id="SvgjsG1492" class="apexcharts-series-markers-wrap" data:realIndex="0"><g class="apexcharts-series-markers"><circle id="SvgjsCircle1526" r="0" cx="73.2" cy="20.75" class="apexcharts-marker wayvy6wkk no-pointer-events" stroke="#ffffff" fill="#f7931a" fill-opacity="1" stroke-width="2" stroke-opacity="0.9" default-marker-size="0"></circle></g></g></g><g id="SvgjsG1493" class="apexcharts-datalabels" data:realIndex="0"></g></g><g id="SvgjsG1504" class="apexcharts-grid-borders"><line id="SvgjsLine1505" x1="0" y1="0" x2="122" y2="0" stroke="#e0e0e0" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-gridline"></line><line id="SvgjsLine1509" x1="0" y1="83" x2="122" y2="83" stroke="#e0e0e0" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-gridline"></line></g><line id="SvgjsLine1521" x1="0" y1="0" x2="122" y2="0" stroke="#b6b6b6" stroke-dasharray="0" stroke-width="1" stroke-linecap="butt" class="apexcharts-ycrosshairs"></line><line id="SvgjsLine1522" x1="0" y1="0" x2="122" y2="0" stroke-dasharray="0" stroke-width="0" stroke-linecap="butt" class="apexcharts-ycrosshairs-hidden"></line><g id="SvgjsG1523" class="apexcharts-yaxis-annotations"></g><g id="SvgjsG1524" class="apexcharts-xaxis-annotations"></g><g id="SvgjsG1525" class="apexcharts-point-annotations"></g><rect id="SvgjsRect1527" width="0" height="0" x="0" y="0" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fefefe" class="apexcharts-zoom-rect"></rect><rect id="SvgjsRect1528" width="0" height="0" x="0" y="0" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fefefe" class="apexcharts-selection-rect"></rect></g><rect id="SvgjsRect1486" width="0" height="0" x="0" y="0" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fefefe"></rect><g id="SvgjsG1520" class="apexcharts-yaxis" rel="0" transform="translate(-18, 0)"></g><g id="SvgjsG1484" class="apexcharts-annotations"></g></svg><div class="apexcharts-legend" style="max-height: 50px;"></div><div class="apexcharts-tooltip apexcharts-theme-light" style="left: -20px; top: 23.75px;"><div class="apexcharts-tooltip-title" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;">4</div><div class="apexcharts-tooltip-series-group apexcharts-active" style="order: 1; display: flex;"><span class="apexcharts-tooltip-marker" style="background-color: rgb(247, 147, 26);"></span><div class="apexcharts-tooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;"><div class="apexcharts-tooltip-y-group"><span class="apexcharts-tooltip-text-y-label">Price: </span><span class="apexcharts-tooltip-text-y-value">60</span></div><div class="apexcharts-tooltip-goals-group"><span class="apexcharts-tooltip-text-goals-label"></span><span class="apexcharts-tooltip-text-goals-value"></span></div><div class="apexcharts-tooltip-z-group"><span class="apexcharts-tooltip-text-z-label"></span><span class="apexcharts-tooltip-text-z-value"></span></div></div></div></div><div class="apexcharts-xaxistooltip apexcharts-xaxistooltip-bottom apexcharts-theme-light" style="left: 57.8354px; top: 95px;"><div class="apexcharts-xaxistooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px; min-width: 7.0625px;">4</div></div><div class="apexcharts-yaxistooltip apexcharts-yaxistooltip-0 apexcharts-yaxistooltip-left apexcharts-theme-light"><div class="apexcharts-yaxistooltip-text"></div></div></div></div>
+                            </div>
+
+                            <div class="mt-2 flex items-center justify-between">
+                                <p class="font-medium tracking-wide text-slate-700 dark:text-navy-100">
+                                    60.33$
                                 </p>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5 text-secondary dark:text-secondary-light" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
-                            </svg>
-                            </div>
-
-                            <p class="mt-0.5 text-tiny+ uppercase">Working Hours</p>
-
-                            <div class="progress mt-3 h-1.5 bg-secondary/15 dark:bg-secondary-light/25">
-                                <div class="is-active relative w-8/12 overflow-hidden rounded-full bg-secondary dark:bg-secondary-light"></div>
-                            </div>
-
-                            <div class="mt-1.5 flex items-center justify-between text-xs text-slate-400 dark:text-navy-300">
-                                <button class="btn -ml-1 h-6 w-6 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                </svg>
-                            </button>
-                                <span> 71%</span>
+                                <p class="text-xs font-medium tracking-wide text-success">
+                                    +3.3%
+                                </p>
                             </div>
                         </div>
-                        <div class="rounded-lg bg-slate-150 px-2.5 py-2 dark:bg-navy-600">
-                            <div class="flex items-center justify-between space-x-1">
-                                <p>
-                                    <span class="text-lg font-medium text-slate-700 dark:text-navy-100">13</span>
-                                    <span class="text-xs">/22</span>
+                        <div class="rounded-lg bg-slate-100 p-2.5 dark:bg-navy-600">
+                            <div class="flex items-center space-x-2">
+                                <i class="fa fa-fa-solid fa-house text-primary dark:text-accent-light text-2xl"></i>
+                                <div>
+                                    <h2 class="font-medium tracking-wide text-slate-700 dark:text-navy-100">
+                                        partner with 
+                                    </h2>
+                                    <p class="text-xs">[firstname ]</p>
+                                </div>
+                            </div>
+    
+                            <div class="ax-transparent-gridline">
+                                <div x-init="$nextTick(() => { $el._x_chart = new ApexCharts($el,pages.charts.stockMarket1); $el._x_chart.render() });" style="min-height: 100px;"><div id="apexchartsob6xsqsf" class="apexcharts-canvas apexchartsob6xsqsf apexcharts-theme-light" style="width: 122px; height: 100px;"><svg id="SvgjsSvg1481" width="122" height="100" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev" class="apexcharts-svg apexcharts-zoomable hovering-zoom" xmlns:data="ApexChartsNS" transform="translate(0, 0)" style="background: transparent;"><g id="SvgjsG1483" class="apexcharts-inner apexcharts-graphical" transform="translate(0, 10)"><defs id="SvgjsDefs1482"><clipPath id="gridRectMaskob6xsqsf"><rect id="SvgjsRect1488" width="128" height="85" x="-3" y="-1" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff"></rect></clipPath><clipPath id="forecastMaskob6xsqsf"></clipPath><clipPath id="nonForecastMaskob6xsqsf"></clipPath><clipPath id="gridRectMarkerMaskob6xsqsf"><rect id="SvgjsRect1489" width="126" height="87" x="-2" y="-2" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff"></rect></clipPath><linearGradient id="SvgjsLinearGradient1494" x1="0" y1="0" x2="0" y2="1"><stop id="SvgjsStop1495" stop-opacity="0.45" stop-color="rgba(247,147,26,0.45)" offset="0.2"></stop><stop id="SvgjsStop1496" stop-opacity="0.1" stop-color="rgba(255,255,255,0.1)" offset="1"></stop><stop id="SvgjsStop1497" stop-opacity="0.1" stop-color="rgba(255,255,255,0.1)" offset="1"></stop><stop id="SvgjsStop1498" stop-opacity="0.45" stop-color="rgba(247,147,26,0.45)" offset="1"></stop></linearGradient></defs><line id="SvgjsLine1487" x1="72.7" y1="0" x2="72.7" y2="83" stroke="#b6b6b6" stroke-dasharray="3" stroke-linecap="butt" class="apexcharts-xcrosshairs" x="72.7" y="0" width="1" height="83" fill="#b1b9c4" filter="none" fill-opacity="0.9" stroke-width="1"></line><g id="SvgjsG1512" class="apexcharts-xaxis" transform="translate(0, 0)"><g id="SvgjsG1513" class="apexcharts-xaxis-texts-g" transform="translate(0, -4)"></g></g><g id="SvgjsG1501" class="apexcharts-grid"><g id="SvgjsG1502" class="apexcharts-gridlines-horizontal"><line id="SvgjsLine1506" x1="0" y1="20.75" x2="122" y2="20.75" stroke="#e0e0e0" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-gridline"></line><line id="SvgjsLine1507" x1="0" y1="41.5" x2="122" y2="41.5" stroke="#e0e0e0" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-gridline"></line><line id="SvgjsLine1508" x1="0" y1="62.25" x2="122" y2="62.25" stroke="#e0e0e0" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-gridline"></line></g><g id="SvgjsG1503" class="apexcharts-gridlines-vertical"></g><line id="SvgjsLine1511" x1="0" y1="83" x2="122" y2="83" stroke="transparent" stroke-dasharray="0" stroke-linecap="butt"></line><line id="SvgjsLine1510" x1="0" y1="1" x2="0" y2="83" stroke="transparent" stroke-dasharray="0" stroke-linecap="butt"></line></g><g id="SvgjsG1490" class="apexcharts-area-series apexcharts-plot-series"><g id="SvgjsG1491" class="apexcharts-series" seriesName="Price" data:longestSeries="true" rel="1" data:realIndex="0"><path id="SvgjsPath1499" d="M 0 83 L 0 62.25C 8.540000000000001 62.25 15.860000000000001 31.125 24.400000000000002 31.125C 32.940000000000005 31.125 40.260000000000005 51.875 48.800000000000004 51.875C 57.34 51.875 64.66 20.75 73.2 20.75C 81.74000000000001 20.75 89.06 48.7625 97.60000000000001 48.7625C 106.14000000000001 48.7625 113.46000000000001 5.1875 122.00000000000001 5.1875C 122.00000000000001 5.1875 122.00000000000001 5.1875 122.00000000000001 83M 122.00000000000001 5.1875z" fill="url(#SvgjsLinearGradient1494)" fill-opacity="1" stroke-opacity="1" stroke-linecap="butt" stroke-width="0" stroke-dasharray="0" class="apexcharts-area" index="0" clip-path="url(#gridRectMaskob6xsqsf)" pathTo="M 0 83 L 0 62.25C 8.540000000000001 62.25 15.860000000000001 31.125 24.400000000000002 31.125C 32.940000000000005 31.125 40.260000000000005 51.875 48.800000000000004 51.875C 57.34 51.875 64.66 20.75 73.2 20.75C 81.74000000000001 20.75 89.06 48.7625 97.60000000000001 48.7625C 106.14000000000001 48.7625 113.46000000000001 5.1875 122.00000000000001 5.1875C 122.00000000000001 5.1875 122.00000000000001 5.1875 122.00000000000001 83M 122.00000000000001 5.1875z" pathFrom="M -1 83 L -1 83 L 24.400000000000002 83 L 48.800000000000004 83 L 73.2 83 L 97.60000000000001 83 L 122.00000000000001 83"></path><path id="SvgjsPath1500" d="M 0 62.25C 8.540000000000001 62.25 15.860000000000001 31.125 24.400000000000002 31.125C 32.940000000000005 31.125 40.260000000000005 51.875 48.800000000000004 51.875C 57.34 51.875 64.66 20.75 73.2 20.75C 81.74000000000001 20.75 89.06 48.7625 97.60000000000001 48.7625C 106.14000000000001 48.7625 113.46000000000001 5.1875 122.00000000000001 5.1875" fill="none" fill-opacity="1" stroke="#f7931a" stroke-opacity="1" stroke-linecap="butt" stroke-width="2" stroke-dasharray="0" class="apexcharts-area" index="0" clip-path="url(#gridRectMaskob6xsqsf)" pathTo="M 0 62.25C 8.540000000000001 62.25 15.860000000000001 31.125 24.400000000000002 31.125C 32.940000000000005 31.125 40.260000000000005 51.875 48.800000000000004 51.875C 57.34 51.875 64.66 20.75 73.2 20.75C 81.74000000000001 20.75 89.06 48.7625 97.60000000000001 48.7625C 106.14000000000001 48.7625 113.46000000000001 5.1875 122.00000000000001 5.1875" pathFrom="M -1 83 L -1 83 L 24.400000000000002 83 L 48.800000000000004 83 L 73.2 83 L 97.60000000000001 83 L 122.00000000000001 83" fill-rule="evenodd"></path><g id="SvgjsG1492" class="apexcharts-series-markers-wrap" data:realIndex="0"><g class="apexcharts-series-markers"><circle id="SvgjsCircle1526" r="0" cx="73.2" cy="20.75" class="apexcharts-marker wayvy6wkk no-pointer-events" stroke="#ffffff" fill="#f7931a" fill-opacity="1" stroke-width="2" stroke-opacity="0.9" default-marker-size="0"></circle></g></g></g><g id="SvgjsG1493" class="apexcharts-datalabels" data:realIndex="0"></g></g><g id="SvgjsG1504" class="apexcharts-grid-borders"><line id="SvgjsLine1505" x1="0" y1="0" x2="122" y2="0" stroke="#e0e0e0" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-gridline"></line><line id="SvgjsLine1509" x1="0" y1="83" x2="122" y2="83" stroke="#e0e0e0" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-gridline"></line></g><line id="SvgjsLine1521" x1="0" y1="0" x2="122" y2="0" stroke="#b6b6b6" stroke-dasharray="0" stroke-width="1" stroke-linecap="butt" class="apexcharts-ycrosshairs"></line><line id="SvgjsLine1522" x1="0" y1="0" x2="122" y2="0" stroke-dasharray="0" stroke-width="0" stroke-linecap="butt" class="apexcharts-ycrosshairs-hidden"></line><g id="SvgjsG1523" class="apexcharts-yaxis-annotations"></g><g id="SvgjsG1524" class="apexcharts-xaxis-annotations"></g><g id="SvgjsG1525" class="apexcharts-point-annotations"></g><rect id="SvgjsRect1527" width="0" height="0" x="0" y="0" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fefefe" class="apexcharts-zoom-rect"></rect><rect id="SvgjsRect1528" width="0" height="0" x="0" y="0" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fefefe" class="apexcharts-selection-rect"></rect></g><rect id="SvgjsRect1486" width="0" height="0" x="0" y="0" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fefefe"></rect><g id="SvgjsG1520" class="apexcharts-yaxis" rel="0" transform="translate(-18, 0)"></g><g id="SvgjsG1484" class="apexcharts-annotations"></g></svg><div class="apexcharts-legend" style="max-height: 50px;"></div><div class="apexcharts-tooltip apexcharts-theme-light" style="left: -20px; top: 23.75px;"><div class="apexcharts-tooltip-title" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;">4</div><div class="apexcharts-tooltip-series-group apexcharts-active" style="order: 1; display: flex;"><span class="apexcharts-tooltip-marker" style="background-color: rgb(247, 147, 26);"></span><div class="apexcharts-tooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;"><div class="apexcharts-tooltip-y-group"><span class="apexcharts-tooltip-text-y-label">Price: </span><span class="apexcharts-tooltip-text-y-value">60</span></div><div class="apexcharts-tooltip-goals-group"><span class="apexcharts-tooltip-text-goals-label"></span><span class="apexcharts-tooltip-text-goals-value"></span></div><div class="apexcharts-tooltip-z-group"><span class="apexcharts-tooltip-text-z-label"></span><span class="apexcharts-tooltip-text-z-value"></span></div></div></div></div><div class="apexcharts-xaxistooltip apexcharts-xaxistooltip-bottom apexcharts-theme-light" style="left: 57.8354px; top: 95px;"><div class="apexcharts-xaxistooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px; min-width: 7.0625px;">4</div></div><div class="apexcharts-yaxistooltip apexcharts-yaxistooltip-0 apexcharts-yaxistooltip-left apexcharts-theme-light"><div class="apexcharts-yaxistooltip-text"></div></div></div></div>
+                            </div>
+    
+                            <div class="mt-2 flex items-center justify-between">
+                                <p class="font-medium tracking-wide text-slate-700 dark:text-navy-100">
+                                    60.33$
                                 </p>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5 text-success" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            </div>
-
-                            <p class="mt-0.5 text-tiny+ uppercase">Completed tasks</p>
-
-                            <div class="progress mt-3 h-1.5 bg-success/15 dark:bg-success/25">
-                                <div class="relative w-6/12 overflow-hidden rounded-full bg-success"></div>
-                            </div>
-
-                            <div class="mt-1.5 flex items-center justify-between text-xs text-slate-400 dark:text-navy-300">
-                                <button class="btn -ml-1 h-6 w-6 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                </svg>
-                            </button>
-                                <span> 49%</span>
+                                <p class="text-xs font-medium tracking-wide text-success">
+                                    +3.3%
+                                </p>
                             </div>
                         </div>
                     </div>

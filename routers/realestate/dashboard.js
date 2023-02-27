@@ -3,6 +3,7 @@ const Router = express.Router()
 const showError = require("../../modules/errormodule")
 const {USER, ADMIN, CARD, Transaction, CLUSTER} = require("../../modules/db/db-user")
 const passport = require("passport")
+const datefns = require('date-fns')
 
 
 const transactionpath = "/transaction"
@@ -13,10 +14,13 @@ Router.use(async function(req,res,next){
             const admin = await ADMIN.findOne({}, "accounts giftcards investments").lean()
             if(req.url == transactionpath){
                 res.locals.transactions = await Transaction.find({user : req.user._id})
+                res.locals.transactions.reverse()
             }
-            if(req.url == '/account' || req.url == '/deposit'){
+            if(req.url == '/account' || req.url == '/deposit' || req.url == '/' ){
                 req.user.cards = await CARD.find({user : req.user._id, deleted : false})
             }
+            req.user.activities.reverse()
+            res.locals.datefns = datefns
             //  <%## Date.now() < new Date(investment.expiry).getTime() ##%>
             res.locals.investments = await CLUSTER.find({user : req.user._id})
             res.locals.accounts = admin.accounts
