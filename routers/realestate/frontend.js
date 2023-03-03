@@ -33,6 +33,13 @@ Router.get("/login", function(req,res){
     res.render("realestate/home/login.ejs")
 })
 
+Router.get("/logout", function(req,res){
+    return req.logOut(function(e){
+        if(e) return console.log(e)
+        res.redirect("/dashboard/auth/login")
+    })
+})
+
 // find post routes for both register routes and login route in dasboaord.js
 
 

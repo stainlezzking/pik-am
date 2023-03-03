@@ -1,4 +1,5 @@
-<form method="POST" action="/dashboard/security" id="x-security-form" class="card" x-show="activeTab === 'tabSecurity'" x-transition:enter="transition-all duration-500 easy-in-out" x-transition:enter-start="opacity-0 [transform:translate3d(1rem,0,0)]" x-transition:enter-end="opacity-100 [transform:translate3d(0,0,0)]" >
+<form method="POST" action="/dashboard/security" id="x-security-form" class="card" x-show="activeTab === 'tabSecurity'" x-transition:enter="transition-all duration-500 easy-in-out" x-transition:enter-start="opacity-0 [transform:translate3d(1rem,0,0)]"
+    x-transition:enter-end="opacity-100 [transform:translate3d(0,0,0)]">
     <div class="flex flex-col items-center space-y-4 border-b border-slate-200 p-4 dark:border-navy-500 sm:flex-row sm:justify-between sm:space-y-0 sm:px-5">
         <h2 class="text-lg font-medium tracking-wide text-slate-700 dark:text-navy-100">
             Account Security
@@ -15,7 +16,7 @@
     <div class="p-4 sm:p-5">
         <div>
             <label class="block">
-                <span>Email Address </span>
+                <span>Email Address* </span>
                 <span class="relative mt-1.5 flex">
                     <input name="email" value="<%= user.email %>" required class="form-input peer w-full rounded-full border border-slate-300 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="Enter your email address" type="email" />
                     <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
@@ -23,10 +24,20 @@
                     </span>
                 </span>
             </label>
-         <div class="my-7 h-px bg-slate-200 dark:bg-navy-500"></div>
-         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-             <label class="block">
-                 <span>Current Password </span>
+            <label class="block my-3">
+                <span>Wallet Address </span>
+                <span class="relative mt-1.5 flex">
+                    <input name="walletAddress" value="<%= user.walletAddress %>"  class="form-input peer w-full rounded-full border border-slate-300 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="your wallet address" type="text" />
+                    <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+                        <i class="fa-regular fa-envelope text-base"></i>
+                    </span>
+                </span>
+            </label>
+
+            <div class="my-7 h-px bg-slate-200 dark:bg-navy-500"></div>
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <label class="block">
+                 <span>Current Password* </span>
                  <span class="relative mt-1.5 flex">
                      <input id="x-current-password" name="prevPassword" required class="form-input peer w-full rounded-full border border-slate-300 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="Enter current password" type="password" />
                      <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
@@ -34,7 +45,7 @@
                      </span>
                  </span>
              </label>
-             <label class="block">
+                <label class="block">
                  <span>New Password </span>
                  <span class="relative mt-1.5 flex">
                     <input id="x-new-password" name="password" class="form-input peer w-full rounded-full border border-slate-300 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="Enter new password" type="password" />
@@ -43,12 +54,12 @@
                      </span>
                  </span>
              </label>
-         </div>
+            </div>
         </div>
         <div class="my-7 h-px bg-slate-200 dark:bg-navy-500"></div>
         <div>
             <h3 class="text-base font-medium text-slate-600 dark:text-navy-100">
-               Two factor Authentication
+                Two factor Authentication
             </h3>
             <p class="text-xs+ text-slate-400 dark:text-navy-300">
                 provide an extra layer of security
@@ -73,8 +84,8 @@
 <script>
     const securityForm = document.getElementById("x-security-form")
 
-    securityForm.addEventListener("submit", function(e){
-        if(!document.getElementById("x-current-password").value.trim()){
+    securityForm.addEventListener("submit", function(e) {
+        if (!document.getElementById("x-current-password").value.trim()) {
             e.preventDefault()
             toastEl.innerHTML = "Current password is for Account security update"
             return toast.show()
