@@ -106,6 +106,8 @@ Router.post("/buyAssets", async function(req, res) {
     try {
         if (req.user.balance < Number(req.body.capital)) return showError(req, "/dashboard/invest", "Insufficient balance", res)
         const plan = JSON.parse(req.body.investment)
+        const disallowed = req.user.disallowedPlans.find(p=> JSON.stringify(plan._id) == JSON.stringify(p.planId)) 
+        if(disallowed) return showError(req, "/dashboard/invest", (disallowed.feedback.trim() ? disallowed.feedback : "This plan is not available to you"), res)
         plan._id = undefined
         const newInv = {
             user: req.user._id,
@@ -218,7 +220,7 @@ Router.post("/receipt", function(req, res) {
         }
         try {
             const img_file = await cloudinary.uploader.upload(loc + "/" + req.file.filename, { folder: "receipt", use_filename: true })
-            await Transaction.create({ user: req.user._id, amount: req.body.amount, type: "withdraw", url: img_file.secure_url })
+            await Transaction.create({ user: req.user._id, amount: req.body.amount, type: "deposit", url: img_file.secure_url })
             return showError(req, "/dashboard/deposit", "Successful, Processing Transaction", res)
         } catch (e) {
             return showError(req, "/dashboard/deposit", "server error, report problem", res);

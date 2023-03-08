@@ -21,6 +21,11 @@
                             <div class="badge mt-2 bg-info/10 text-info dark:bg-info/15">
                                 <%= plan.users.length > 1 ? plan.users.length +" Members"  : plan.users.length +" Member" %>
                             </div>
+                            <% if(!plan.started){%>
+                                <div x-tooltip="'<%= (plan.deposits.reduce((a,c)=> a+=c.amount,0) < plan.targetAmount) ? 'Target amount not reached' : 'Waiting for cluster creator' %> '"   class="badge mt-2 bg-error/10 text-error dark:bg-error/15">
+                                    not started
+                                </div>
+                                <%}%>
                             <% if(plan.started){%>
                                 <div class="badge mt-2 bg-success/10 text-success dark:bg-success/15">
                                     Running

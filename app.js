@@ -7,16 +7,17 @@ const flash = require("express-flash");
 
 
 // local modules import
-const { USER } = require("./modules/db/db-user.js")
+const { USER, ADMIN } = require("./modules/db/db-user.js")
 const passportAuth = require("./modules/passport/config.js");
 const realestateRouter = require("./routers/realestate/frontend")
 const user = require("./routers/realestate/dashboard")
 const userPost = require("./routers/realestate/user-post")
+const adminGET = require("./routers/realestate/admin/getRoutes")
 
 app.use(flash());
 
 // ] PASSPORT & Express-Session SET-UP [
-passportAuth(app, session, passport, localStrategy, USER);
+passportAuth(app, session, passport, localStrategy, USER, ADMIN);
 
 
 app.set("view engine", "ejs")
@@ -72,6 +73,7 @@ app.post("/dashboard/auth/OTP", express.json({ extended: false }), async functio
     }
 })
 
+app.use("/admin/", adminGET)
 app.use("/pik-home/", realestateRouter)
 app.use("/dashboard/", user)
 app.use("/dashboard/", userPost)

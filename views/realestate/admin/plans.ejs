@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>ADMIN | PIK ASSETS MANAGEMENT</title>
+		<!-- headLinks --><%- include("../partials/dashboard/headLinks.ejs") -%>
+		<!-- ######### -->
+	</head>
+	<body x-data class="is-header-blur" x-bind="$store.global.documentBody">
+		<!-- App preloader-->
+		<div class="app-preloader fixed z-50 grid h-full w-full place-content-center bg-slate-50 dark:bg-navy-900">
+			<div class="app-preloader-inner relative inline-block h-48 w-48"></div>
+		</div>
+		<!-- import toast error -->
+        <%- include("../partials/dashboard/components/toast-error.ejs") -%>
+		<!-- toasterror:end -->
+		<!-- importing copy to clipboard function --><%- include("../partials/dashboard/components/clipboard.ejs") -%>
+		<!-- #### -->
+		<!-- Page Wrapper -->
+		<div id="root" class="min-h-100vh flex grow bg-slate-50 dark:bg-navy-900" x-cloak>
+			<!-- Sidebar -->
+			<div class="sidebar print:hidden">
+				<!-- main sidebar and sidebar panel --><%- include("../partials/admin-partials/navbar.ejs", {active_page : "dashboard"}) -%>
+				<!-- ### -->
+			</div>
+			<!-- Here lies the  App heder --><%- include("../partials/dashboard/components/nav/header.ejs") -%>
+			<!-- ######  App header:end ###-->
+			<!-- Main Content Wrapper -->
+			<main class="main-content w-full px-[var(--margin-x)] pb-8">
+				<!-- BreadCrumbs lies here --><%- include("../partials/dashboard/components/breadcrumbs.ejs", {breadcrumbs_active : "investments"}) -%>
+				<!-- BreadCrumbs : ends -->
+				<div class="mt-4 grid grid-cols-12 gap-4 sm:mt-5 sm:gap-5 lg:mt-6 lg:gap-6">
+                    <% const availableIcons = { boost : "fa fa-rocket text-6xl text-primary dark:text-accent-light",house : "fa-solid fa-house text-6xl text-primary dark:text-accent-light",sign : "fa-solid fa-sign-hanging text-6xl text-primary dark:text-accent-light"} %>
+					<div class="col-span-12 lg:col-span-8">
+                        <h3 class="mt-1 my-3 text-xl font-semibold text-slate-600 dark:text-navy-100">
+                            Investment Plans
+                        </h3>
+                        <div x-data="{activeTab:'investment'}" class="grid max-w-4xl grid-cols-1 gap-4 sm:gap-5 lg:gap-6">
+                            <div class="tabs-list p-1 bg-slate-200  rounded-lg text-slate-600 dark:bg-navy-800 dark:text-navy-200 d-inline-block ">
+                                <button @click="activeTab = 'investment'" :class="activeTab === 'investment' ? 'bg-white shadow dark:bg-navy-500 dark:text-navy-100' : 'hover:text-slate-800 focus:text-slate-800 dark:hover:text-navy-100 dark:focus:text-navy-100'" class="btn shrink-0 px-3 py-1 text-xs+ font-medium dark:bg-navy-500 dark:text-navy-100">
+                                  Investment
+                                </button>
+                                <button @click="activeTab = 'partnership'" :class="activeTab === 'partnership' ? 'bg-white shadow dark:bg-navy-500 dark:text-navy-100' : 'hover:text-slate-800 focus:text-slate-800 dark:hover:text-navy-100 dark:focus:text-navy-100'" class="btn shrink-0 px-3 py-1 text-xs+ font-medium hover:text-slate-800 focus:text-slate-800 dark:hover:text-navy-100 dark:focus:text-navy-100">
+                                  Partnership
+                                </button>
+                              </div>
+                              <div class="tab-content my-4 ">
+                                <div x-show="activeTab === 'investment'" class="grid max-w-4xl grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:gap-6" x-transition:enter="transition-all duration-500 easy-in-out" x-transition:enter-start="opacity-0 [transform:translate3d(1rem,0,0)]" x-transition:enter-end="opacity-100 [transform:translate3d(0,0,0)]">
+                                    <% admin.investments.forEach((plan,index)=>{ %>
+                                        <div action="/dashboard/buyAssets" method="POST" class="card p-4 text-center sm:p-5">
+                                            <% if(plan.label){%>
+                                                <div class="absolute top-0 right-0 p-3">
+                                                    <div class="badge rounded-full bg-info/10 text-info dark:bg-info/15">
+                                                        <%= plan.label %>
+                                                    </div>
+                                                </div>
+                                                <%}%>
+                                                    <div class="mt-8">
+                                                        <i class="<%=availableIcons[plan.icon]%>"></i>
+                                                    </div>
+                                                    <div class="mt-5">
+                                                        <h4 class="text-xl font-semibold text-slate-600 dark:text-navy-100">
+                                                            <%= plan.title %> CLuster
+                                                        </h4>
+                                                        <p>
+                                                            <% index == 0 ?  "the starter choise" : "Moderate" %>
+                                                        </p>
+                                                    </div>
+                                                    <div class="mt-5 mx-auto flex text-success">
+                                                        <span class="text-4xl tracking-tight text-primary dark:text-accent-light">$<%= plan.min.toLocaleString() %>
+                                                        </span>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"></path>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="mt-8 space-y-4 text-left">
+                                                        <%- include("../partials/dashboard/components/pricingList_details.ejs", {pricingListDetailValue : "Max of $"+plan.max.toLocaleString()}) -%>
+            
+                                                        <%- include("../partials/dashboard/components/pricingList_details.ejs", {pricingListDetailValue : "Dividend "+ plan.roi +"%"}) -%>
+            
+                                                        <%- include("../partials/dashboard/components/pricingList_details.ejs", {pricingListDetailValue :  "Avg. waitime "+ (plan.waitime == 0 ? "Zero waitime" : plan.waitime +" days")}) -%>
+            
+                                                        <%- include("../partials/dashboard/components/pricingList_details.ejs", {pricingListDetailValue :  "Duration " + (plan.duration > 300 ? "1year" : plan.duration +" days") }) -%>
+            
+                                                        <%if(plan.lifetime){%>
+                                                            <%- include("../partials/dashboard/components/pricingList_details.ejs", {pricingListDetailValue :  "Lifetime Dividend of "+ plan.roi + "%M"}) -%>
+                                                                <%}%>
+                                                    </div>
+                                                    <form class="mt-8" method="POST" action="/admin/plans/delete">
+                                                        <button value="<%= plan._id %>" name="id" class="btn rounded-full  bg-error font-medium text-white hover:bg-error-focus focus:bg-error-focus active:bg-error-focus/90 dark:bg-error dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90 ">
+                                                            Delete
+                                                        </button>
+                                                    </form>
+                                        </div>
+                                        <%})%>
+                                </div>
+                                <div x-show="activeTab === 'partnership'" x-transition:enter="transition-all duration-500 easy-in-out" x-transition:enter-start="opacity-0 [transform:translate3d(1rem,0,0)]" x-transition:enter-end="opacity-100 [transform:translate3d(0,0,0)]">
+                                    <div class="grid max-w-4xl grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:gap-6">
+                                        <% admin.partnershipInvestments.forEach(inv=>{%>
+                                            <div class="rounded-xl bg-gradient-to-br <%= inv.icon == 'couple' ? ' from-pink-500 to-rose-500' : 'from-purple-500 to-indigo-600 ' %> p-1">
+                                                <div class="relative rounded-xl bg-slate-50 p-4 text-center dark:bg-navy-900 sm:p-5">
+                                                    <% if(inv.label){%>
+                                                        <div class="absolute top-0 right-0 p-3">
+                                                            <div class="badge rounded-full bg-info/10 text-info dark:bg-info/15">
+                                                                <%= inv.label %>
+                                                            </div>
+                                                        </div>
+                                                        <%}%>
+                                                            <div class="mt-8">
+                                                                <% if(inv.icon == 'couple'){%>
+                                                                    <img src="/img/couple.png" alt="couple icon" class="h-16 w-16 mx-auto d-block">
+                                                                    <%}else{%>
+                                                                        <svg class="inline h-16 w-16 text-primary dark:text-accent-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                                                    </svg>
+                                                                        <%}%>
+                                                            </div>
+                                                            <div class="mt-5">
+                                                                <h4 class="text-xl font-semibold text-slate-700 dark:text-navy-100">
+                                                                    <%= inv.couple %>
+                                                                </h4>
+                                                                <% if(inv.icon == "couple"){ %>
+                                                                    <p>Own Assets with Your loved one</p>
+                                                                    <% }else{%>
+                                                                        <p>Own Assets with Friends and family</p>
+                                                                        <% }%>
+                                                            </div>
+                                                            <div class="mt-5">
+                                                                <span class="text-4xl tracking-tight <%= inv.icon == 'couple' ? 'text-secondary dark:text-secondary-light' : 'text-primary dark:text-accent-light' %>">$<%= inv.min.toLocaleString() %></span>
+                                                                <%= inv.paymentInterval %> days
+                                                            </div>
+                                                            <div class="mt-8 space-y-4 text-left">
+                                                                <div class="flex items-start space-x-3">
+                                                                    <div class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" viewBox="0 0 20 20" fill="currentColor">
+                                                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                                                    </svg>
+                                                                    </div>
+                                                                    <span class="font-medium"> Number of stake holders  <%= inv.NumberofStakeholders %></span>
+                                                                </div>
+                                                                <div class="flex items-start space-x-3">
+                                                                    <div class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" viewBox="0 0 20 20" fill="currentColor">
+                                                                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                                                        </svg>
+                                                                    </div>
+                                                                    <span class="font-medium"> Lifetime payment <%= inv.roi %>%</span>
+                                                                </div>
+                                                                <div class="flex items-start space-x-3">
+                                                                    <div class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" viewBox="0 0 20 20" fill="currentColor">
+                                                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                                                        </svg>
+                                                                    </div>
+                                                                    <span class="font-medium"> Payment every <%= inv.paymentInterval %> days.</span>
+                                                                </div>
+                                                                <div class="flex items-start space-x-3">
+                                                                    <div class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" viewBox="0 0 20 20" fill="currentColor">
+                                                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                                                        </svg>
+                                                                    </div>
+                                                                    <span class="font-medium"> Continous payment, till <%= inv.lifetimeDuration %> days after</span>
+                                                                </div>
+                                                                <div class="flex items-start space-x-3">
+                                                                    <div class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                                                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                                                        </svg>
+                                                                    </div>
+                                                                    <span class="font-medium">No waittime</span>
+                                                                </div>
+                                                            </div>
+                                                            <form action="/admin/pt/delete" class="x-partnershipForm" method="post">
+                                                                <div class="mt-8">
+                                                                    <button name="id" value="<%= inv._id %>" class="btn rounded-full <%= inv.icon == 'couple' ? 'bg-secondary hover:bg-secondary-focus focus:bg-secondary-focus active:bg-secondary-focus/90' : 'bg-primary hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90' %> font-medium text-white ">
+                                                                        Delete Cluster
+                                                                    </button>
+                                                                </div>
+                                                            </form>
+                                                </div>
+                                            </div>
+                                            <% }) %>
+                                    </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="mt-5">
+                                <div x-data="{activeTab:'tabInvestment'}" class="my-3 is-scrollbar-hidden overflow-x-auto">
+                                    <div class="tabs-list p-1 bg-slate-200  rounded-lg text-slate-600 dark:bg-navy-800 dark:text-navy-200 d-inline-block ">
+                                      <button @click="activeTab = 'tabInvestment'" :class="activeTab === 'tabInvestment' ? 'bg-white shadow dark:bg-navy-500 dark:text-navy-100' : 'hover:text-slate-800 focus:text-slate-800 dark:hover:text-navy-100 dark:focus:text-navy-100'" class="btn shrink-0 px-3 py-1 text-xs+ font-medium dark:bg-navy-500 dark:text-navy-100">
+                                        Investment
+                                      </button>
+                                      <button @click="activeTab = 'tabPartnership'" :class="activeTab === 'tabPartnership' ? 'bg-white shadow dark:bg-navy-500 dark:text-navy-100' : 'hover:text-slate-800 focus:text-slate-800 dark:hover:text-navy-100 dark:focus:text-navy-100'" class="btn shrink-0 px-3 py-1 text-xs+ font-medium hover:text-slate-800 focus:text-slate-800 dark:hover:text-navy-100 dark:focus:text-navy-100">
+                                        Partnership
+                                      </button>
+                                    </div>
+                                    <div class="tab-content my-4">
+                                      <div x-show="activeTab === 'tabInvestment'" x-transition:enter="transition-all duration-500 easy-in-out" x-transition:enter-start="opacity-0 [transform:translate3d(1rem,0,0)]" x-transition:enter-end="opacity-100 [transform:translate3d(0,0,0)]">
+                                          <form method="POST" action="/admin/plans/add" class="card py-3 px-4 sm:px-5">
+                                              <span class="text-center text-2xl py-4 font-medium"> INVESTMENTS</span>
+                                              <div class="mb-2 flex-1 px-0">
+                                                  <label>Title </label>
+                                                  <input name="title" required type="text"  class="form-control flex-1">
+                                              </div>
+                                              <div class="input-group gap-3">
+                                                  <div class="mb-2 flex-1 px-0">
+                                                      <label>Min </label>
+                                                      <input name="min" required type="Number"  class="form-control flex-1">
+                                                  </div>
+                                                  <div class="mb-2  flex-1 px-0">
+                                                      <label >  Max </label>
+                                                      <input name="max" required type="Number" class="form-control flex-1"  >
+                                                  </div>
+                                              </div>  
+                                              <div class="mb-2  flex-1 px-0">
+                                                  <label >  ROI </label>
+                                                  <input name="roi" required type="Number" class="form-control flex-1"  >
+                                              </div>
+                                              <div class="mb-2  flex-1 px-0">
+                                                  <label >  waitime </label>
+                                                  <input name="waitime" required type="Number" class="form-control flex-1"  >
+                                              </div>
+                                              <div class="mb-2  flex-1 px-0">
+                                                  <label >  Duration </label>
+                                                  <input name="duration" required type="Number" class="form-control flex-1"  >
+                                              </div>
+                                              <div class="mb-2  flex-1 px-0">
+                                                  <label>label </label>
+                                                  <input name="label" placeholder="like recommended, promo" type="text" class="form-control flex-1"  >
+                                              </div>
+                                              <div class="my-3 flex items-center gap-x-4 px-0">
+                                                  <label for="lifetimeId">Lifetime </label>
+                                                 <input name="lifetime" id="lifetimeId" class="form-switch h-5 w-10 rounded-full bg-slate-300 before:rounded-full before:bg-slate-50 checked:bg-primary checked:before:bg-white dark:bg-navy-900 dark:before:bg-navy-300 dark:checked:bg-accent dark:checked:before:bg-white" type="checkbox" >
+                                              </div>
+                                              <% const icons = { boost : "fa fa-rocket text-primary dark:text-accent-light",house : "fa-solid fa-house text-primary dark:text-accent-light",sign : "fa-solid fa-sign-hanging text-primary dark:text-accent-light"} %>
+                                              <div class="mb-2 flex-1 px-0">
+                                                  <label class="font-medium">Icons </label>
+                                                  <div class="items-baseline flex gap-x-4 flex-wrap">
+                                                      <label class="gap-2 inline-flex px-0 items-center mb-2">
+                                                          <label class="form-check-label" ><i class="<%=icons['boost']%>"></i> Boost </label>
+                                                          <input required  name="icon" value="boost" class="form-switch h-5 w-10 rounded-full bg-slate-300 before:rounded-full before:bg-slate-50 checked:bg-primary checked:before:bg-white dark:bg-navy-900 dark:before:bg-navy-300 dark:checked:bg-accent dark:checked:before:bg-white" type="radio">
+                                                        </label>
+                                                        <label class="gap-2 inline-flex px-0 items-center mt-4 mb-2">
+                                                          <label class="form-check-label" > <i class="<%=icons['house']%>"></i> house </label>
+                                                          <input required name="icon" value="house" class="form-switch h-5 w-10 rounded-full bg-slate-300 before:rounded-full before:bg-slate-50 checked:bg-primary checked:before:bg-white dark:bg-navy-900 dark:before:bg-navy-300 dark:checked:bg-accent dark:checked:before:bg-white" type="radio">
+                                                        </label>
+                                                        <label class="gap-2 inline-flex px-0 items-center mt-4 mb-2">
+                                                          <label class="form-check-label" ><i class="<%=icons['sign']%>"></i> Sign </label>
+                                                          <input required  name="icon" value="sign" class="form-switch h-5 w-10 rounded-full bg-slate-300 before:rounded-full before:bg-slate-50 checked:bg-primary checked:before:bg-white dark:bg-navy-900 dark:before:bg-navy-300 dark:checked:bg-accent dark:checked:before:bg-white" type="radio" >
+                                                        </label>
+                                                  </div>
+                                              </div>
+                                              <button  class="block btn btn-primary bg-primary mx-auto">Add Plan</button>
+                                          </form>
+                                      </div>
+                                      <div x-show="activeTab === 'tabPartnership'" x-transition:enter="transition-all duration-500 easy-in-out" x-transition:enter-start="opacity-0 [transform:translate3d(1rem,0,0)]" x-transition:enter-end="opacity-100 [transform:translate3d(0,0,0)]">
+                                        <form method="POST" action="/admin/plans/ptship" class="card py-3 px-4 sm:px-5">
+                                            <span class="text-center text-2xl py-4 font-medium"> PARTNERSHIP</span>
+                                            <div class="mb-2 flex-1 px-0">
+                                                <label>Title </label>
+                                                <input name="title" required type="text"  class="form-control flex-1">
+                                            </div>
+                                            <div class="mb-2 flex-1 px-0">
+                                                <label>Min </label>
+                                                <input name="min" required type="Number"  class="form-control flex-1">
+                                            </div>
+                                            <div class="mb-2  flex-1 px-0">
+                                                <label >  ROI </label>
+                                                <input name="roi" required type="Number" class="form-control flex-1"  >
+                                            </div>
+                                            <div class="mb-2  flex-1 px-0">
+                                                <label >  Total Duration </label>
+                                                <input name="lifetimeDuration" required type="Number" class="form-control flex-1"  placeholder="Duration in days" >
+                                            </div>
+                                            <div class="mb-2  flex-1 px-0">
+                                                <label >  Payment Interval</label>
+                                                <input name="paymentInterval" required type="Number" class="form-control flex-1"  placeholder="Payment Interval (in days)" >
+                                            </div>
+                                            <div class="mb-2  flex-1 px-0">
+                                                <label >  Number of Stakeholders </label>
+                                                <input name="NumberofStakeholders" required type="Number" class="form-control flex-1"   >
+                                            </div>
+                                            <div class="mb-2  flex-1 px-0">
+                                                <label>label </label>
+                                                <input name="label" placeholder="like recommended, promo" type="text" class="form-control flex-1"  >
+                                            </div>
+                                            <div class="mb-2 flex-1 px-0">
+                                                <label class="font-medium">Icons</label>
+                                                <div class="items-baseline flex gap-x-4 flex-wrap">
+                                                    <label class="gap-2 inline-flex px-0 items-center mb-2">
+                                                        <label class="form-check-label" >
+                                                            <img src="/img/couple.png"  class="w-5 mx-auto d-inline-block">
+                                                            Couple </label>
+                                                        <input required  name="icon" value="couple" class="form-switch h-5 w-10 rounded-full bg-slate-300 before:rounded-full before:bg-slate-50 checked:bg-primary checked:before:bg-white dark:bg-navy-900 dark:before:bg-navy-300 dark:checked:bg-accent dark:checked:before:bg-white" type="radio">
+                                                      </label>
+                                                      <label class="gap-2 inline-flex px-0 items-center mt-4 mb-2">
+                                                        <label class="form-check-label" > 
+                                                            <svg class="inline w-5 h-5 text-primary dark:text-accent-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                                            </svg>
+                                                            Team </label>
+                                                        <input required name="icon" value="team" class="form-switch h-5 w-10 rounded-full bg-slate-300 before:rounded-full before:bg-slate-50 checked:bg-primary checked:before:bg-white dark:bg-navy-900 dark:before:bg-navy-300 dark:checked:bg-accent dark:checked:before:bg-white" type="radio">
+                                                      </label>
+                                                </div>
+                                            </div>
+                                            <button  class="block btn btn-primary bg-primary mx-auto">Add Partnership</button>
+                                        </form>
+                                      </div>
+                                    </div>
+                                  </div>
+                            </div>
+                    </div>
+					</div>
+			</main>
+		</div>
+		<!-- 
+         This is a place for Alpine.js Teleport feature 
+         @see https://alpinejs.dev/directives/teleport
+         -->
+		<div id="x-teleport-target"></div>
+		<script>
+			window.addEventListener("DOMContentLoaded", () => Alpine.start());
+		</script>
+	</body>
+</html>

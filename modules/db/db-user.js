@@ -85,12 +85,15 @@ const cardSchema = mongoose.Schema({
 })
 
 const transaction = mongoose.Schema({
-    user: mongoose.Schema.Types.ObjectId,
+    user: { type : mongoose.Schema.Types.ObjectId, ref : "user"},
     amount: Number,
     type: { type: String, enum: ["deposit", "withdraw", "giftcard"] },
     url: String,
     status: { type: String, enum: ["pending", "declined", "success"], default: "pending" },
 }, { timestamps: true })
+
+const booleanify = v => Boolean(v)
+
 const userSchema = mongoose.Schema({
     email: { type: String, required: [true, "make sure all inputs are filled"], lowercase: true },
     password: { type: String, required: [true, "make sure all inputs are filled"] },
@@ -109,25 +112,35 @@ const userSchema = mongoose.Schema({
     heardAboutUS: String,
     partnerships: [{ type: mongoose.Schema.Types.ObjectId, ref: "partnershipInv" }],
     giftcards: [{ amount: Number, key: String, title: String, cashed: { type: Boolean, default: false }, cashedBy: mongoose.Schema.Types.ObjectId }],
-    agent: Boolean,
-    disallowedPlans: [{ _id: String, feedback: String }],
+    agent: { type : Boolean, set : booleanify, default : false},
+    disallowedPlans: [{ planId: String, feedback: String }],
     walletAddress: String,
-    kyc: { type: Boolean, default: false },
+    kyc: { type: Boolean, default: false, set : booleanify },
     activities: [activity],
     // referredBy : mongoose.Schema.Types.ObjectId,
     refferedBy: String, // but will store ID, just so it doesn't throw error during signup, for wrong ID format
     advert: String,
+    level :{stage : {type: Number, default : 1},progress :{ type : Number, default : 6 }},
     other_means_ad: String,
     // checkedInvestmentStatus also serves as lastLogged in
     checkedInvestmentStatus: { type: Date, default: Date },
     deactivated: { type: Boolean, default: false },
+    watch : {type : Boolean, default : false, set : booleanify },
     notes: String,
     //   client: { type: Boolean, default: false },
 }, { minimize: false, timestamps: true, });
 
+userSchema.virtual("url")
+.get(function(){
+   const d = this.src ?  this.src : this.fname.slice(0,1) + this.lname.slice(0,1);
+   return d
+})
+
 const adminschema = mongoose.Schema({
     giftcards: [{ amount: Number, title: String }],
     accounts: [{ title: String, address: String }],
+    username : String,
+    password : String,
     investments: [{
         title: String,
         min: Number,
@@ -136,7 +149,7 @@ const adminschema = mongoose.Schema({
         waitime: Number,
         duration: Number,
         label: String,
-        lifetime: Boolean,
+        lifetime: { type : Boolean, default : false, set : booleanify},
         icon: { type: String, enum: ["boost", 'house', 'sign'] }
     }],
     partnershipInvestments: [{

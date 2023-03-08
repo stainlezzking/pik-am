@@ -30,13 +30,6 @@ Router.use(async function(req, res, next) {
             await res_locals(res, req, transactionpath)
             return next()
         }
-        console.log("not Authenticated")
-            // res redirect to login page
-            // const user = await USER.findOne({ email: "nanyachukwuf@gmail.com" })
-            // return req.login(user, function(err) {
-            //     if (err) return console.log(err.message)
-            //     return res.redirect("/dashboard" + req.url)
-            // })
         return res.redirect("/pik-home/login")
     } catch (err) {
         console.log(err)

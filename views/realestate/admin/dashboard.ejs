@@ -1,195 +1,309 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-
-    <title>Dashboard | PIK ASSETS MANAGEMENT </title>
-
-    <!-- headLinks -->
-    <%- include("../partials/dashboard/headLinks.ejs") -%>
-        <!-- ######### -->
-</head>
-
-<body x-data class="is-header-blur" x-bind="$store.global.documentBody">
-    <!-- App preloader-->
-    <div class="app-preloader fixed z-50 grid h-full w-full place-content-center bg-slate-50 dark:bg-navy-900">
-        <div class="app-preloader-inner relative inline-block h-48 w-48"></div>
-    </div>
-
-    <!-- import toast error -->
-    <%- include("../partials/dashboard/components/toast-error.ejs") -%>
-        <!-- toasterror:end -->
-
-        <!-- importing copy to clipboard function -->
-        <%- include("../partials/dashboard/components/clipboard.ejs") -%>
-            <!-- #### -->
-
-            <!-- Page Wrapper -->
-            <div id="root" class="min-h-100vh flex grow bg-slate-50 dark:bg-navy-900" x-cloak>
-                <!-- Sidebar -->
-                <div class="sidebar print:hidden">
-
-                    <!-- main sidebar and sidebar panel -->
-                    <%- include("../partials/dashboard/components/nav/navbar.ejs", {active_page : "dashboard"}) -%>
-                        <!-- ### -->
-                </div>
-
-                <!-- Here lies the  App heder -->
-                <%- include("../partials/dashboard/components/nav/header.ejs") -%>
-                    <!-- ######  App header:end ###-->
-
-                    <!-- Right side bar lies here -->
-                    <%- include("../partials/dashboard/components/rightside.ejs") -%>
-                        <!-- Right side bar : ends -->
-
-                        <!-- Main Content Wrapper -->
-                        <main class="main-content w-full px-[var(--margin-x)] pb-8">
-                            <!-- BreadCrumbs lies here -->
-                            <%- include("../partials/dashboard/components/breadcrumbs.ejs", {breadcrumbs_active : "dashboard"}) -%>
-                                <!-- BreadCrumbs : ends -->
-                                <div class="mt-4 grid grid-cols-12 gap-4 sm:mt-5 sm:gap-5 lg:mt-6 lg:gap-6">
-                                    <div class="col-span-12 lg:col-span-8">
-
-                                        <!-- hear lies balance -->
-                                        <%-include("../partials/dashboard/components/balance.ejs") -%>
-                                            <!-- ### -->
-
-                                            <div class="card mt-4 pb-1 sm:mt-5 lg:mt-6">
-                                                <div class="my-3 flex items-center justify-between px-4 sm:px-5">
-                                                    <h2 class="font-medium tracking-wide text-slate-700 dark:text-navy-100">
-                                                        Assets
-                                                    </h2>
-                                                    <a href="/dashboard/invest" class="btn h-7 w-7 rounded-full bg-slate-150 p-0 font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"></path>
-									</svg>
-                                                    </a>
-                                                </div>
-                                                <div class="scrollbar-sm flex space-x-4 overflow-x-auto overflow-y-hidden px-4 pb-2 sm:px-5">
-                                                    <% if(investments && investments.length){ %>
-                                                        <!-- make sure expired investments dont show here -->
-                                                        <% const availableIcons = { boost : "fa fa-rocket text-primary",house : "fa-solid fa-house text-primary",sign : "fa-solid fa-sign-hanging text-primary"} %>
-                                                            <% investments.filter(investment=> !investment.ended ).forEach(investment=>{ %>
-                                                                <div class="flex w-72 shrink-0 flex-col">
-                                                                    <div class="flex items-center space-x-2">
-                                                                        <i class="fa fa-<%= availableIcons[investment.icon] %> dark:text-accent-light"></i>
-                                                                        <div>
-                                                                            <span><%= investment.title %></span>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="mt-2.5 flex justify-between rounded-lg bg-slate-50 py-3 pr-3 dark:bg-navy-600">
-                                                                        <div class="ax-transparent-gridline">
-                                                                            <div x-init="$nextTick(() => { $el._x_chart = new ApexCharts($el,pages.charts.cryptoWatchlist1); $el._x_chart.render() });"></div>
-                                                                        </div>
-                                                                        <div class="flex w-36 flex-col items-center rounded-lg bg-slate-100 py-2 font-inter dark:bg-navy-500">
-                                                                            <p class="text-xl font-medium text-slate-700 line-clamp-1 dark:text-navy-100">
-                                                                                $
-                                                                                <%= (investment.capital + ((investment.roi/100)*investment.capital )).toLocaleString() %>
-                                                                            </p>
-                                                                            <p class="mt-1 flex items-center space-x-0.5 text-xs text-success">
-                                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-															<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12" />
-														</svg>
-                                                                                <span><%= investment.roi %> %</span>
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <%})%>
-                                                                    <%}else{%>
-                                                                        <div class="flex w-72 shrink-0 flex-col">
-                                                                            <div class="flex items-center space-x-2">
-                                                                                <i class="fa fa-rocket  text-warning dark:text-accent-light"></i>
-                                                                                <div>
-                                                                                    <span>Shared cluster</span>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="mt-2.5 flex justify-between rounded-lg bg-slate-50 py-3 pr-3 dark:bg-navy-600">
-                                                                                <div class="ax-transparent-gridline">
-                                                                                    <div x-init="$nextTick(() => { $el._x_chart = new ApexCharts($el,pages.charts.cryptoWatchlist1); $el._x_chart.render() });"></div>
-                                                                                </div>
-                                                                                <div class="flex w-36 flex-col items-center rounded-lg bg-slate-100 py-2 font-inter dark:bg-navy-500">
-                                                                                    <p class="text-xl font-medium text-slate-700 line-clamp-1 dark:text-navy-100">
-                                                                                        $0.00
-                                                                                    </p>
-                                                                                    <p class="mt-1 flex items-center space-x-0.5 text-xs text-success">
-                                                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-														<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12" />
-													</svg>
-                                                                                        <span>100%</span>
-                                                                                    </p>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="flex w-72 shrink-0 flex-col">
-                                                                            <div class="flex items-center space-x-2">
-                                                                                <i class="fa fa-house  text-primary dark:text-accent-light"></i>
-                                                                                <div>
-                                                                                    <span>Properties</span>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="mt-2.5 flex justify-between rounded-lg bg-slate-50 py-3 pr-3 dark:bg-navy-600">
-                                                                                <div class="ax-transparent-gridline">
-                                                                                    <div x-init="$nextTick(() => { $el._x_chart = new ApexCharts($el,pages.charts.cryptoWatchlist3); $el._x_chart.render() });"></div>
-                                                                                </div>
-                                                                                <div class="flex w-36 flex-col items-center rounded-lg bg-slate-100 py-2 font-inter dark:bg-navy-500">
-                                                                                    <p class="text-xl font-medium text-slate-700 line-clamp-1 dark:text-navy-100">
-                                                                                        $0.00
-                                                                                    </p>
-                                                                                    <p class="mt-1 flex items-center space-x-0.5 text-xs text-success">
-                                                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-														<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12" />
-													</svg>
-                                                                                        <span>100%</span>
-                                                                                    </p>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <%}%>
-                                                </div>
-                                            </div>
-                                            <!-- here lies the activities column -->
-                                            <%- include("../partials/dashboard/components/activities.ejs", {activities_exists : true}) -%>
-                                                <!-- activities: end -->
-                                    </div>
-                                    <div class="col-span-12 grid grid-cols-1 gap-4 sm:gap-5 lg:col-span-4 lg:gap-6">
-
-                                        <!-- here lies a card for deposit  -->
-                                        <%- include("./deposit-card.ejs") -%>
-                                            <!-- depositcard:end -->
-                                            <div class="mx-4 my-3 h-px bg-slate-200 dark:bg-navy-500 sm:mx-5"></div>
-
-                                    </div>
-
-                                    <div class="mt-3 sm:px-5 ">
-                                        <div>
-                                            <h2 class="font-medium tracking-wide text-slate-700 dark:text-navy-100">
-                                                Buy PIK Gift card
-                                            </h2>
-                                            <p> gift friends and family their first landed assets </p>
-                                        </div>
-                                    </div>
-                                    <div class="">
-                                        <!-- hear giftcard -->
-                                        <%-include("../partials/dashboard/components/giftcard.ejs") -%>
-                                            <!-- ### -->
-                                    </div>
-
-                                </div>
-            </div>
-            </main>
-            </div>
-            <!-- 
-        This is a place for Alpine.js Teleport feature 
-        @see https://alpinejs.dev/directives/teleport
-      -->
-            <div id="x-teleport-target"></div>
-            <script>
-                window.addEventListener("DOMContentLoaded", () => Alpine.start());
-            </script>
-</body>
-
+	<head>
+		<title>ADMIN | PIK ASSETS MANAGEMENT</title>
+		<!-- headLinks --><%- include("../partials/dashboard/headLinks.ejs") -%>
+		<!-- ######### -->
+	</head>
+	<body x-data class="is-header-blur" x-bind="$store.global.documentBody">
+		<!-- App preloader-->
+		<div class="app-preloader fixed z-50 grid h-full w-full place-content-center bg-slate-50 dark:bg-navy-900">
+			<div class="app-preloader-inner relative inline-block h-48 w-48"></div>
+		</div>
+		<!-- import toast error --><%- include("../partials/dashboard/components/toast-error.ejs") -%>
+		<!-- toasterror:end -->
+		<!-- importing copy to clipboard function --><%- include("../partials/dashboard/components/clipboard.ejs") -%>
+		<!-- #### -->
+		<!-- Page Wrapper -->
+		<div id="root" class="min-h-100vh flex grow bg-slate-50 dark:bg-navy-900" x-cloak>
+			<!-- Sidebar -->
+			<div class="sidebar print:hidden">
+				<!-- main sidebar and sidebar panel --><%- include("../partials/admin-partials/navbar.ejs", {active_page : "dashboard"}) -%>
+				<!-- ### -->
+			</div>
+			<!-- Here lies the  App heder --><%- include("../partials/dashboard/components/nav/header.ejs") -%>
+			<!-- ######  App header:end ###-->
+			<!-- Main Content Wrapper -->
+			<main class="main-content w-full px-[var(--margin-x)] pb-8">
+				<!-- BreadCrumbs lies here --><%- include("../partials/dashboard/components/breadcrumbs.ejs", {breadcrumbs_active : "dashboard"}) -%>
+				<!-- BreadCrumbs : ends -->
+				<div class="mt-4 grid grid-cols-12 gap-4 sm:mt-5 sm:gap-5 lg:mt-6 lg:gap-6">
+					<div class="col-span-12 lg:col-span-8">
+						<!-- hear lies balance -->
+						<!-- ### -->
+						<div>
+						<div class="flex items-center justify-between my-3">
+							<h2 class="text-base font-medium tracking-wide text-slate-700 line-clamp-1 dark:text-navy-100">
+								Manage Accounts
+							</h2>
+							<div class="flex">
+								<div class="flex items-center" x-data="{isInputActive:false}">
+									<label class="block">
+										<input
+											x-effect="isInputActive === true && $nextTick(() => { $el.focus()});"
+											:class="isInputActive ? 'w-32 lg:w-48' : 'w-0'"
+											class="form-input bg-transparent px-1 text-right transition-all duration-100 placeholder:text-slate-500 dark:placeholder:text-navy-200"
+											placeholder="Search here..."
+											type="text"
+											id="search"
+										/>
+									</label>
+									<button
+										@click="isInputActive = !isInputActive"
+										class="btn h-8 w-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25"
+									>
+										<svg
+											xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+										</svg>
+									</button>
+								</div>
+									<div class="flex items-center space-x-2 text-xs+">
+										<span>Show</span>
+										<label class="block ">
+										  <select id="sort-select" class="text-xs+ form-select rounded-full border border-slate-300 bg-white px-2 py-1 pr-6 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:bg-navy-700 dark:hover:border-navy-400 dark:focus:border-accent">
+											<option value="*">All</option>
+											<option value="watch">Important</option>
+											<option value="users">Users</option>
+											<option value="agents">Agents</option>
+										  </select>
+										</label>
+									  </div>
+								</div>
+							</div>
+						</div>
+						<div class="card mt-3">
+							<div class="is-scrollbar-hidden min-w-full overflow-x-auto">
+								<table class="w-full text-left" x-data="{expandedItem:null}">
+									<thead>
+										<tr>
+											<th class="whitespace-nowrap rounded-tl-lg bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
+												#
+											</th>
+											<th class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
+												Avatar
+											</th>
+											<th class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
+												User
+											</th>
+											<th class="d-none d-md-block whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
+												Email
+											</th>
+										</tr>
+									</thead>
+									<% if(users && users.length){%>
+										<% users.forEach((user, index)=>{%>
+											<tbody x-fullname="<%=user.fname%><%= user.lname %>" x-data="accordionItem('item-<%= index+1 %>')" <%= user.watch ? 'x-important' : '' %> x-sort="<%= user.agent ? 'agent' : 'user' %>">
+												<tr class="border-y border-transparent" @click="expanded = !expanded" @click="expanded = !expanded">
+													<td class="whitespace-nowrap px-4 py-3 sm:px-5">
+														<%= index +1 %>
+													</td>
+													<td class="whitespace-nowrap px-4 py-3 sm:px-5">
+														<div class="avatar flex">
+															<% if(user.src){%>
+																< img class="rounded-full" src="<%= user.src %>" alt="avatar" />
+																<%}else{%>
+																	<div class="is-initial rounded-full bg-info text-sm+ uppercase text-white">
+																		<%=user.url%>
+																	</div>
+															<%}%>
+														</div>
+													</td>
+													<td class="whitespace-nowrap px-4 py-3">
+														<p class="font-medium text-slate-700 dark:text-navy-100 sm:px-5">
+															<%= user.fname %> <%= user.lname %>
+														</p>
+														<p class="text-xs+ d-md-none"><%= user.email %></p>
+													</td>
+													<td class="d-none d-md-block whitespace-nowrap px-4 py-3 sm:px-5 ">
+														<%= user.email %>
+													</td>
+												</tr>
+												<tr class="border-y border-transparent border-b-slate-200 dark:border-b-navy-500">
+													<td colspan="100" class="p-0">
+														<div x-show="expanded" x-collapse>
+															<div class="px-4 pb-4 sm:px-5 py-3">
+																<form class="user_update_forms" method="POST" action="/admin/update?id=<%= user._id %>">
+																	<div class="input-group gap-3">
+																		<div class="mb-2 flex-1 px-0">
+																			<label >First name</label>
+																			<input disabled type="text" value="<%= user.fname %>" name="fname" class="form-control" placeholder="first name" aria-label="Username">
+																		  </div>
+																		<div class="mb-2  flex-1 px-0">
+																			<label >Last name</label>
+																			<input disabled type="text" value="<%= user.lname %>" name="lname" class="form-control" placeholder="last name" aria-label="Server">
+																		  </div>
+																	  </div>
+																	  <div class="mb-2">
+																		<label class="form-label">Balance</label>
+																		<input name="balance" type="Number" value="<%= user.balance %>" class="form-control" aria-describedby="emailHelp">
+																	  </div>
+																	<div class="mb-2">
+																	  <label class="form-label">Email address</label>
+																	  <input name="email" type="email" disabled value="<%= user.email %>" class="form-control" aria-describedby="emailHelp">
+																	</div>
+																	<div class="mb-2">
+																	  <label class="form-label">Password</label>
+																	  <input disabled name="password" value="<%= user.password %>" class="form-control" >
+																	</div>
+																	<div class="mb-2">
+																		<label class="form-label">D.O.B</label>
+																		<input disabled value="<%= new Date(user.dob).toString().split(" ").slice(1,4).join(" ") %>" class="form-control" >
+																	</div>
+																	<div class="mb-2">
+																		<label class="form-label">Phone</label>
+																		<input disabled name="mobile" value="<%= user.mobile %>" class="form-control" >
+																	</div>
+																	<div class="mb-2">
+																		<label class="form-label">Occupation</label>
+																		<input disabled  value="<%= user.occupation %>" class="form-control" >
+																	  </div>
+																	  <div class="mb-2">
+																		<label class="form-label">Source of wealth</label>
+																		<input disabled  value="<%= user.source_of_wealth %>" class="form-control" >
+																	  </div>
+																	<div class="mb-2">
+																		<label class="form-label">Country</label>
+																		<input disabled name="country" value="<%= user.country %>" class="form-control" >
+																	  </div>
+																	  <div class="mb-2">
+																		<label class="form-label">walletAddress</label>
+																		<input disabled name="walletAddress" value="<%= user.walletAddress %>" class="form-control" >
+																	  </div>
+																	  <% if(user.advert){ %>
+																		<div class="mb-2">
+																			<label class="form-label">From</label>
+																			<input value="<%= user.advert %>" class="form-control" >
+																		  </div>
+																	  <%}%>
+																	  <% if(user.refferedBy || user.other_means_ad){%>
+																		<div class="mb-2">
+																		  <label class="form-label"> <%= user.refferedBy ? "Reffered By" : "Heard About us from" %></label>
+																		  <input value="<%= user.refferedBy ? user.refferedBy : user.other_means_ad  %>" class="form-control" >
+																		</div>
+																	<%}%>
+																	<% let allPlans = [...admin.investments] %>
+																	<% let checked_feed = [] %>
+																	<% if(user.disallowedPlans.length){%>
+																		<% allPlans.forEach(plan=>{%>
+																			<% const l = user.disallowedPlans.find(p=> JSON.stringify(plan._id) == JSON.stringify(p.planId)) %>
+																			<% l ? checked_feed.push({disallowed : true, feedback : l.feedback }) :  checked_feed.push({ disallowed : false , feedback : ""}) %>
+																		<% return plan; %>
+																		<%})%>
+																	<%}%>
+																	<% console.log(checked_feed)%>
+																		<label class="form-label py-2">Disallow Plans</label>
+																		<div class="grid grid-cols-1 gap-2 sm:gap-2 lg:col-span-4 ">
+	
+																		<% allPlans.forEach((inv, i)=>{%>
+																			<div class="mb-2 form-check">
+																				<div class="flex gap-2 mb-2">
+																				<input name="disallowedPlans" value="<%= checked_feed.length ? checked_feed[i].feedback : '' %>" id="dis_<%= inv.id %>" type="checkbox" <%= checked_feed.length && checked_feed[i].disallowed ? "checked" : "" %> class="form-check-input" >
+																					<label for="dis_<%= inv.id %>" class="form-check-label" ><%= inv.title %> </label>
+																				</div>
+																					<input value="<%= checked_feed.length ? checked_feed[i].feedback : '' %>" class=" text-sm feedback form-control border-1 flex-1 border-active-warning" type="text" placeholder="feedback for disallowing <%= inv.title %>">
+																					</div>
+																		<%})%>
+																		</div>
+																		<div class="mb-2">
+																			<label class="form-label">Level</label>
+																			<input required placeholder="Level [starts at 1]" name="stage" value="<%= user.level.stage %>" class="form-control" >
+																		</div>
+																		<div class="mb-2">
+																			<label class="form-label">(Level)Progress</label>
+																			<input required placeholder="Progress, max should be 12" name="progress" value="<%= user.level.progress %>" class="form-control" >
+																		</div>
+																		<hr>
+																		<div class=" flex py-2 gap-x-4 flex-wrap">
+																			<label class="gap-2 inline-flex px-0 items-center mt-4 mb-2">
+																				<label class="form-check-label" > Make Agent </label>
+																				<input <%= user.agent ? 'checked' : "" %>  name="agent" class="form-switch h-5 w-10 rounded-full bg-slate-300 before:rounded-full before:bg-slate-50 checked:bg-primary checked:before:bg-white dark:bg-navy-900 dark:before:bg-navy-300 dark:checked:bg-accent dark:checked:before:bg-white" type="checkbox">
+																			  </label>
+																			  <label class="gap-2 inline-flex px-0 items-center mt-4 mb-2">
+																				<label class="form-check-label" > KYC </label>
+																				<input <%= user.kyc ? 'checked' : "" %> name="kyc" class="form-switch h-5 w-10 rounded-full bg-slate-300 before:rounded-full before:bg-slate-50 checked:bg-primary checked:before:bg-white dark:bg-navy-900 dark:before:bg-navy-300 dark:checked:bg-accent dark:checked:before:bg-white" type="checkbox">
+																			  </label>
+																			  <label class="gap-2 inline-flex px-0 items-center mt-4 mb-2">
+																				<label class="form-check-label" > Add to Watch list </label>
+																				<input <%= user.watch ? 'checked' : "" %> name="watch" class="form-switch h-5 w-10 rounded-full bg-slate-300 before:rounded-full before:bg-slate-50 checked:bg-primary checked:before:bg-white dark:bg-navy-900 dark:before:bg-navy-300 dark:checked:bg-accent dark:checked:before:bg-white" type="checkbox" >
+																			  </label>
+																		</div>
+																			<div class="mb-2">
+																			  <input disabled value="<%= 'Last logged in  '+ datefns.formatDistanceToNowStrict(user.checkedInvestmentStatus, {unit : 'hour'}) + ' ago' %>" class="form-control" >
+																			</div>
+																			<label class="block my-3">
+																			  <label> Leave Note [not seen]</label>
+																			  <textarea name="notes" class="form-control" ><%= user.notes %></textarea>
+																			</label>
+																		<button type="submit" class="block btn btn-primary bg-primary mx-auto">Update</button>
+																  </form>
+																<div class="text-right">
+																	<button
+																		@click="expanded = false"
+																		class="btn mt-2 h-8 rounded px-3 text-xs+ font-medium text-primary hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:text-accent-light dark:hover:bg-accent-light/20 dark:focus:bg-accent-light/20 dark:active:bg-accent-light/25"
+																	>
+																		Hide
+																	</button>
+																</div>
+															</div>
+														</div>
+													</td>
+												</tr>
+											</tbody>
+										<%})%>
+										<%}else{%>
+											<p>No users available</p>
+										<%}%>
+								</table>
+								<script>
+									const tbody = Array.from(document.querySelectorAll("tbody"))
+									const users = document.querySelectorAll("tbody[x-sort='user']")
+									const agents = document.querySelectorAll("tbody[x-sort='agent']")
+									const watchLists = document.querySelectorAll("tbody[x-important]")
+									document.getElementById("sort-select").onchange = function(e){
+										if(e.target.value == '*') return tbody.forEach(t=> t.classList.remove("d-none"))
+										tbody.forEach(t=> t.classList.add("d-none"))
+										if(e.target.value == 'users') return users.forEach(t=> t.classList.remove("d-none"))
+										if(e.target.value == 'agents') return agents.forEach(t=> t.classList.remove("d-none"))
+										if(e.target.value == 'watch') return watchLists.forEach(t=> t.classList.remove("d-none"))
+										console.log(e.target.value)
+									}
+									document.getElementById("search").onkeyup = function(e){
+											tbody.forEach(t=> t.classList.add("d-none"))
+											return tbody.filter(t=> t.getAttribute("x-fullname").includes(e.target.value.trim()) )
+											.forEach(t=> t.classList.remove("d-none"))
+									}
+									Array.from(document.getElementsByClassName("feedback")).forEach(i=>{
+										i.addEventListener("keyup", function(e){
+											e.target.previousElementSibling.firstElementChild.value = e.target.value
+										})
+									})
+									Array.from(document.forms).forEach(form=>{
+										form.addEventListener("submit", function(e){
+											Array.from(form.querySelectorAll("input[name='disallowedPlans']"))
+											.forEach(input=>{
+												const json = JSON.stringify({planId : input.getAttribute("id").slice(4), feedback : input.value })
+												input.value = json
+												console.log(input.value, json)
+											})
+										})
+									})
+								</script>
+							</div>
+						</div>
+						
+					</div>
+					</div>
+				</div>
+			</main>
+		</div>
+		<!-- 
+         This is a place for Alpine.js Teleport feature 
+         @see https://alpinejs.dev/directives/teleport
+         -->
+		<div id="x-teleport-target"></div>
+		<script>
+			window.addEventListener("DOMContentLoaded", () => Alpine.start());
+		</script>
+	</body>
 </html>

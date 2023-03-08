@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>ADMIN | PIK ASSETS MANAGEMENT</title>
+		<!-- headLinks --><%- include("../partials/dashboard/headLinks.ejs") -%>
+		<!-- ######### -->
+	</head>
+	<body x-data class="is-header-blur" x-bind="$store.global.documentBody">
+		<!-- App preloader-->
+		<div class="app-preloader fixed z-50 grid h-full w-full place-content-center bg-slate-50 dark:bg-navy-900">
+			<div class="app-preloader-inner relative inline-block h-48 w-48"></div>
+		</div>
+		<!-- import toast error -->
+        <%- include("../partials/dashboard/components/toast-error.ejs") -%>
+		<!-- toasterror:end -->
+		<!-- importing copy to clipboard function -->
+        <%- include("../partials/dashboard/components/clipboard.ejs") -%>
+		<!-- #### -->
+		<!-- Page Wrapper -->
+		<div id="root" class="min-h-100vh flex grow bg-slate-50 dark:bg-navy-900" x-cloak>
+			<!-- Sidebar -->
+			<div class="sidebar print:hidden">
+				<!-- main sidebar and sidebar panel --><%- include("../partials/admin-partials/navbar.ejs", {active_page : "account"}) -%>
+				<!-- ### -->
+			</div>
+			<!-- Here lies the  App heder --><%- include("../partials/dashboard/components/nav/header.ejs") -%>
+			<!-- ######  App header:end ###-->
+			<!-- Main Content Wrapper -->
+			<main class="main-content w-full px-[var(--margin-x)] pb-8">
+				<!-- BreadCrumbs lies here -->
+                <%- include("../partials/dashboard/components/breadcrumbs.ejs", {breadcrumbs_active : "Addresses"}) -%>
+				<!-- BreadCrumbs : ends -->
+				<div class="mt-4 grid grid-cols-12 gap-4 sm:mt-5 sm:gap-5 lg:mt-6 lg:gap-6">
+					<div class="col-span-12 lg:col-span-8">
+						<!-- hear lies balance -->
+						<!-- ### -->
+					</div>
+					<div class="col-span-12 grid grid-cols-1 gap-4 sm:gap-5 lg:col-span-4 lg:gap-6">
+						<!-- Collapsible  Table -->
+                        <div >
+                            <h2 class="text-2xl my-3"> Accounts</h2>
+                            <hr>
+                            <form method="POST" action="/admin/account/delete" class="my-3">
+                                <% admin.accounts.forEach(a=>{%>
+                                    <div class="input-group gap-3">
+                                        <div class="mb-2 flex-1 px-0">
+                                            <label>Account</label>
+                                            <input disabled value="<%= a.title %>" type="text"  class="form-control flex-1">
+                                          </div>
+                                        <div class="mb-2  flex-1 px-0">
+                                            <label > Address</label>
+                                            <input disabled type="text" value="<%= a.address %>"  class="form-control flex-1"  >
+                                          </div>
+                                          <button class="p-2" name="id"  value="<%=a._id%>">[d]</button>
+                                      </div>
+                                    <%})%>
+                            </form>
+                            <form method="POST" action="/admin/addaccount">
+                                <div id="output">
+
+                                </div>
+                            </form>
+                            <hr class="mb-3">
+                                <button  id="addButton" class="block btn btn-primary bg-primary mx-auto">Add Account</button>
+                          </div>
+						</div>
+					</div>
+			</main>
+		</div>
+		<!-- 
+         This is a place for Alpine.js Teleport feature 
+         @see https://alpinejs.dev/directives/teleport
+         -->
+		<div id="x-teleport-target"></div>
+		<script>
+			window.addEventListener("DOMContentLoaded", () => Alpine.start());
+		</script>
+        <script>
+            document.getElementById("addButton").addEventListener("click", function(e){
+                document.getElementById("output").innerHTML = `
+                <div class="input-group gap-3">
+                    <div class="mb-2 flex-1 px-0">
+                        <label>Account</label>
+                        <input required name="title" type="text"  class="form-control flex-1">
+                      </div>
+                    <div class="mb-2  flex-1 px-0">
+                        <label > Address</label>
+                        <input required name="address" type="text" class="form-control flex-1"  >
+                      </div>
+                  </div>
+                  <button  type='submit' class="my-4 block btn btn-success bg-success mx-auto">Save</button>
+                `
+            })
+        </script>
+	</body>
+</html>

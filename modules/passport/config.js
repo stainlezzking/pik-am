@@ -1,5 +1,5 @@
 const md5 = require('md5')
-module.exports = passportAuth = function(app, session, passport, localStrategy, USER) {
+module.exports = passportAuth = function(app, session, passport, localStrategy, USER, ADMIN) {
     // session
     app.use(session({
         secret: process.env.SESSION_KEY,
@@ -41,19 +41,19 @@ module.exports = passportAuth = function(app, session, passport, localStrategy, 
                 })
         }))
 
-    // passport.use("admin",new localStrategy(
-    //     (user,password,done)=>{
-    //         ADMIN.findOne({username: user.toLowerCase()},
-    //          function(err,data){
-    //             if(err) return done(err)
-    //             if(!data) return done(null, false, {message : "wrong username or password"})
-    //             if(data){
-    //                     if(data.password == md5(password)) return done(null,data)
-    //                         return done(null, false, {message : "wrong username or password"})
-    //             }
-    //         })
-    //     })
-    // )
+    passport.use("admin",new localStrategy(
+        (user,password,done)=>{
+            ADMIN.findOne({username: user.toLowerCase()},
+             function(err,data){
+                if(err) return done(err)
+                if(!data) return done(null, false, {message : "wrong username or password"})
+                if(data){
+                        if(data.password == md5(password)) return done(null,data)
+                            return done(null, false, {message : "wrong username or password"})
+                }
+            })
+        })
+    )
 
     passport.serializeUser(function(user, done) {
         done(null, { id: user.id, admin: user.admin });

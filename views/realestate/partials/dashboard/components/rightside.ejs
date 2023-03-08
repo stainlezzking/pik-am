@@ -205,13 +205,13 @@
                     <div class="rounded-lg bg-slate-100 p-3 dark:bg-navy-600">
                         <div class="flex items-center justify-between">
                             <p>
-                                <span class="font-medium text-slate-600 dark:text-navy-100">Account level </span> [Begginer]
+                                <span class="font-medium text-slate-600 dark:text-navy-100">Account level </span> <span class="font-medium"> <%= user.level.stage %></span>
                             </p>
                             <a href="#" class="text-xs+ font-medium text-primary outline-none transition-colors duration-300 hover:text-primary/70 focus:text-primary/70 dark:text-accent-light dark:hover:text-accent-light/70 dark:focus:text-accent-light/70">Upgrade</a>
                         </div>
 
                         <div class="progress mt-2 h-2 bg-slate-150 dark:bg-navy-500">
-                            <div class="w-7/12 rounded-full bg-warning"></div>
+                            <div class="w-<%= user.level.progress %>/12 rounded-full bg-warning"></div>
                         </div>
                     </div>
                 </div>
