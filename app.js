@@ -13,6 +13,7 @@ const realestateRouter = require("./routers/realestate/frontend")
 const user = require("./routers/realestate/dashboard")
 const userPost = require("./routers/realestate/user-post")
 const adminGET = require("./routers/realestate/admin/getRoutes")
+const {transporter, Message} = require("./modules/nodemailer")
 
 app.use(flash());
 
@@ -56,20 +57,31 @@ app.post("/dashboard/auth/register", express.urlencoded({ extended: false }), fu
         failureFlash: true,
     }))
     /*
-    #JSON Response
-    OTP request for register page
-    */
+#JSON Response
+send email
+OTP request for register page
+otp.otp
+*/
 
 app.post("/dashboard/auth/OTP", express.json({ extended: false }), async function(req, res) {
     const OTP = (Math.random() * 1000000).toFixed()
         //send email
     try {
         console.log(OTP)
+        res.locals.otp = OTP
         const user = await USER.findOne({ email: req.body.email })
         if (user) return res.json({ error: "This email has been used" })
-        return res.json({ success: true, OTP })
+        res.render('../email/realestate/otp', function (err, html) {
+            if (err) return res.json({ error: "An error occurred, please try again", other : err.message });
+            let message = new Message(req.body.email,"PIK ASSETS MANAGEMENT","Verify your email, do not share your one time password with anybody", html);
+           return transporter.sendMail(message, function (err, info) {
+                if (err) return res.json({ error: "An error occurred, please try again", other : err.message });
+                return res.json({ success: true, OTP })
+              });
+        })
     } catch (err) {
-        return res.json({ error: "An error occurred, please try again" })
+        console.log(err)
+        return res.json({ error: "An error occurred, please try again"})
     }
 })
 

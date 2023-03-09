@@ -2,9 +2,9 @@ const express = require("express")
 const Router = express.Router()
 const showError = require("../../modules/errormodule")
 const { USER, CARD, CLUSTER, } = require("../../modules/db/db-user")
-const passport = require("passport")
 const isToday = require('date-fns/isToday')
 const { payInvestmentFunc, payPTinvestments, res_locals } = require("../../modules/utitlites")
+const {transporter, Message} = require("../../modules/nodemailer")
 
 const transactionpath = "/transaction"
 
@@ -13,6 +13,9 @@ Router.use(async function(req, res, next) {
     try {
         if (req.isAuthenticated()) {
             if (req.user.deactivated) return res.send("your account has been deactivated, contact our support for further assistance")
+            if(req.url !== "/registration"){
+                if(!req.user.completeSignup) return res.redirect("/dashboard/registration")
+            }
             if (!isToday(req.user.checkedInvestmentStatus)) {
                 // pay investors whose investments is due
                 const investments = await CLUSTER.find({ user: req.user._id, expiry: { $lt: new Date().getTime() }, paid: false })
@@ -83,9 +86,19 @@ Router.route("/registration")
         try {
             const response = await USER.updateOne({ email: req.user.email }, {...req.body, completeSignup: true })
             if (!req.body.skip) {
-                await CARD.create(req.body)
+                await CARD.create({...req.body, user : req.user._id})
             }
-            return res.redirect("/dashboard")
+            // send email
+            res.locals.fname = req.user.fname
+           return res.render('../email/realestate/welcome', function (err, html) {
+                if (err) return showError(req, "/dashboard/registration", err.message, res)
+                let message = new Message(req.user.email,"PIK ASSETS MANAGEMENT",
+                "We would like to extend a warm welcome to you as a new investor of PIK We are thrilled to have you as a part of our growing community of investors, and we look forward to working with you to help you achieve your investment goals", html);
+               return transporter.sendMail(message, function (err, info) {
+                    if (err) return showError(req, "/dashboard/registration", err.message, res)
+                    return showError(req, "/dashboard/registration", "Welcome "+ req.user.fname + " " + req.user.lname, res)
+                  });
+            })
         } catch (err) {
             return showError(req, "/dashboard/registration", err.message, res)
         }

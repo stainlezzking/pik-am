@@ -6,9 +6,8 @@ const { addDays } = require('date-fns')
 const { upload, cloudinary } = require("../../modules/fileupload-configuration");
 const multer = require('multer')
 const path = require("path")
-const { MongooseError } = require("mongoose")
-const passport = require("passport")
-
+const datefns = require('date-fns')
+const {transporter, Message} = require("../../modules/nodemailer")
 
 
 Router.use(express.urlencoded({ extended: false }))
@@ -63,11 +62,22 @@ giftcard key is made of => key : req.user.id + Date.now
 Router.post("/giftcard", async function(req, res) {
     try {
         const { amount, title } = JSON.parse(req.body.giftcard)
+        const key = req.user.id + "x" + Date.now()
+        // giftcard : { key, fname, expiry}
+        res.locals.giftcard = {key , amount, fname : req.user.fname , expiry : datefns.format(datefns.addDays(new Date(), 30), "dd/M/yyyy")}
         if (req.user.balance < Number(amount)) return showError(req, "/dashboard/withdraw#giftcard", "Insufficient balance", res)
-        await USER.updateOne({ _id: req.user._id }, { balance: req.user.balance - Number(amount), $inc: { debits: Number(amount) }, $push: { giftcards: { amount, title, key: req.user.id + "x" + Date.now() } } })
+        await USER.updateOne({ _id: req.user._id }, { balance: req.user.balance - Number(amount), $inc: { debits: Number(amount) }, $push: { giftcards: { amount, title, key } } })
         await Transaction.create({ user: req.user._id, amount: -amount, type: "giftcard", status: "success" })
             // send email+-
-        return showError(req, "/dashboard/withdraw#giftcard", "purchase successful", res)
+            return res.render('../email/realestate/giftcard', function (err, html) {
+                if (err) return showError(req, "/dashboard/withdraw#giftcard", err.message, res)
+                let message = new Message(req.user.email,"PIK ASSETS MANAGEMENT",
+                " You purchased a PIK-AM gift card,....", html);
+               return transporter.sendMail(message, function (err, info) {
+                    if (err) return showError(req, "/dashboard/withdraw#giftcard", err.message, res)
+                    return showError(req, "/dashboard/withdraw#giftcard", "purchase successful", res)
+                  });
+            })
     } catch (err) {
         return showError(req, "/dashboard/withdraw#giftcard", err.message, res)
     }

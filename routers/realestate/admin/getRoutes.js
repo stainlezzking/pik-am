@@ -5,9 +5,10 @@ const { ADMIN, USER, Transaction } = require("../../../modules/db/db-user")
 const datefns = require("date-fns")
 const showError = require("../../../modules/errormodule")
 const { urlencoded } = require("express")
+const {transporter, Message} = require("../../../modules/nodemailer")
+
 
 const isAuth = async function(req,res,next){
-    console.log(req.url)
     res.locals.datefns = datefns
    const admin = await ADMIN.findOne({})
    if(req.url == '/'){
@@ -24,7 +25,18 @@ const isAuth = async function(req,res,next){
     if(req.isAuthenticated() && req.user.admin) return next()
     return res.redirect('/admin/login')
 }
-
+Router.get("/email", isAuth, function(req,res){
+    res.render("../email/realestate/transaction.ejs")
+})
+Router.get("/gift", isAuth, function(req,res){
+    res.render("../email/realestate/giftcard.ejs")
+})
+Router.get("/welcome", isAuth, function(req,res){
+    res.render("../email/realestate/welcome.ejs")
+})
+Router.get("/otp", isAuth, function(req,res){
+    res.render("../email/realestate/otp.ejs")
+})
 Router
 .get("/", isAuth,function(req,res){
     res.render("realestate/admin/dashboard.ejs")
@@ -110,18 +122,43 @@ Router.post("/addaccount",express.urlencoded({extended : false}), async function
 Router.post("/transaction",express.urlencoded({extended : false}), async function(req,res){
     try{
         const transaction = JSON.parse(req.body.trans)
+        res.locals.datefns = datefns
         // send an email
         if(req.body.submitter == "yes"){
             const amount = Number(req.body.amount)
             const withdraw = transaction.type == "withdraw" ? true : false;
             await Transaction.updateOne({_id : transaction._id}, {amount ,status : "success"})
             await USER.updateOne({_id :transaction.user._id}, { $inc : {balance : (withdraw ? -amount : amount), [withdraw ? "debits" : "credits"] : Number(req.body.amount)},})
-            return showError(req,"/admin/transactions", "Successful paid ", res)
+            res.locals.transaction = transaction
+            res.locals.transaction.fullname = transaction.user.fname  + ' '+transaction.user.lname
+            res.locals.transaction.status = "success"
+            // amount, type, fullname, _id, status
+            return res.render('../email/realestate/transaction', function (err, html) {
+                if (err) return showError(req, "/admin/transactions", err.message, res)
+                let message = new Message(transaction.user.email,"PIK ASSETS MANAGEMENT",
+                " Your transaction has been processed successfully...", html);
+               return transporter.sendMail(message, function (err, info) {
+                    if (err) return showError(req, "/admin/transactions", err.message, res)
+                    return showError(req,"/admin/transactions", "Successful paid ", res)
+                  });
+            })
         }
         if(req.body.submitter == "no"){
             await Transaction.updateOne({_id : transaction._id}, {status : "declined"})
             // send email possibly
-            return showError(req,"/admin/transactions", "Successfully declined", res)
+            res.locals.transaction = transaction
+            res.locals.transaction.fullname = transaction.user.fullname 
+            res.locals.transaction.status = "declined"
+            // amount, type, fullname, _id, status
+            return res.render('../email/realestate/transaction', function (err, html) {
+                if (err) return showError(req, "/admin/transactions", err.message, res)
+                let message = new Message(transaction.user.email,"PIK ASSETS MANAGEMENT",
+                " Your transaction has been processed successfully...", html);
+               return transporter.sendMail(message, function (err, info) {
+                    if (err) return showError(req, "/admin/transactions", err.message, res)
+                    return showError(req,"/admin/transactions", "Successful declined ", res)
+                  });
+            })
         }
         // 1 update the transaction doc to success
         return showError(req,"/admin/transactions", "Invalid Request", res)
