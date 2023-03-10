@@ -36,13 +36,13 @@ Router.use(async function(req, res, next) {
         return res.redirect("/pik-home/login")
     } catch (err) {
         console.log(err)
-        next({ message: "an error occured internally, please report" })
+        next({ message: "an error ocurred internally, please report" })
     }
 })
 
 
-Router.get("/", function(req, res) {
-    res.render("realestate/user/dashboard.ejs")
+Router.get("/", async function(req, res) {
+        res.render("realestate/user/dashboard.ejs")
 })
 
 Router.get("/deposit", function(req, res) {

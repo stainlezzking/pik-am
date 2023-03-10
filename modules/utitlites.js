@@ -41,10 +41,12 @@ const payInvestmentFunc = async function(investments = []) {
 
 const payPTinvestments = async function(plans) {
     for (i = 0; i < plans.length; i++) {
-        if (datefns.isToday(datefns.addDays(plans[i].startDate, plans[i].lifetimeDuration))) {
+        const amount = ((plans[i].targetAmount * (plans[i].roi/100) * Math.floor(plans[i].lifetimeDuration / plans[i].paymentInterval)) + plans[i].deposits.reduce((o, c) => o += c.amount, 0)) / plans[i].users.length 
+        const expiry = datefns.addDays(plans[i].startDate, plans[i].lifetimeDuration)
+        if (datefns.isToday(expiry) || datefns.isPast(expiry)) {
             await PTCLUSTER.updateOne({ _id: plans[i]._id }, { ended: true })
             await USER.updateMany({ _id: { $in: plans[i].users.map(u => u.userId) } }, {
-                $inc: { balance: ((plans[i].targetAmount * plans[i].roi * Math.floor(plans[i].lifetimeDuration / plans[i].paymentInterval)) + plans[i].deposits.reduce((o, c) => o += c, 0)) / plans[i].users },
+                $inc: { balance: amount },
                 $push: { activities: { title: " Partnership Payout #" + plans[i].id, body: "You earned $" + amount.toLocaleString() + " in your partnership Cluster ", type: "assets_sell" } }
             })
         }

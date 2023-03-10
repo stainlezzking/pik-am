@@ -28,6 +28,12 @@
             .bg-disabled {
                 background-color: #e1e0ff !important;
             }
+            @media (min-width: 1024px){
+                .lg\:block {
+                    display: block !important;
+                }
+
+              }
         </style>
 </head>
 
@@ -292,7 +298,7 @@
                                             <div x-data="{expandedItem:null}" class="flex flex-col divide-y divide-slate-150 dark:divide-navy-500">
                                                 <div x-data="accordionItem('item-1')">
                                                     <div @click="expanded = !expanded" class="flex cursor-pointer items-center justify-between py-4 text-base font-medium text-slate-700 dark:text-navy-100">
-                                                        <p>What is waittime</p>
+                                                        <p>Waittime</p>
                                                         <div :class="expanded && '-rotate-180'" class="text-sm font-normal leading-none text-slate-400 transition-transform duration-300 dark:text-navy-300">
                                                             <i class="fas fa-chevron-down"></i>
                                                         </div>
@@ -300,22 +306,15 @@
                                                     <div x-collapse x-show="expanded">
                                                         <div class="pb-4">
                                                             <p>
-                                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi earum magni officiis possimus repellendus. Accusantium adipisci aliquid praesentium quaerat voluptate.
+                                                                Generally, each plan has a wait time before or after initial investments, 
+                                                                due to the high volume of investors looking to buy into the same plan. The wait time is controlled by the systems algorithm, which groups investors into clusters. 
                                                             </p>
-                                                            <div class="flex space-x-2 pt-3">
-                                                                <a href="#" class="tag rounded-full border border-primary text-primary dark:border-accent-light dark:text-accent-light">
-                                                            Tag 1
-                                                        </a>
-                                                                <a href="#" class="tag rounded-full border border-primary text-primary dark:border-accent-light dark:text-accent-light">
-                                                            Tag 2
-                                                        </a>
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div x-data="accordionItem('item-2')">
                                                     <div @click="expanded = !expanded" class="flex cursor-pointer items-center justify-between py-4 text-base font-medium text-slate-700 dark:text-navy-100">
-                                                        <p>What is lifetime payment</p>
+                                                        <p>Lifetime</p>
                                                         <div :class="expanded && '-rotate-180'" class="text-sm font-normal leading-none text-slate-400 transition-transform duration-300 dark:text-navy-300">
                                                             <i class="fas fa-chevron-down"></i>
                                                         </div>
@@ -323,22 +322,15 @@
                                                     <div x-collapse x-show="expanded">
                                                         <div class="pb-4">
                                                             <p>
-                                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi earum magni officiis possimus repellendus. Accusantium adipisci aliquid praesentium quaerat voluptate.
+                                                                The lifetime option pays investors continuously and multiple times.
+                                                                The payments are made at intervals, as specified in the plan block.
                                                             </p>
-                                                            <div class="flex space-x-2 pt-3">
-                                                                <a href="#" class="tag rounded-full border border-primary text-primary dark:border-accent-light dark:text-accent-light">
-                                                            Tag 1
-                                                        </a>
-                                                                <a href="#" class="tag rounded-full border border-primary text-primary dark:border-accent-light dark:text-accent-light">
-                                                            Tag 2
-                                                        </a>
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div x-data="accordionItem('item-3')">
                                                     <div @click="expanded = !expanded" class="flex cursor-pointer items-center justify-between py-4 text-base font-medium text-slate-700 dark:text-navy-100">
-                                                        <p>Accordion Item 3</p>
+                                                        <p>Partnership</p>
                                                         <div :class="expanded && '-rotate-180'" class="text-sm font-normal leading-none text-slate-400 transition-transform duration-300 dark:text-navy-300">
                                                             <i class="fas fa-chevron-down"></i>
                                                         </div>
@@ -346,29 +338,55 @@
                                                     <div x-collapse x-show="expanded">
                                                         <div class="pb-4">
                                                             <p>
-                                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi earum magni officiis possimus repellendus. Accusantium adipisci aliquid praesentium quaerat voluptate.
+                                                                This is a high-value investment, perfect for family, friends, 
+                                                                and co-workers who are interested in earning together without having to jeopardize their relationship, as we handle the management of assets and payment of members. When the cluster is mature, 
+                                                                we split the capital plus profits equally between the members of the partnership.
                                                             </p>
-                                                            <div class="flex space-x-2 pt-3">
-                                                                <a href="#" class="tag rounded-full border border-primary text-primary dark:border-accent-light dark:text-accent-light">
-                                                            Tag 1
-                                                        </a>
-                                                                <a href="#" class="tag rounded-full border border-primary text-primary dark:border-accent-light dark:text-accent-light">
-                                                            Tag 2
-                                                        </a>
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div x-data="accordionItem('item-4')">
+                                                    <div @click="expanded = !expanded" class="flex cursor-pointer items-center justify-between py-4 text-base font-medium text-slate-700 dark:text-navy-100">
+                                                        <p>Target Amount</p>
+                                                        <div :class="expanded && '-rotate-180'" class="text-sm font-normal leading-none text-slate-400 transition-transform duration-300 dark:text-navy-300">
+                                                            <i class="fas fa-chevron-down"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div x-collapse x-show="expanded">
+                                                        <div class="pb-4">
+                                                            <p>
+                                                                This is the capital for the partnership cluster,
+                                                                 the target amount are contributed by members of the partnership.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div x-data="accordionItem('item-5')">
+                                                    <div @click="expanded = !expanded" class="flex cursor-pointer items-center justify-between py-4 text-base font-medium text-slate-700 dark:text-navy-100">
+                                                        <p>Can a partnership initiator remove members</p>
+                                                        <div :class="expanded && '-rotate-180'" class="text-sm font-normal leading-none text-slate-400 transition-transform duration-300 dark:text-navy-300">
+                                                            <i class="fas fa-chevron-down"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div x-collapse x-show="expanded">
+                                                        <div class="pb-4">
+                                                            <p>
+                                                                 The plan initiator cannot remove members;this is to avoid exploitation of cluster funds.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            
                                             </div>
                                         </div>
-                                        <div class="card">
-                                            <h2> A big image advert that only shows on desktop, veritcal rectangle</h2>
+                                        <div class="card d-none lg:block">
+                                           <img src="/img/buy-asset-ad.png" class="w-full" alt="Don't look for the needle in the haystack. Just buy the haystack!" >
                                         </div>
                                         <div class="card sm:px-5 px-4">
                                             <div class="flex items-center justify-between py-3 ">
                                                 <a href="/deposit" class="font-medium tracking-wide text-slate-700 dark:text-navy-100">
-                                            [ add icon | blog] How to create a wallet
-                                        </a>
+                                                    [ add icon | blog] How to create a wallet
+                                                </a>
                                                 <div x-data="usePopper({placement:'bottom-end',offset:4})" @click.outside="isShowPopper && (isShowPopper = false)" class="inline-flex">
                                                     <a href="/deposit" class="btn h-7 w-7 rounded-full bg-slate-150 p-0 font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90">
                                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">

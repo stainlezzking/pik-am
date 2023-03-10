@@ -38,13 +38,13 @@
                                     <div class="mt-8">
                                         <p class="font-inter">
                                             <% const acc_sum = plan.deposits.reduce((o,d)=> o+d.amount, 0) %>
-                                                <span x-tooltip="'Current Amount'" class="text-2xl font-medium text-slate-600 dark:text-navy-100">$<%= acc_sum.toLocaleString() %></span>
+                                                <span x-tooltip="'Current Amount'" class="text-2xl font-medium text-slate-600 dark:text-navy-100">$<%= (acc_sum+(acc_sum*(plan.roi/100)*Math.floor(plan.lifetimeDuration / plan.paymentInterval))).toLocaleString() %></span>
                                         </p>
                                         </div>
                                         <% if(plan.started){ %>
                                             <div class="mt-3">
                                                 <div class="progress h-2 bg-slate-150 dark:bg-navy-500">
-                                                    <div class="is-active relative <%= plan.percentage12 %>/12 overflow-hidden rounded-full bg-info"></div>
+                                                    <div class="is-active relative w-<%= plan.percentage12 %>/12 overflow-hidden rounded-full bg-info"></div>
                                                 </div>
                                             </div>
                                             <p class="mt-2 text-xs">
@@ -172,7 +172,7 @@
                 }
                 if (e.submitter.value == "start") {
                     if (Number(e.target.getAttribute("x-pt-acc_sum")) < Number(e.submitter.getAttribute("x-pt-targetAm"))) {
-                        toastEl.innerHTML = "Target Amount less than current deposit"
+                        toastEl.innerHTML = "Target Amount less than total deposit"
                         toast.show()
                         return e.preventDefault()
                     }

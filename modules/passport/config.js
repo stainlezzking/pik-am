@@ -67,8 +67,6 @@ module.exports = passportAuth = function(app, session, passport, localStrategy, 
         }
         return USER.findById(user.id, function(err, user) {
             done(err, user);
-        }).populate("partnerships", {
-            match: { ended: false }
-        });
+        }).populate({path : "partnerships", match : {ended : false}});
     });
 }

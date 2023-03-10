@@ -27,6 +27,12 @@
 			.bg-disabled {
 				background-color: #e1e0ff !important;
 			}
+            @media (min-width: 1024px){
+                .lg\:block {
+                    display: block !important;
+                }
+
+              }
 		</style>
 	</head>
 
@@ -120,10 +126,10 @@
                                         </div>
                                         <div class="text-left">
                                             <p class="font-medium text-slate-600 dark:text-navy-100">
-                                                User Photo Changed
+                                                Select Account 
                                             </p>
                                             <div class="mt-1 text-xs text-slate-400 line-clamp-1 dark:text-navy-300">
-                                                John Doe changed his avatar photo
+                                                copy the selected wallet address and make payment.
                                             </div>
                                         </div>
                                     </li>
@@ -133,10 +139,10 @@
                                         </div>
                                         <div class="text-left">
                                             <p class="font-medium text-slate-600 dark:text-navy-100">
-                                                User Photo Changed
+                                                Upload receipt
                                             </p>
                                             <div class="mt-1 text-xs text-slate-400 line-clamp-1 dark:text-navy-300">
-                                                John Doe changed his avatar photo
+                                               Make a screenshot of the transaction receipt and upload.
                                             </div>
                                         </div>
                                     </li>
@@ -146,10 +152,10 @@
                                         </div>
                                         <div class="text-left">
                                             <p class="font-medium text-slate-600 dark:text-navy-100">
-                                                User Photo Changed
+                                                Finish✅
                                             </p>
                                             <div class="mt-1 text-xs text-slate-400 line-clamp-1 dark:text-navy-300">
-                                                John Doe changed his avatar photo
+                                                Your deposit would reflect on your dashboard.
                                             </div>
                                         </div>
                                     </li>
@@ -170,17 +176,19 @@
                                 Redeem
                             </button>
                         </form>
-
+                        <div>
+                            <img src="/img/deposit.png" class="w-full" alt="Don't look for the needle in the haystack. Just buy the haystack!" >
+                         </div>
                         <div class="card sm:px-5 px-4">
                             <div class="flex items-center justify-between py-3 ">
-                                <a href="/deposit" class="font-medium tracking-wide text-slate-700 dark:text-navy-100">
-                                    [ add icon | blog] How to create a wallet
+                                <a target="_blank" href="https://help.coinbase.com/en-in/coinbase/trading-and-funding/sending-or-receiving-cryptocurrency/how-to-send-and-receive-cryptocurrency" class="font-medium tracking-wide text-slate-700 dark:text-navy-100">
+                                    How to make payment
                                 </a>
                                 <div x-data="usePopper({placement:'bottom-end',offset:4})" @click.outside="isShowPopper && (isShowPopper = false)" class="inline-flex">
                                     <a href="/deposit" class="btn h-7 w-7 rounded-full bg-slate-150 p-0 font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"></path>
-                            </svg>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"></path>
+                                    </svg>
                                     </a>
                                 </div>
                             </div>
