@@ -33,7 +33,7 @@ Router.use(async function(req, res, next) {
             await res_locals(res, req, transactionpath)
             return next()
         }
-        return res.redirect("/pik-home/login")
+        return res.redirect("/pik-group/login")
     } catch (err) {
         console.log(err)
         next({ message: "an error ocurred internally, please report" })
@@ -60,7 +60,9 @@ Router.get("/withdraw", function(req, res) {
 Router.get("/invest", function(req, res) {
     res.render("realestate/user/invest.ejs")
 })
-
+Router.get("/bank", function(req,res){
+    res.render("realestate/user/bank.ejs")
+})
 Router.get("/account", function(_, res) {
     res.locals.activeTab = ""
     return res.render("realestate/user/account.ejs")
@@ -118,7 +120,7 @@ Router.get("/deleteaccount", function(req, res) {
         return res.send("sorry to see you leave")
     } catch (err) {
         console.log(err)
-        return showError(req, "/dashboard/account", "An error occured deactivating account", res)
+        return showError(req, "/dashboard/account", "An error occurred deactivating account", res)
     }
 
 })
@@ -126,6 +128,6 @@ Router.get("/deleteaccount", function(req, res) {
 
 Router.use(function(err, req, res, next) {
     console.log(err)
-    return res.send("error occured internally, please report")
+    return res.send("error occurred internally, please report")
 })
 module.exports = Router

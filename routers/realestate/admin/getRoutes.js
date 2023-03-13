@@ -18,7 +18,7 @@ const isAuth = async function(req,res,next){
     res.locals.transactions = await Transaction.find({status : "pending"}).populate("user", "email fname lname _id src ")
    }
    return await req.login(admin, function(e){
-    if(e) return console.log("an error occured");
+    if(e) return console.log("an error occurred");
     res.locals.admin = admin
     return next()
    })
@@ -200,7 +200,7 @@ Router.post("/update",express.urlencoded({extended : false}), async function(req
 
 Router.get('/logout', function(req,res){
    return req.logout(function(e){
-        if(e) return res.send("error occured logging out")
+        if(e) return res.send("error occurred logging out")
       return  res.redirect("/admin/login")
     })
 })

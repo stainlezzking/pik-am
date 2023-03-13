@@ -81,11 +81,13 @@
                                                         <h3 class="text-base font-medium text-slate-700 dark:text-navy-100">
                                                             <%= user.fname %>
                                                                 <%= user.lname %>
+                                                                <% if(user.agent){%>
                                                                     <div class="inline-block space-x-2">
                                                                         <img x-tooltip="'Award Level 1'" class="h-6 w-6 inline-block" src="/limestone/images/awards/award-1.svg" alt="avatar">
                                                                         <img x-tooltip="'Award Level 2'" class="h-6 w-6 inline-block" src="/limestone/images/awards/award-6.svg" alt="avatar">
                                                                         <img x-tooltip="'Award Level 3'" class="h-6 w-6 inline-block" src="/limestone/images/awards/award-9.svg" alt="avatar">
                                                                     </div>
+                                                                    <%}%>
                                                         </h3>
                                                         <p class="text-xs+">
                                                             <%= user.occupation %>
@@ -177,6 +179,9 @@
             <script>
                 window.addEventListener("DOMContentLoaded", () => Alpine.start());
             </script>
+                <!-- tawk.to configuration -->
+                <%-include("../partials/dashboard/tawkto.ejs") -%>
+                <!-- ### -->
 </body>
 
 </html>

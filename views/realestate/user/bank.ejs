@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>BANK WITH US | PIK ASSETS MANAGEMENT </title>
+
+    <!-- headLinks -->
+    <%- include("../partials/dashboard/headLinks.ejs") -%>
+        <!-- ######### -->
+</head>
+
+<body x-data class="is-header-blur" x-bind="$store.global.documentBody">
+    <!-- App preloader-->
+    <div class="app-preloader fixed z-50 grid h-full w-full place-content-center bg-slate-50 dark:bg-navy-900">
+        <div class="app-preloader-inner relative inline-block h-48 w-48"></div>
+    </div>
+
+    <!-- import toast error -->
+    <%- include("../partials/dashboard/components/toast-error.ejs") -%>
+        <!-- toasterror:end -->
+
+        <!-- importing copy to clipboard function -->
+        <%- include("../partials/dashboard/components/clipboard.ejs") -%>
+            <!-- #### -->
+
+            <!-- Page Wrapper -->
+            <div id="root" class="min-h-100vh flex grow bg-slate-50 dark:bg-navy-900" x-cloak>
+                <!-- Sidebar -->
+                <div class="sidebar print:hidden">
+
+                    <!-- main sidebar and sidebar panel -->
+                    <%- include("../partials/dashboard/components/nav/navbar.ejs", {active_page : "dashboard"}) -%>
+                        <!-- ### -->
+                </div>
+
+                <!-- Here lies the  App heder -->
+                <%- include("../partials/dashboard/components/nav/header.ejs") -%>
+                    <!-- ######  App header:end ###-->
+
+                    <!-- Right side bar lies here -->
+                    <%- include("../partials/dashboard/components/rightside.ejs") -%>
+                        <!-- Right side bar : ends -->
+
+                        <!-- Main Content Wrapper -->
+                        <main class="main-content w-full px-[var(--margin-x)] pb-8">
+                            <!-- BreadCrumbs lies here -->
+                            <%- include("../partials/dashboard/components/breadcrumbs.ejs", {breadcrumbs_active : "Bank"}) -%>
+                                <!-- BreadCrumbs : ends -->
+                                <div class="mt-4 grid grid-cols-12 gap-4 sm:mt-5 sm:gap-5 lg:mt-6 lg:gap-6">
+                                    <div class="col-span-12 lg:col-span-8">
+
+                                        <!-- hear lies balance -->
+                                        <%-include("../partials/dashboard/components/balance.ejs") -%>
+                                            <!-- ### -->
+
+                                            <h3 class="py-4 text-center text-warning"> (Bank with us) Not available to you</h3>
+                                                            
+                                                <div class="flex flex-col border border-slate-150 dark:border-navy-500">
+                                                    <div class="flex space-x-5 px-5 py-4">
+                                                    <div
+                                                        class="skeleton animate-wave h-16 w-16 rounded-full bg-slate-150 dark:bg-navy-500"
+                                                    ></div>
+                                                    <div class="flex flex-1 flex-col justify-between py-2">
+                                                        <div
+                                                        class="skeleton animate-wave h-3 w-full rounded bg-slate-150 dark:bg-navy-500"
+                                                        ></div>
+                                                        <div
+                                                        class="skeleton animate-wave h-3 w-full rounded bg-slate-150 dark:bg-navy-500"
+                                                        ></div>
+                                                    </div>
+                                                    </div>
+                                                    <div
+                                                    class="skeleton animate-wave h-48 w-full bg-slate-150 dark:bg-navy-500"
+                                                    ></div>
+                                                    <div class="w-full px-6 py-4">
+                                                    <div
+                                                        class="skeleton animate-wave h-3 w-full rounded bg-slate-150 dark:bg-navy-500"
+                                                    ></div>
+                                                    <div
+                                                        class="skeleton animate-wave mt-4 h-3 w-8/12 rounded bg-slate-150 dark:bg-navy-500"
+                                                    ></div>
+                                                    </div>
+                                                </div>
+
+                                    </div>
+                                    <div class="col-span-12 grid grid-cols-1 gap-4 sm:gap-5 lg:col-span-4 lg:gap-6">
+
+                                    </div>
+
+                                </div>
+            </div>
+            </main>
+            </div>
+            <!-- 
+        This is a place for Alpine.js Teleport feature 
+        @see https://alpinejs.dev/directives/teleport
+      -->
+            <div id="x-teleport-target"></div>
+            <script>
+                window.addEventListener("DOMContentLoaded", () => Alpine.start());
+            </script>
+        <!-- tawk.to configuration -->
+        <%-include("../partials/dashboard/tawkto.ejs") -%>
+        <!-- ### -->
+</body>
+
+</html>

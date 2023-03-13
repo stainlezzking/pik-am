@@ -27,6 +27,13 @@
   .team_img{
     text-align: center;
   }
+  .d-block {
+    display: block !important;
+  }
+  
+.passion_part .single_passion .single_passion_item {
+  max-width: 400px;
+}
 </style>
 <script nonce="d21349ee-bd85-40a7-be05-bf2431d521bc">(function(w,d){!function(f,g,h,i){f[h]=f[h]||{};f[h].executed=[];f.zaraz={deferred:[],listeners:[]};f.zaraz.q=[];f.zaraz._f=function(j){return function(){var k=Array.prototype.slice.call(arguments);f.zaraz.q.push({m:j,a:k})}};for(const l of["track","set","debug"])f.zaraz[l]=f.zaraz._f(l);f.zaraz.init=()=>{var m=g.getElementsByTagName(i)[0],n=g.createElement(i),o=g.getElementsByTagName("title")[0];o&&(f[h].t=g.getElementsByTagName("title")[0].text);f[h].x=Math.random();f[h].w=f.screen.width;f[h].h=f.screen.height;f[h].j=f.innerHeight;f[h].e=f.innerWidth;f[h].l=f.location.href;f[h].r=g.referrer;f[h].k=f.screen.colorDepth;f[h].n=g.characterSet;f[h].o=(new Date).getTimezoneOffset();if(f.dataLayer)for(const s of Object.entries(Object.entries(dataLayer).reduce(((t,u)=>({...t[1],...u[1]})))))zaraz.set(s[0],s[1],{scope:"page"});f[h].q=[];for(;f.zaraz.q.length;){const v=f.zaraz.q.shift();f[h].q.push(v)}n.defer=!0;for(const w of[localStorage,sessionStorage])Object.keys(w||{}).filter((y=>y.startsWith("_zaraz_"))).forEach((x=>{try{f[h]["z_"+x.slice(7)]=JSON.parse(w.getItem(x))}catch{f[h]["z_"+x.slice(7)]=w.getItem(x)}}));n.referrerPolicy="origin";n.src="../../cdn-cgi/zaraz/sd0d9.js?z="+btoa(encodeURIComponent(JSON.stringify(f[h])));m.parentNode.insertBefore(n,m)};["complete","interactive"].includes(g.readyState)?zaraz.init():f.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);</script></head>
 <body>
@@ -34,21 +41,23 @@
   <!-  Beginning of header ->
   <%- include("../partials/home/navbar.ejs") %>
   <!- ####### end of header->
-
 <section class="banner_part">
 <div class="container">
 <div class="row align-content-center">
+  <div class="col-12 d-flex gap-4 text-center p-2 bg-info text-white mt-3"><img width="40px" src="https://static.nc-img.com/uilayout2/34735a65a0c63bd007fa4c32f67dab4c.svg" alt="Ukraine flag"><p class="mb-0 text-white">We stand with our friends and colleagues in Ukraine. To support Ukraine in their time of need visit this  <a target="_blank" href="https://war.ukraine.ua/support-ukraine/">page</a>.</p></div>
 <div class="col-lg-6">
 <div class="banner_text aling-items-center">
 <div class="banner_text_iner">
 <h5>PIK Assets Management</h5>
-<h2>Everyone Deserves
-the Opportunity of owning
+<h2>
+  We believe 
+  everyone deserves
+the same shot at owning
 a Property or investing in one</h2>
 <p> With our parent company Ranked <a href="#">#30 in forbes list World largest Public Real Estate Companies in 2021</a>, with a market value of over $9 Billion. 
 You can trust us to manage your assets.
 </p>
-<a href="#" class="btn_1 banner_btn ">Sign up</a>
+<a href="/pik-group/register" class="btn_1 banner_btn ">Sign up</a>
 <div class="d-none d-xl-block banner_social_icon">
 <ul class="list-inline">
 <li class="list-inline-item"><a href="#"><span class="ti-facebook"></span>facebook</a><span class="dot"><i class="fas fa-circle"></i></span></li>
@@ -80,18 +89,17 @@ All of our properties are located in Europe, North America and Africa.
 After your purchase, we effectively become your long-term tenants and agree to pay you
 guaranteed rent and maintain the properties at our cost. 
 You fully own the property, benefit from long term guaranteed rental income and future property capital growth,
-but do not need to do anything – we do it all.<a href="/about"> Read more...</a> </p>
+but do not need to do anything – we do it all.<a href="/pik-group/about"> Read more...</a> </p>
 <ul>
-<li class="d-block"><span class="ti-check-box"></span> We offer loans  </li>
-<li class="d-block"><span class="ti-check-box"></span> Joint Property Ownership </li>
-<li class="d-block"><span class="ti-check-box"></span> We flip houses  </li>
-<li class="d-block"><span class="ti-check-box"></span> We Can help you acquire properties around the world</li>
-<li class="d-block"><span class="ti-check-box"></span> We accept investors from all over the world</li>
-<li class="d-block"><span class="ti-check-box"></span> Our Payment plan is borderless</li>
-<li class="d-block"><span class="ti-check-box"></span>Free financial advice for new investors (contact our support)</li>
+<li class="d-block my-2"><span class="ti-check-box"></span> Joint Property Ownership </li>
+<li class="d-block my-2"><span class="ti-check-box"></span> We flip houses  </li>
+<li class="d-block my-2"><span class="ti-check-box"></span> We Can help you acquire properties around the world</li>
+<li class="d-block my-2"><span class="ti-check-box"></span> We accept investors from all over the world</li>
+<li class="d-block my-2"><span class="ti-check-box"></span> Our Payment plan is borderless</li>
+<li class="d-block my-2"><span class="ti-check-box"></span>Free financial advice for new investors (contact our support)</li>
 
 </ul>
-<a href="/about" class="btn_1">Read More</a>
+<a href="/pik-group/about" class="btn_1">Read More</a>
 </div>
 </div>
 </div>
@@ -112,80 +120,36 @@ but do not need to do anything – we do it all.<a href="/about"> Read more...</
 </div>
 </div>
 <div class="row justify-content-center g-4">
-<div class="col-md-6 col-lg-5">
-<div class="single_passion">
-<div class="single_passion_item">
-<a href="#" class="passion_icon"> 
-<img src="/img/partnership-4.png" alt="">
- </a>
-<h4>Shared cluster</h4>
-<h4> $100 - $999</h4>
-<div style="text-align: left; font-weight: bold;">
-<p><span class="ti-check-box primaryColor"></span> Roi - 7%  </p>
-<p><span class="ti-check-box primaryColor"></span> duration - 7 days</p>
-</div>
-<br>
-<p style="text-align: left;">Here investors money are combined and used to purchase a property, refurnish/renovate it and flip the property <span class="dots">back...</span> <span class="more">back for cash to pay back investors. this process is automated and does not necessarily depend on the sale of a particular property.</span></p>
-<a href="#" class="btn_2">Get Started <span class="ti-arrow-right"></span></a>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-lg-5">
-<div class="single_passion">
-<div class="single_passion_item">
-<a href="#" class="passion_icon"><img src="/img/partnership-4.png" alt="">
-</a>
-<h4>Shared cluster 2</h4>
-<h4> $1000 - $15,000</h4>
-<div style="text-align: left; font-weight: bold;">
-<p><span class="ti-check-box primaryColor"></span> Roi - 16.5% </p>
-<p><span class="ti-check-box primaryColor"></span> duration - 5 days</p>
-</div>
-<br>
-<p style="text-align: left;">Here investors money are combined and used to purchase a property, refurnish/renovate it and flip the property <span class="dots">back...</span> <span class="more">back for cash to pay back investors. this process is automated and does not necessarily depend on the sale of a particular property.</span></p>
-<a href="#" class="btn_2"> Get Started<span class="ti-arrow-right"></span></a>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-lg-5">
-<div class="single_passion">
-<div class="single_passion_item">
-<a href="#" class="passion_icon"> <img src="/img/partnership.png" alt="">
- </a>
-<h4>Partnership cluster</h4>
-<h4> $10,000 - $50,000</h4>
-<div style="text-align: left; font-weight: bold;">
-<p><span class="ti-check-box primaryColor"></span>  intial payment - 25% </p>
-<p><span class="ti-check-box primaryColor"></span> Lifetime Payment of 5% per month </p> 
-</div>
-<br>
-<p style="text-align: left;">
-Here investors own <span style="color : green;">50%</span> of the property been bought, after purchase of the property
-we effectively become your long-term <span class="dots">tenants...</span> <span class="more">tenants and agree to pay you guaranteed rent and maintain the properties at our cost.You fully own the property</span> 
-
-</p>
-<a href="#" class="btn_2">Get Started <span class="ti-arrow-right"></span></a>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-lg-5">
-<div class="single_passion">
-<div class="single_passion_item">
-<a href="#" class="passion_icon"> <img src="/img/keys.png" alt="">
- </a>
-<h4>Landlord Cluster</h4>
-<h4> $50,000 - $1,000,000</h4>
-<div style="text-align: left; font-weight: bold;">
-<p><span class="ti-check-box primaryColor"></span>  intial payment - 30% </p>
-<p><span class="ti-check-box primaryColor"></span> Lifetime Payment of 12% per month</p> 
-</div>
-<br>
-<p style="text-align: left;">Here you own <span style="color : green;">100%</span> of the property been bought, after purchase of the property
-we effectively become your long-term <span class="dots">tenants...</span> <span class="more">tenants and agree to pay you guaranteed rent and maintain the properties at our cost.You fully own the property</span> </p>
-<a href="#" class="btn_2">Get Started <span class="ti-arrow-right"></span></a>
-</div>
-</div>
-</div>
+  <% adminInv.investments.forEach(investment=>{%>
+    <div class="col-md-6 col-lg-5">
+    <div class="single_passion">
+    <div class="single_passion_item">
+    <a href="#" class="passion_icon"> 
+    <img src="/img/partnership-4.png" alt="">
+     </a>
+    <h4> <%= investment.title %> </h4>
+    <h4> $<%= investment.min.toLocaleString()%> - $<%= investment.max.toLocaleString() %></h4>
+    <div style="text-align: left; font-weight: bold;">
+    <p><span class="ti-check-box primaryColor"></span> Roi - <%= investment.roi %>%  </p>
+    <p><span class="ti-check-box primaryColor"></span> Min deposit - $<%= investment.min.toLocaleString() %>  </p>
+    <p><span class="ti-check-box primaryColor"></span> Max deposit - $<%= investment.max.toLocaleString() %>  </p>
+    <% if(investment.lifetime){%>
+      <p><span class="ti-check-box primaryColor"></span> Lifetime payment </p>
+    <%}%>
+    <p><span class="ti-check-box primaryColor"></span> duration - <%= investment.duration %> days</p>
+    </div>
+    <br>
+    <!-- <p style="text-align: left;">Here investors money are combined and used to purchase a property, refurnish/renovate it and flip the property <span class="dots">back...</span> <span class="more">back for cash to pay back investors. this process is automated and does not necessarily depend on the sale of a particular property.</span></p> -->
+    <a href="login" class="btn_2">Get Started <span class="ti-arrow-right"></span></a>
+    </div>
+    </div>
+    </div>
+  <%})%>
+  <% if(investmentsError){%>
+      <h2>
+         <%= investmentsError %> 
+      </h2>
+  <%}%>
 </div>
 </div>
 </div>
@@ -212,7 +176,7 @@ we effectively become your long-term <span class="dots">tenants...</span> <span 
 </div>
 <div class="col-md-4 col-lg-5">
 <div class="view_more_btn float-right d-none d-md-block">
-<a href="#" class="btn_2">Read More <span class="ti-arrow-right"></span></a>
+<a href="/pik-group/about" class="btn_2">Read More <span class="ti-arrow-right"></span></a>
 </div>
 </div>
 </div>
@@ -282,7 +246,7 @@ we effectively become your long-term <span class="dots">tenants...</span> <span 
 <div class="cta_iner">
 <h1> Our Goal </h1>
 <p>Our main pursuit is to give people of different status all around the world equal Opportunity to get started in Real Estate </p>
-<a href="#" class="cta_btn">Sing Up</a>
+<a href="/pik-group/register" class="cta_btn">Sign Up</a>
 </div>
 </div>
 </div>

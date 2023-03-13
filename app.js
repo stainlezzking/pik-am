@@ -31,7 +31,7 @@ app.post("/dashboard/auth/login", express.urlencoded({ extended: false }),
     },
     passport.authenticate("user", {
         successRedirect: "/dashboard/registration",
-        failureRedirect: "/pik-home/login",
+        failureRedirect: "/pik-group/login",
         failureFlash: true,
     })
 );
@@ -43,17 +43,17 @@ emaul,password,fname,lname
 app.post("/dashboard/auth/register", express.urlencoded({ extended: false }), function(req, res, next) {
         USER.findOne({ email: req.body.email.toLowerCase() })
             .then(user => {
-                if (user) return showError(req, "/pik-home/register", "This email has been used ", res)
+                if (user) return showError(req, "/pik-group/register", "This email has been used ", res)
                 return USER.create(req.body, function(err) {
-                    if (err) return showError(req, "/pik-home/register", "A 500 code error occured, please try again", res)
+                    if (err) return showError(req, "/pik-group/register", "A 500 code error occured, please try again", res)
                         // send signup email confirmation
                     return next()
                 })
             })
-            .catch(e => showError(req, "pik/home/register", "A 500 code error, please try again", e))
+            .catch(e => showError(req, "/pik-group/register", "A 500 code error, please try again", e))
     }, passport.authenticate("user", {
         successRedirect: "/dashboard/registration",
-        failureRedirect: "/pik-home/register",
+        failureRedirect: "/pik-group/register",
         failureFlash: true,
     }))
     /*
@@ -86,11 +86,15 @@ app.post("/dashboard/auth/OTP", express.json({ extended: false }), async functio
 })
 
 app.use("/admin/", adminGET)
-app.use("/pik-home/", realestateRouter)
+app.use("/pik-group/", realestateRouter)
 app.use("/dashboard/", user)
 app.use("/dashboard/", userPost)
 
 app.use(express.static("public"))
+
+app.use(function(req,res){
+    res.render("realestate/home/404.ejs")
+})
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {

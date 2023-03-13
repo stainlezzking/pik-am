@@ -1,6 +1,7 @@
 const express = require("express")
 const Router = express.Router()
 const path = require("path")
+const { ADMIN } = require("../../modules/db/db-user")
 
 
 
@@ -9,15 +10,24 @@ Router.use(function(req,res,next){
     next()
 })
 
-Router.get("/", function(req,res){
-    res.render("realestate/home/index.ejs")
+Router.get("/", async function(req,res){
+    try{
+      res.locals.adminInv = await ADMIN.findOne({}, "investments")
+      res.locals.investmentsError = ""
+       return res.render("realestate/home/index.ejs")
+    }catch(err){
+        console.log(err)
+        res.locals.adminInv = [];
+        res.locals.investmentsError = "An Error occurred "
+        return res.render("realestate/home/index.ejs")
+    }
 })
 
 Router.get("/about", function(req,res){
     res.render("realestate/home/about.ejs")
 })
 
-Router.get("/blogs", function(req,res){
+Router.get("/news", function(req,res){
     res.render("realestate/home/blogs.ejs")
 })
 
@@ -31,6 +41,12 @@ Router.get("/register", function(req,res){
 
 Router.get("/login", function(req,res){
     res.render("realestate/home/login.ejs")
+})
+Router.get("/policy", function(req,res){
+    res.render("realestate/home/private-policy.ejs")
+})
+Router.get("/terms", function(req,res){
+    res.render("realestate/home/terms.ejs")
 })
 
 Router.get("/logout", function(req,res){
