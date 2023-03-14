@@ -35,6 +35,10 @@ Router.get("/contact", function(req,res){
     res.render("realestate/home/contact.ejs")
 })
 
+Router.get("/corporate", function(req,res){
+    res.render("realestate/home/corporate-info.ejs")
+})
+
 Router.get("/register", function(req,res){
     res.render("realestate/home/register.ejs")
 })
@@ -47,6 +51,9 @@ Router.get("/policy", function(req,res){
 })
 Router.get("/terms", function(req,res){
     res.render("realestate/home/terms.ejs")
+})
+Router.get("/personal-data-consent", function(req,res){
+    res.render("realestate/home/personal-data-consent.ejs")
 })
 
 Router.get("/logout", function(req,res){
