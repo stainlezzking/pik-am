@@ -2,13 +2,11 @@ const mongoose = require("mongoose")
 require("dotenv").config();
 mongoose.set('strictQuery', false);
 const { differenceInDays, addDays } = require('date-fns')
-let online = `mongodb+srv://<%= process.env.MONGODB_USER %>:<%= process.env.MONGODB_USER %>pik-asset-cluster.o0hkixu.mongodb.net/?retryWrites=true&w=majority/pik-am`
-// let online = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@cluster0.hqwfrk3.mongodb.net/pik-am`;
+let online = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@pik-asset-cluster.o0hkixu.mongodb.net/pik-am`
 let localhost = "mongodb://127.0.0.1:27017/pik-am";
-mongoose.connect(localhost, function(req, res) {
+mongoose.connect(online, { useNewUrlParser: true, useUnifiedTopology: true },function(req, res) {
     console.log("DB connected successfully");
-});
-
+})
 
 const activity = mongoose.Schema({
         title: String,
