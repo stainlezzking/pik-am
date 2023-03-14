@@ -35,6 +35,9 @@ app.post("/dashboard/auth/login", express.urlencoded({ extended: false }),
         failureFlash: true,
     })
 );
+app.get("/", function(req,res){
+    res.redirect("/pik-group/")
+})
 /*
 signup route for new users 
 get[requrest]@ frontend.js
